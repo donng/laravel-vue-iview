@@ -1,7 +1,7 @@
 # laravel-vue-iview
 基于laravel+vue以及iview前端ui搭建的后台系统快速开发样板。
 
-> 此项目的搭建过程可以访问[这里]()
+> 此项目的搭建过程可以访问[这里](https://segmentfault.com/a/1190000013212484)
 
 #### 克隆或下载此项目
 ```
