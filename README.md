@@ -6,6 +6,7 @@
 ## 开发
 ```bash
 # 克隆项目
+git clone https://github.com/Donng/laravel-vue-iview.git
 
 # 安装composer依赖
 composer install
