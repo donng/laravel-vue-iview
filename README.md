@@ -17,6 +17,9 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 # 安装npm扩展包
 cnpm install
 
+# 复制配置文件并生成key
+cp .env.example .env && php artisan key:generate
+
 # 编译前端代码
 npm run dev
 ```
