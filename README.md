@@ -3,7 +3,7 @@
 
 > 此项目的搭建过程可以访问[这里](https://segmentfault.com/a/1190000013212484)
 
-## 克隆或下载此项目
+### 克隆或下载此项目
 ```
 git clone https://github.com/Donng/laravel-vue-iview.git
 ```
