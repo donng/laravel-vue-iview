@@ -14,6 +14,7 @@ export const router = new VueRouter({
 
 router.beforeEach((to, from ,next) => {
     iView.LoadingBar.start();
+    next();
 });
 
 router.afterEach(() => {

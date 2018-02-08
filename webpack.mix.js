@@ -12,4 +12,26 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+    .extract(['vue', 'axios'])
+    .sass('resources/assets/sass/app.scss', 'public/css')
+    .webpackConfig({
+        resolve: {
+            extensions: ['.js', '.vue', '.json'],
+            alias: {
+                '~': path.resolve(__dirname, 'resources/assets/js/'),
+                'styles': path.resolve(__dirname, 'resources/assets/js/styles'),
+                'api': path.resolve(__dirname, 'resources/assets/js/api'),
+                'components': path.resolve(__dirname, 'resources/assets/js/components'),
+                'icons': path.resolve(__dirname, 'resources/assets/js/icons'),
+                'resource': path.resolve(__dirname, 'resources/assets/js/resource'),
+                'views': path.resolve(__dirname, 'resources/assets/js/views'),
+                'utils': path.resolve(__dirname, 'resources/assets/js/utils'),
+                'router': path.resolve(__dirname, 'resources/assets/js/router'),
+            }
+        },
+    })
+    .sourceMaps();
+
+if (mix.inProduction()) {
+    mix.version();
+}

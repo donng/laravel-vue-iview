@@ -4,12 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>落地页生成器</title>
+    <title>laravel-vue-iview</title>
+    <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
 </head>
 <body style="height: 100%">
 <div id="app">
 
 </div>
+<script src="{{ mix('js/manifest.js') }}"></script>
+<script src="{{ mix('js/vendor.js') }}"></script>
 <script src="{{ mix('js/app.js') }}"></script>
 
 </body>
