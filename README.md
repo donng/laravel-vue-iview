@@ -20,7 +20,7 @@ cnpm install
 
 #### ② 编译前端代码
 ```
-cnpm run dev
+npm run dev
 ```
 
 ## 访问
