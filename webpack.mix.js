@@ -18,7 +18,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
         resolve: {
             extensions: ['.js', '.vue', '.json'],
             alias: {
-                '~': path.resolve(__dirname, 'resources/assets/js/'),
+                '@': path.resolve(__dirname, 'resources/assets/js/'),
                 'styles': path.resolve(__dirname, 'resources/assets/js/styles'),
                 'api': path.resolve(__dirname, 'resources/assets/js/api'),
                 'components': path.resolve(__dirname, 'resources/assets/js/components'),
@@ -29,9 +29,8 @@ mix.js('resources/assets/js/app.js', 'public/js')
                 'router': path.resolve(__dirname, 'resources/assets/js/router'),
             }
         },
-    })
-    .sourceMaps();
+    });
 
-if (mix.inProduction()) {
-    mix.version();
-}
+// if (mix.inProduction()) {
+//     mix.version();
+// }
