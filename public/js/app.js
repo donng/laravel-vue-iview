@@ -67821,7 +67821,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.layout[data-v-a2114b40]{\n    border: 1px solid #d7dde4;\n    background: #f5f7f9;\n    position: relative;\n    border-radius: 4px;\n    overflow: hidden;\n    height: 100%;\n}\n.layout-header-bar[data-v-a2114b40]{\n    background: #fff;\n    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.1);\n            box-shadow: 0 1px 1px rgba(0,0,0,.1);\n}\n.layout-logo-left[data-v-a2114b40]{\n    width: 90%;\n    height: 30px;\n    background: #5b6270;\n    border-radius: 3px;\n    margin: 15px auto;\n}\n.menu-icon[data-v-a2114b40]{\n    -webkit-transition: all .3s;\n    transition: all .3s;\n}\n.rotate-icon[data-v-a2114b40]{\n    -webkit-transform: rotate(-90deg);\n            transform: rotate(-90deg);\n}\n.menu-item span[data-v-a2114b40]{\n    display: inline-block;\n    overflow: hidden;\n    width: 69px;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    vertical-align: bottom;\n    -webkit-transition: width .2s ease .2s;\n    transition: width .2s ease .2s;\n}\n.menu-item i[data-v-a2114b40]{\n    -webkit-transform: translateX(0px);\n            transform: translateX(0px);\n    -webkit-transition: font-size .2s ease, -webkit-transform .2s ease;\n    transition: font-size .2s ease, -webkit-transform .2s ease;\n    transition: font-size .2s ease, transform .2s ease;\n    transition: font-size .2s ease, transform .2s ease, -webkit-transform .2s ease;\n    vertical-align: middle;\n    font-size: 16px;\n}\n.collapsed-menu span[data-v-a2114b40]{\n    width: 0px;\n    -webkit-transition: width .2s ease;\n    transition: width .2s ease;\n}\n.collapsed-menu i[data-v-a2114b40]{\n    -webkit-transform: translateX(5px);\n            transform: translateX(5px);\n    -webkit-transition: font-size .2s ease .2s, -webkit-transform .2s ease .2s;\n    transition: font-size .2s ease .2s, -webkit-transform .2s ease .2s;\n    transition: font-size .2s ease .2s, transform .2s ease .2s;\n    transition: font-size .2s ease .2s, transform .2s ease .2s, -webkit-transform .2s ease .2s;\n    vertical-align: middle;\n    font-size: 22px;\n}\n", ""]);
+exports.push([module.i, "\n.layout[data-v-a2114b40] {\n  border: 1px solid #d7dde4;\n  background: #f5f7f9;\n  position: relative;\n  border-radius: 4px;\n  overflow: hidden;\n  height: 100%;\n}\n.layout-header-bar[data-v-a2114b40] {\n  background: #fff;\n  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .1);\n          box-shadow: 0 1px 1px rgba(0, 0, 0, .1);\n}\n.layout-logo-left[data-v-a2114b40] {\n  width: 90%;\n  height: 30px;\n  background: #5b6270;\n  border-radius: 3px;\n  margin: 15px auto;\n}\n.menu-icon[data-v-a2114b40] {\n  -webkit-transition: all .3s;\n  transition: all .3s;\n}\n.rotate-icon[data-v-a2114b40] {\n  -webkit-transform: rotate(-90deg);\n          transform: rotate(-90deg);\n}\n.menu-item span[data-v-a2114b40] {\n  display: inline-block;\n  overflow: hidden;\n  width: 69px;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  vertical-align: bottom;\n  -webkit-transition: width .2s ease .2s;\n  transition: width .2s ease .2s;\n}\n.menu-item i[data-v-a2114b40] {\n  -webkit-transform: translateX(0px);\n          transform: translateX(0px);\n  -webkit-transition: font-size .2s ease, -webkit-transform .2s ease;\n  transition: font-size .2s ease, -webkit-transform .2s ease;\n  transition: font-size .2s ease, transform .2s ease;\n  transition: font-size .2s ease, transform .2s ease, -webkit-transform .2s ease;\n  vertical-align: middle;\n  font-size: 16px;\n}\n.collapsed-menu span[data-v-a2114b40] {\n  width: 0px;\n  -webkit-transition: width .2s ease;\n  transition: width .2s ease;\n}\n.collapsed-menu i[data-v-a2114b40] {\n  -webkit-transform: translateX(5px);\n          transform: translateX(5px);\n  -webkit-transition: font-size .2s ease .2s, -webkit-transform .2s ease .2s;\n  transition: font-size .2s ease .2s, -webkit-transform .2s ease .2s;\n  transition: font-size .2s ease .2s, transform .2s ease .2s;\n  transition: font-size .2s ease .2s, transform .2s ease .2s, -webkit-transform .2s ease .2s;\n  vertical-align: middle;\n  font-size: 22px;\n}\n", ""]);
 
 // exports
 
@@ -67862,29 +67862,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "index",
-    components: {},
-    data: function data() {
-        return {
-            isCollapsed: false
-        };
-    },
+  name: "index",
+  middle: 'auth',
+  components: {},
 
-    computed: {
-        rotateIcon: function rotateIcon() {
-            return ['menu-icon', this.isCollapsed ? 'rotate-icon' : ''];
-        },
-        menuitemClasses: function menuitemClasses() {
-            return ['menu-item', this.isCollapsed ? 'collapsed-menu' : ''];
-        }
+  data: function data() {
+    return {
+      isCollapsed: false
+    };
+  },
+
+  computed: {
+    rotateIcon: function rotateIcon() {
+      return ['menu-icon', this.isCollapsed ? 'rotate-icon' : ''];
     },
-    methods: {
-        collapsedSider: function collapsedSider() {
-            this.$refs.side1.toggleCollapse();
-        }
+    menuitemClasses: function menuitemClasses() {
+      return ['menu-item', this.isCollapsed ? 'collapsed-menu' : ''];
     }
+  },
+
+  methods: {
+    collapsedSider: function collapsedSider() {
+      this.$refs.side1.toggleCollapse();
+    }
+  }
 });
 
 /***/ }),
