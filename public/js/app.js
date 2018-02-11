@@ -65060,16 +65060,16 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_
 
 // 创建并导出 router 实例，然后传 `routes` 配置
 var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
-    routes: __WEBPACK_IMPORTED_MODULE_3__router__["a" /* routes */]
+  routes: __WEBPACK_IMPORTED_MODULE_3__router__["a" /* routes */]
 });
 
 router.beforeEach(function (to, from, next) {
-    __WEBPACK_IMPORTED_MODULE_1_iview___default.a.LoadingBar.start();
-    next();
+  __WEBPACK_IMPORTED_MODULE_1_iview___default.a.LoadingBar.start();
+  next();
 });
 
 router.afterEach(function () {
-    __WEBPACK_IMPORTED_MODULE_1_iview___default.a.LoadingBar.finish();
+  __WEBPACK_IMPORTED_MODULE_1_iview___default.a.LoadingBar.finish();
 });
 
 /***/ }),
@@ -67715,21 +67715,26 @@ if (inBrowser && window.Vue) {
 
 
 var mainRouter = [{
-    path: '/',
-    component: __WEBPACK_IMPORTED_MODULE_0_views_layout___default.a,
-    redirect: '/home',
-    meta: { roles: ['admin'] }, // you can set roles in root nav
-    children: [{
-        path: 'home',
-        component: __webpack_require__(57),
-        name: 'home',
-        meta: {
-            title: 'home',
-            icon: 'lock',
-            noCache: true,
-            roles: ['admin'] // or you can only set roles in sub nav
-        }
-    }]
+  path: '/login',
+  component: __webpack_require__(78),
+  name: 'login',
+  meta: { roles: ['admin'] }
+}, {
+  path: '/',
+  component: __WEBPACK_IMPORTED_MODULE_0_views_layout___default.a,
+  redirect: '/home',
+  meta: { roles: ['admin'] }, // you can set roles in root nav
+  children: [{
+    path: 'home',
+    component: __webpack_require__(57),
+    name: 'home',
+    meta: {
+      title: 'home',
+      icon: 'lock',
+      noCache: true,
+      roles: ['admin'] // or you can only set roles in sub nav
+    }
+  }]
 }];
 
 // 导出所有的路由配置
@@ -68690,6 +68695,270 @@ module.exports = function (css) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 71 */,
+/* 72 */,
+/* 73 */,
+/* 74 */,
+/* 75 */,
+/* 76 */,
+/* 77 */,
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(79)
+}
+var normalizeComponent = __webpack_require__(6)
+/* script */
+var __vue_script__ = __webpack_require__(81)
+/* template */
+var __vue_template__ = __webpack_require__(82)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-c175f96e"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/views/login/index.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c175f96e", Component.options)
+  } else {
+    hotAPI.reload("data-v-c175f96e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(80);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(5)("cc435704", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/_css-loader@0.28.9@css-loader/index.js!../../../../../node_modules/_vue-loader@13.7.1@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c175f96e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/_vue-loader@13.7.1@vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../../../../node_modules/_css-loader@0.28.9@css-loader/index.js!../../../../../node_modules/_vue-loader@13.7.1@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c175f96e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/_vue-loader@13.7.1@vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 81 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "index",
+  data: function data() {
+    return {
+      formInline: {
+        user: '',
+        password: ''
+      },
+      ruleInline: {
+        user: [{ required: true, message: '请填写用户名称', trigger: 'blur' }],
+        password: [{ required: true, message: '请填写登录密码', trigger: 'blur' }, { type: 'string', min: 6, message: '密码长度不能低于6个字符', trigger: 'blur' }]
+      }
+    };
+  },
+
+  methods: {
+    submit: function submit(name) {
+      var _this = this;
+
+      this.$refs[name].validate(function (valid) {
+        if (valid) {
+          _this.$Message.success('Success!');
+        } else {
+          _this.$Message.error('Fail!');
+        }
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 82 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "Form",
+        {
+          ref: "formInline",
+          attrs: { model: _vm.formInline, rules: _vm.ruleInline, inline: "" }
+        },
+        [
+          _c(
+            "FormItem",
+            { attrs: { prop: "user" } },
+            [
+              _c(
+                "Input",
+                {
+                  attrs: { type: "text", placeholder: "Username" },
+                  model: {
+                    value: _vm.formInline.user,
+                    callback: function($$v) {
+                      _vm.$set(_vm.formInline, "user", $$v)
+                    },
+                    expression: "formInline.user"
+                  }
+                },
+                [
+                  _c("Icon", {
+                    attrs: { slot: "prepend", type: "ios-person-outline" },
+                    slot: "prepend"
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "FormItem",
+            { attrs: { prop: "password" } },
+            [
+              _c(
+                "Input",
+                {
+                  attrs: { type: "password", placeholder: "Password" },
+                  model: {
+                    value: _vm.formInline.password,
+                    callback: function($$v) {
+                      _vm.$set(_vm.formInline, "password", $$v)
+                    },
+                    expression: "formInline.password"
+                  }
+                },
+                [
+                  _c("Icon", {
+                    attrs: { slot: "prepend", type: "ios-locked-outline" },
+                    slot: "prepend"
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "FormItem",
+            [
+              _c(
+                "Button",
+                {
+                  attrs: { type: "primary" },
+                  on: {
+                    click: function($event) {
+                      _vm.submit("formInline")
+                    }
+                  }
+                },
+                [_vm._v("登录")]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-c175f96e", module.exports)
+  }
+}
 
 /***/ })
 ],[16]);
