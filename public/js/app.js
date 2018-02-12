@@ -34875,11 +34875,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_vue__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__app_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_iview__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_iview___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_iview__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_iview_dist_styles_iview_css__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_iview_dist_styles_iview_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_iview_dist_styles_iview_css__);
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__lang_i18n__ = __webpack_require__(84);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__lang_i18n___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__lang_i18n__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_iview__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_iview___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_iview__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_iview_dist_styles_iview_css__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_iview_dist_styles_iview_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_iview_dist_styles_iview_css__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -34900,10 +34901,12 @@ window.Vue = __webpack_require__(2);
 
 
 
-Vue.use(__WEBPACK_IMPORTED_MODULE_2_iview___default.a);
+
+Vue.use(__WEBPACK_IMPORTED_MODULE_3_iview___default.a);
 
 var app = new Vue({
   el: '#app',
+  i18n: __WEBPACK_IMPORTED_MODULE_2__lang_i18n___default.a,
   router: __WEBPACK_IMPORTED_MODULE_1__router__["a" /* router */],
   render: function render(h) {
     return h(__WEBPACK_IMPORTED_MODULE_0__app_vue___default.a);
@@ -68789,7 +68792,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.row[data-v-c175f96e] {\n  margin-top: 180px;\n}\n", ""]);
 
 // exports
 
@@ -68866,7 +68869,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "Row",
-    { attrs: { type: "flex", justify: "center", align: "middle" } },
+    { attrs: { type: "flex", justify: "center", "class-name": "row" } },
     [
       _c(
         "Col",
@@ -68893,7 +68896,7 @@ var render = function() {
                       _c(
                         "Input",
                         {
-                          attrs: { type: "text", placeholder: "Username" },
+                          attrs: { type: "text", placeholder: "用户名" },
                           model: {
                             value: _vm.form.user,
                             callback: function($$v) {
@@ -68924,7 +68927,7 @@ var render = function() {
                       _c(
                         "Input",
                         {
-                          attrs: { type: "password", placeholder: "Password" },
+                          attrs: { type: "password", placeholder: "密码" },
                           model: {
                             value: _vm.form.password,
                             callback: function($$v) {
@@ -68988,6 +68991,13 @@ if (false) {
     require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-c175f96e", module.exports)
   }
 }
+
+/***/ }),
+/* 83 */,
+/* 84 */
+/***/ (function(module, exports) {
+
+
 
 /***/ })
 ],[16]);

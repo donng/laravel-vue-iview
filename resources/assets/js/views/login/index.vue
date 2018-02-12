@@ -1,16 +1,16 @@
 <template>
-  <Row type="flex" justify="center" align="middle">
+  <Row type="flex" justify="center" class-name="row">
     <Col span="6">
     <Card>
       <p slot="title">Sign In</p>
       <Form ref="form" :model="form" :rules="ruleInline">
         <FormItem prop="user">
-          <Input type="text" v-model="form.user" placeholder="Username">
+          <Input type="text" v-model="form.user" placeholder="用户名">
           <Icon type="ios-person-outline" slot="prepend"></Icon>
           </Input>
         </FormItem>
         <FormItem prop="password">
-          <Input type="password" v-model="form.password" placeholder="Password">
+          <Input type="password" v-model="form.password" placeholder="密码">
           <Icon type="ios-locked-outline" slot="prepend"></Icon>
           </Input>
         </FormItem>
@@ -58,5 +58,7 @@
 </script>
 
 <style scoped>
-
+  .row {
+    margin-top: 180px;
+  }
 </style>

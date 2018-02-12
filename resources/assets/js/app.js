@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -15,14 +14,17 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 import App from './app.vue'
-import {router} from './router'
+import { router } from './router'
+import i18n from './lang/i18n'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
+
 
 Vue.use(iView);
 
 const app = new Vue({
-    el: '#app',
-    router: router,
-    render: h => h(App)
+  el: '#app',
+  i18n,
+  router,
+  render: h => h(App)
 });
