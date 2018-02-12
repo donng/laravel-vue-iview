@@ -1,21 +1,26 @@
 <template>
-  <div>
-    <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
-      <FormItem prop="user">
-        <Input type="text" v-model="formInline.user" placeholder="Username">
-        <Icon type="ios-person-outline" slot="prepend"></Icon>
-        </Input>
-      </FormItem>
-      <FormItem prop="password">
-        <Input type="password" v-model="formInline.password" placeholder="Password">
-        <Icon type="ios-locked-outline" slot="prepend"></Icon>
-        </Input>
-      </FormItem>
-      <FormItem>
-        <Button type="primary" @click="submit('formInline')">登录</Button>
-      </FormItem>
-    </Form>
-  </div>
+  <Row type="flex" justify="center" align="middle">
+    <Col span="6">
+    <Card>
+      <p slot="title">Sign In</p>
+      <Form ref="form" :model="form" :rules="ruleInline">
+        <FormItem prop="user">
+          <Input type="text" v-model="form.user" placeholder="Username">
+          <Icon type="ios-person-outline" slot="prepend"></Icon>
+          </Input>
+        </FormItem>
+        <FormItem prop="password">
+          <Input type="password" v-model="form.password" placeholder="Password">
+          <Icon type="ios-locked-outline" slot="prepend"></Icon>
+          </Input>
+        </FormItem>
+        <FormItem>
+          <Button type="primary" @click="submit('form')" long>登录</Button>
+        </FormItem>
+      </Form>
+    </Card>
+    </Col>
+  </Row>
 </template>
 
 <script>
@@ -23,7 +28,7 @@
     name: "index",
     data () {
       return {
-        formInline: {
+        form: {
           user: '',
           password: ''
         },

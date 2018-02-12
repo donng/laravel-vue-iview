@@ -68789,7 +68789,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -68820,12 +68820,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "index",
   data: function data() {
     return {
-      formInline: {
+      form: {
         user: '',
         password: ''
       },
@@ -68860,85 +68865,109 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "Row",
+    { attrs: { type: "flex", justify: "center", align: "middle" } },
     [
       _c(
-        "Form",
-        {
-          ref: "formInline",
-          attrs: { model: _vm.formInline, rules: _vm.ruleInline, inline: "" }
-        },
+        "Col",
+        { attrs: { span: "6" } },
         [
           _c(
-            "FormItem",
-            { attrs: { prop: "user" } },
+            "Card",
             [
+              _c("p", { attrs: { slot: "title" }, slot: "title" }, [
+                _vm._v("Sign In")
+              ]),
+              _vm._v(" "),
               _c(
-                "Input",
+                "Form",
                 {
-                  attrs: { type: "text", placeholder: "Username" },
-                  model: {
-                    value: _vm.formInline.user,
-                    callback: function($$v) {
-                      _vm.$set(_vm.formInline, "user", $$v)
-                    },
-                    expression: "formInline.user"
-                  }
+                  ref: "form",
+                  attrs: { model: _vm.form, rules: _vm.ruleInline }
                 },
                 [
-                  _c("Icon", {
-                    attrs: { slot: "prepend", type: "ios-person-outline" },
-                    slot: "prepend"
-                  })
+                  _c(
+                    "FormItem",
+                    { attrs: { prop: "user" } },
+                    [
+                      _c(
+                        "Input",
+                        {
+                          attrs: { type: "text", placeholder: "Username" },
+                          model: {
+                            value: _vm.form.user,
+                            callback: function($$v) {
+                              _vm.$set(_vm.form, "user", $$v)
+                            },
+                            expression: "form.user"
+                          }
+                        },
+                        [
+                          _c("Icon", {
+                            attrs: {
+                              slot: "prepend",
+                              type: "ios-person-outline"
+                            },
+                            slot: "prepend"
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "FormItem",
+                    { attrs: { prop: "password" } },
+                    [
+                      _c(
+                        "Input",
+                        {
+                          attrs: { type: "password", placeholder: "Password" },
+                          model: {
+                            value: _vm.form.password,
+                            callback: function($$v) {
+                              _vm.$set(_vm.form, "password", $$v)
+                            },
+                            expression: "form.password"
+                          }
+                        },
+                        [
+                          _c("Icon", {
+                            attrs: {
+                              slot: "prepend",
+                              type: "ios-locked-outline"
+                            },
+                            slot: "prepend"
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "FormItem",
+                    [
+                      _c(
+                        "Button",
+                        {
+                          attrs: { type: "primary", long: "" },
+                          on: {
+                            click: function($event) {
+                              _vm.submit("form")
+                            }
+                          }
+                        },
+                        [_vm._v("登录")]
+                      )
+                    ],
+                    1
+                  )
                 ],
                 1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "FormItem",
-            { attrs: { prop: "password" } },
-            [
-              _c(
-                "Input",
-                {
-                  attrs: { type: "password", placeholder: "Password" },
-                  model: {
-                    value: _vm.formInline.password,
-                    callback: function($$v) {
-                      _vm.$set(_vm.formInline, "password", $$v)
-                    },
-                    expression: "formInline.password"
-                  }
-                },
-                [
-                  _c("Icon", {
-                    attrs: { slot: "prepend", type: "ios-locked-outline" },
-                    slot: "prepend"
-                  })
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "FormItem",
-            [
-              _c(
-                "Button",
-                {
-                  attrs: { type: "primary" },
-                  on: {
-                    click: function($event) {
-                      _vm.submit("formInline")
-                    }
-                  }
-                },
-                [_vm._v("登录")]
               )
             ],
             1
