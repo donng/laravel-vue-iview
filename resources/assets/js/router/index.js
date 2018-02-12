@@ -1,6 +1,7 @@
 // 导出路由并配置守卫
 import Vue from 'vue';
 import iView from 'iview';
+import store from '../store'
 import VueRouter from 'vue-router';
 
 import { routes } from './router';
@@ -22,7 +23,14 @@ router.beforeEach((to, from, next) => {
       next('/');
     } else {
       // 判断是否已获取用户信息
-      next();
+      if (store.getters.roles.length === 0) {
+        store.dispatch('getUserInfo').then(response => {
+          // 填充路由配置
+          next();
+        });
+      } else {
+        next();
+      }
     }
   } else {
     if (whiteList.includes(to.path)) {
@@ -30,6 +38,7 @@ router.beforeEach((to, from, next) => {
       next();
     } else {
       next('/login');
+      iView.LoadingBar.finish();
     }
   }
 });

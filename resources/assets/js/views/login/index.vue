@@ -65,7 +65,7 @@
   }
 </script>
 
-<style scoped>
+<style rel="stylesheet/scss" lang="scss" scoped>
   .row {
     padding-top: 180px;
   }
@@ -74,9 +74,11 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: #b61924;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 50% 50%;
+    background: {
+      size: cover;
+      color: #b61924;
+      repeat: no-repeat;
+      position: 50% 50%;
+    };
   }
 </style>

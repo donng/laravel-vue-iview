@@ -1,9 +1,10 @@
-import { login } from 'api/login'
+import { login, getUserInfo } from 'api/login'
 import { setToken, getToken } from "utils/storage";
 
 const user = {
   state: {
     user: null,
+    roles: [],
     token: getToken()
   },
   mutations: {
@@ -24,6 +25,12 @@ const user = {
           commit('SET_TOKEN', token);
           resolve()
         })
+      });
+    },
+    async getUserInfo({ commit }) {
+      getUserInfo().then(response => {
+        console.log(response);
+        commit('SET_USER', response.data);
       });
     },
     setToken ({ commit }, token) {

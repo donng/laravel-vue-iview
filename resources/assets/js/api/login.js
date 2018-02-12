@@ -16,3 +16,13 @@ export function login(email, password) {
     }
   })
 }
+
+/**
+ * 获取当前登录用户的信息
+ * @returns {*}
+ */
+export function getUserInfo() {
+  return request({
+    url: '/auth/user',
+  })
+}
