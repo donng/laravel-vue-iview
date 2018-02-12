@@ -47,9 +47,9 @@
       submit (name) {
         this.$refs[name].validate((valid) => {
           if (valid) {
-            this.$Message.success('Success!');
-          } else {
-            this.$Message.error('Fail!');
+            this.$store.dispatch('login', this.form).then(response => {
+
+            })
           }
         })
       }
