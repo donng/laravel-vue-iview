@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('index');
-})->middleware('auth');
+});
 
 Auth::routes();
 
@@ -21,4 +21,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => []], 
     Route::post('login', 'LoginController@login');
 });
 
+Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+});
 //Route::get('/home', 'HomeController@index')->name('home');

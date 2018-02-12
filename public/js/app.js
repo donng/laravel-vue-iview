@@ -65045,7 +65045,9 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_iview___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_iview__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_router__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__router__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_utils_storage__ = __webpack_require__(92);
 // 导出路由并配置守卫
+
 
 
 
@@ -65059,9 +65061,25 @@ var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
   routes: __WEBPACK_IMPORTED_MODULE_3__router__["a" /* routes */]
 });
 
+var whiteList = ['/login'];
+
 router.beforeEach(function (to, from, next) {
   __WEBPACK_IMPORTED_MODULE_1_iview___default.a.LoadingBar.start();
-  next();
+  if (Object(__WEBPACK_IMPORTED_MODULE_4_utils_storage__["a" /* getToken */])()) {
+    if (to.path === '/login') {
+      next('/');
+    } else {
+      // 判断是否已获取用户信息
+      next();
+    }
+  } else {
+    if (whiteList.includes(to.path)) {
+      // 无 token 白名单可访问路由
+      next();
+    } else {
+      next('/login');
+    }
+  }
 });
 
 router.afterEach(function () {
@@ -68785,7 +68803,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.row[data-v-c175f96e] {\n  margin-top: 180px;\n}\n", ""]);
+exports.push([module.i, "\n.row[data-v-c175f96e] {\n  padding-top: 180px;\n}\n", ""]);
 
 // exports
 
@@ -68827,11 +68845,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       form: {
-        user: '',
+        email: '',
         password: ''
       },
       ruleInline: {
-        user: [{ required: true, message: '请填写用户名称', trigger: 'blur' }],
+        email: [{ required: true, message: '请填写邮箱地址', trigger: 'blur' }],
         password: [{ required: true, message: '请填写登录密码', trigger: 'blur' }, { type: 'string', min: 6, message: '密码长度不能低于6个字符', trigger: 'blur' }]
       }
     };
@@ -68843,7 +68861,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.$refs[name].validate(function (valid) {
         if (valid) {
-          _this.$store.dispatch('login', _this.form).then(function (response) {});
+          _this.$store.dispatch('login', _this.form).then(function () {
+            _this.$router.push('/');
+          });
         }
       });
     }
@@ -68882,26 +68902,23 @@ var render = function() {
                 [
                   _c(
                     "FormItem",
-                    { attrs: { prop: "user" } },
+                    { attrs: { prop: "email" } },
                     [
                       _c(
                         "Input",
                         {
-                          attrs: { type: "text", placeholder: "用户名" },
+                          attrs: { type: "text", placeholder: "邮箱地址" },
                           model: {
-                            value: _vm.form.user,
+                            value: _vm.form.email,
                             callback: function($$v) {
-                              _vm.$set(_vm.form, "user", $$v)
+                              _vm.$set(_vm.form, "email", $$v)
                             },
-                            expression: "form.user"
+                            expression: "form.email"
                           }
                         },
                         [
                           _c("Icon", {
-                            attrs: {
-                              slot: "prepend",
-                              type: "ios-person-outline"
-                            },
+                            attrs: { slot: "prepend", type: "email" },
                             slot: "prepend"
                           })
                         ],
@@ -68929,10 +68946,7 @@ var render = function() {
                         },
                         [
                           _c("Icon", {
-                            attrs: {
-                              slot: "prepend",
-                              type: "ios-locked-outline"
-                            },
+                            attrs: { slot: "prepend", type: "locked" },
                             slot: "prepend"
                           })
                         ],
@@ -69975,18 +69989,15 @@ var getters = {};
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_js_cookie__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_js_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_js_cookie__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_api_login__ = __webpack_require__(90);
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_api_login__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_utils_storage__ = __webpack_require__(92);
 
 
 
 var user = {
   state: {
     user: null,
-    token: __WEBPACK_IMPORTED_MODULE_0_js_cookie___default.a.get('token')
+    token: Object(__WEBPACK_IMPORTED_MODULE_1_utils_storage__["a" /* getToken */])()
   },
   mutations: {
     SET_TOKEN: function SET_TOKEN(state, token) {
@@ -70000,7 +70011,15 @@ var user = {
     login: function login(_ref, userInfo) {
       var commit = _ref.commit;
 
-      __WEBPACK_IMPORTED_MODULE_1_api_login__["a" /* login */].apply(undefined, _toConsumableArray(userInfo)).then(function (response) {});
+      return new Promise(function (resolve, reject) {
+        Object(__WEBPACK_IMPORTED_MODULE_0_api_login__["a" /* login */])(userInfo.email, userInfo.password).then(function (response) {
+          var token = response.access_token;
+
+          Object(__WEBPACK_IMPORTED_MODULE_1_utils_storage__["b" /* setToken */])(token);
+          commit('SET_TOKEN', token);
+          resolve();
+        });
+      });
     },
     setToken: function setToken(_ref2, token) {
       var commit = _ref2.commit;
@@ -70198,16 +70217,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /**
  * 用户登录
- * @param username 登录账号
+ * @param email 登录邮箱
  * @param password 登录密码
  * @returns {*}
  */
-function login(username, password) {
+function login(email, password) {
   return Object(__WEBPACK_IMPORTED_MODULE_0__utils_request__["a" /* default */])({
-    url: '/login',
+    url: '/auth/login',
     method: 'post',
     data: {
-      username: username,
+      email: email,
       password: password
     }
   });
@@ -70221,12 +70240,67 @@ function login(username, password) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__storage__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_iview__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_iview___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_iview__);
 
 
 
-var service = __WEBPACK_IMPORTED_MODULE_0_axios___default.a.create({});
+
+
+var service = __WEBPACK_IMPORTED_MODULE_0_axios___default.a.create({
+  validateStatus: function validateStatus(status) {
+    return status <= 500;
+  }
+});
+
+service.interceptors.request.use(function (config) {
+  if (__WEBPACK_IMPORTED_MODULE_1__store__["a" /* default */].getters.token) {
+    config.headers['Authorization'] = 'Bearer ' + Object(__WEBPACK_IMPORTED_MODULE_2__storage__["a" /* getToken */])();
+  }
+  return config;
+}, function (error) {
+  console.log(error); // for debug
+  Promise.reject(error);
+});
+
+service.interceptors.response.use(function (response) {
+  if (response.status === 401) {
+    // 用户登录认证失败
+    __WEBPACK_IMPORTED_MODULE_3_iview__["Message"].error('邮箱地址或密码错误!');
+    return false;
+  }
+
+  return response.data;
+});
 
 /* harmony default export */ __webpack_exports__["a"] = (service);
+
+/***/ }),
+/* 92 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = getToken;
+/* harmony export (immutable) */ __webpack_exports__["b"] = setToken;
+/* unused harmony export removeToken */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_js_cookie__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_js_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_js_cookie__);
+
+
+var TokenKey = 'token';
+
+function getToken() {
+  return __WEBPACK_IMPORTED_MODULE_0_js_cookie___default.a.get(TokenKey);
+}
+
+function setToken(token) {
+  return __WEBPACK_IMPORTED_MODULE_0_js_cookie___default.a.set(TokenKey, token);
+}
+
+function removeToken() {
+  return __WEBPACK_IMPORTED_MODULE_0_js_cookie___default.a.remove(TokenKey);
+}
 
 /***/ })
 ],[16]);

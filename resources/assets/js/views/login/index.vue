@@ -4,14 +4,14 @@
     <Card>
       <p slot="title">Sign In</p>
       <Form ref="form" :model="form" :rules="ruleInline">
-        <FormItem prop="user">
-          <Input type="text" v-model="form.user" placeholder="用户名">
-          <Icon type="ios-person-outline" slot="prepend"></Icon>
+        <FormItem prop="email">
+          <Input type="text" v-model="form.email" placeholder="邮箱地址">
+          <Icon type="email" slot="prepend"></Icon>
           </Input>
         </FormItem>
         <FormItem prop="password">
           <Input type="password" v-model="form.password" placeholder="密码">
-          <Icon type="ios-locked-outline" slot="prepend"></Icon>
+          <Icon type="locked" slot="prepend"></Icon>
           </Input>
         </FormItem>
         <FormItem>
@@ -29,12 +29,12 @@
     data () {
       return {
         form: {
-          user: '',
+          email: '',
           password: ''
         },
         ruleInline: {
-          user: [
-            { required: true, message: '请填写用户名称', trigger: 'blur' }
+          email: [
+            { required: true, message: '请填写邮箱地址', trigger: 'blur' }
           ],
           password: [
             { required: true, message: '请填写登录密码', trigger: 'blur' },
@@ -47,8 +47,8 @@
       submit (name) {
         this.$refs[name].validate((valid) => {
           if (valid) {
-            this.$store.dispatch('login', this.form).then(response => {
-
+            this.$store.dispatch('login', this.form).then(() => {
+              this.$router.push('/');
             })
           }
         })
@@ -59,6 +59,6 @@
 
 <style scoped>
   .row {
-    margin-top: 180px;
+    padding-top: 180px;
   }
 </style>

@@ -1,10 +1,10 @@
-import Cookies from 'js-cookie'
 import { login } from 'api/login'
+import { setToken, getToken } from "utils/storage";
 
 const user = {
   state: {
     user: null,
-    token: Cookies.get('token')
+    token: getToken()
   },
   mutations: {
     SET_TOKEN: (state, token) => {
@@ -16,9 +16,15 @@ const user = {
   },
   actions: {
     login ({ commit }, userInfo) {
-      login(...userInfo).then(response => {
+      return new Promise((resolve, reject) => {
+        login(userInfo.email, userInfo.password).then(response => {
+          const token = response.access_token;
 
-      })
+          setToken(token);
+          commit('SET_TOKEN', token);
+          resolve()
+        })
+      });
     },
     setToken ({ commit }, token) {
       commit('SET_TOKEN', token);

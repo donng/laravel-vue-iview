@@ -2,16 +2,16 @@ import request from '../utils/request'
 
 /**
  * 用户登录
- * @param username 登录账号
+ * @param email 登录邮箱
  * @param password 登录密码
  * @returns {*}
  */
-export function login(username, password) {
+export function login(email, password) {
   return request({
-    url: '/login',
+    url: '/auth/login',
     method: 'post',
     data: {
-      username,
+      email,
       password
     }
   })
