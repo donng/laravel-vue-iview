@@ -17,33 +17,24 @@ const user = {
     }
   },
   actions: {
-    login ({ commit }, userInfo) {
-      return new Promise((resolve, reject) => {
-        login(userInfo.email, userInfo.password).then(response => {
-          if (response.access_token) {
-            const token = response.access_token;
-            setToken(token);
-            commit('SET_TOKEN', token);
-            resolve()
-          } else {
-            Message.error(response.error);
-          }
-        })
-      });
+    async login({ commit }, userInfo) {
+      const response = await login(userInfo.email, userInfo.password);
+      if (response.access_token) {
+        const token = response.access_token;
+        setToken(token);
+        commit('SET_TOKEN', token);
+      } else {
+        Message.error(response.error);
+      }
     },
     async getUserInfo({ commit }) {
       getUserInfo().then(response => {
-        console.log(response);
         commit('SET_USER', response.data);
       });
     },
-    // 前端登出
     async logout({ commit }) {
       removeToken();
       commit('SET_TOKEN', '');
-    },
-    setToken ({ commit }, token) {
-      commit('SET_TOKEN', token);
     }
   }
 };

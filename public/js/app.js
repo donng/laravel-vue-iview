@@ -70015,35 +70015,30 @@ var user = {
     }
   },
   actions: {
-    login: function login(_ref, userInfo) {
-      var commit = _ref.commit;
-
-      return new Promise(function (resolve, reject) {
-        Object(__WEBPACK_IMPORTED_MODULE_2_api_login__["b" /* login */])(userInfo.email, userInfo.password).then(function (response) {
-          if (response.access_token) {
-            var token = response.access_token;
-            Object(__WEBPACK_IMPORTED_MODULE_3_utils_storage__["c" /* setToken */])(token);
-            commit('SET_TOKEN', token);
-            resolve();
-          } else {
-            __WEBPACK_IMPORTED_MODULE_1_iview__["Message"].error(response.error);
-          }
-        });
-      });
-    },
-    getUserInfo: function () {
-      var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(_ref2) {
-        var commit = _ref2.commit;
+    login: function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(_ref, userInfo) {
+        var commit = _ref.commit;
+        var response, token;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                Object(__WEBPACK_IMPORTED_MODULE_2_api_login__["a" /* getUserInfo */])().then(function (response) {
-                  console.log(response);
-                  commit('SET_USER', response.data);
-                });
+                _context.next = 2;
+                return Object(__WEBPACK_IMPORTED_MODULE_2_api_login__["b" /* login */])(userInfo.email, userInfo.password);
 
-              case 1:
+              case 2:
+                response = _context.sent;
+
+                if (response.access_token) {
+                  token = response.access_token;
+
+                  Object(__WEBPACK_IMPORTED_MODULE_3_utils_storage__["c" /* setToken */])(token);
+                  commit('SET_TOKEN', token);
+                } else {
+                  __WEBPACK_IMPORTED_MODULE_1_iview__["Message"].error(response.error);
+                }
+
+              case 4:
               case 'end':
                 return _context.stop();
             }
@@ -70051,25 +70046,24 @@ var user = {
         }, _callee, this);
       }));
 
-      function getUserInfo(_x) {
-        return _ref3.apply(this, arguments);
+      function login(_x, _x2) {
+        return _ref2.apply(this, arguments);
       }
 
-      return getUserInfo;
+      return login;
     }(),
-
-    // 前端登出
-    logout: function () {
-      var _ref5 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(_ref4) {
-        var commit = _ref4.commit;
+    getUserInfo: function () {
+      var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(_ref3) {
+        var commit = _ref3.commit;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                Object(__WEBPACK_IMPORTED_MODULE_3_utils_storage__["b" /* removeToken */])();
-                commit('SET_TOKEN', '');
+                Object(__WEBPACK_IMPORTED_MODULE_2_api_login__["a" /* getUserInfo */])().then(function (response) {
+                  commit('SET_USER', response.data);
+                });
 
-              case 2:
+              case 1:
               case 'end':
                 return _context2.stop();
             }
@@ -70077,17 +70071,36 @@ var user = {
         }, _callee2, this);
       }));
 
-      function logout(_x2) {
-        return _ref5.apply(this, arguments);
+      function getUserInfo(_x3) {
+        return _ref4.apply(this, arguments);
+      }
+
+      return getUserInfo;
+    }(),
+    logout: function () {
+      var _ref6 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(_ref5) {
+        var commit = _ref5.commit;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                Object(__WEBPACK_IMPORTED_MODULE_3_utils_storage__["b" /* removeToken */])();
+                commit('SET_TOKEN', '');
+
+              case 2:
+              case 'end':
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function logout(_x4) {
+        return _ref6.apply(this, arguments);
       }
 
       return logout;
-    }(),
-    setToken: function setToken(_ref6, token) {
-      var commit = _ref6.commit;
-
-      commit('SET_TOKEN', token);
-    }
+    }()
   }
 };
 
