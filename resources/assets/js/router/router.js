@@ -27,7 +27,12 @@ export const mainRouter = [
   },
 ];
 
+export const constantRouterMap = [
+
+];
+
 // 导出所有的路由配置
 export const routes = [
-  ...mainRouter
+  ...mainRouter,
+  ...constantRouterMap
 ];

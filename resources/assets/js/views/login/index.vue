@@ -7,17 +7,17 @@
         <p slot="title">{{$t('login.title')}}</p>
         <Form ref="form" :model="form" :rules="ruleInline">
           <FormItem prop="email">
-            <Input type="text" v-model="form.email" placeholder="邮箱地址">
+            <Input type="text" v-model="form.email" :placeholder="$t('login.email')">
             <Icon type="email" slot="prepend"></Icon>
             </Input>
           </FormItem>
           <FormItem prop="password">
-            <Input type="password" v-model="form.password" placeholder="密码">
+            <Input type="password" v-model="form.password" :placeholder="$t('login.password')">
             <Icon type="locked" slot="prepend"></Icon>
             </Input>
           </FormItem>
           <FormItem>
-            <Button type="primary" @click="submit('form')" long>登录</Button>
+            <Button type="primary" @click="submit('form')" long>{{$t('login.login')}}</Button>
           </FormItem>
         </Form>
       </Card>

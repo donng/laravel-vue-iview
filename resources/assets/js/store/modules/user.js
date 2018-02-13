@@ -30,9 +30,10 @@ const user = {
       }
     },
     async getUserInfo({ commit }) {
-      getUserInfo().then(response => {
-        commit('SET_USER', response.data);
-      });
+      const user = await getUserInfo();
+      commit('SET_USER', user);
+
+      return user;
     },
     async logout({ commit }) {
       removeToken();
