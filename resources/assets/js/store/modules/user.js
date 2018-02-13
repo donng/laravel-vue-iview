@@ -1,3 +1,4 @@
+import { Message } from 'iview'
 import { login, getUserInfo } from 'api/login'
 import { setToken, getToken, removeToken } from "utils/storage";
 
@@ -19,11 +20,14 @@ const user = {
     login ({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         login(userInfo.email, userInfo.password).then(response => {
-          const token = response.access_token;
-
-          setToken(token);
-          commit('SET_TOKEN', token);
-          resolve()
+          if (response.access_token) {
+            const token = response.access_token;
+            setToken(token);
+            commit('SET_TOKEN', token);
+            resolve()
+          } else {
+            Message.error(response.error);
+          }
         })
       });
     },

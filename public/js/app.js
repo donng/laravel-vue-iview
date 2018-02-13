@@ -69988,11 +69988,14 @@ var getters = {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_api_login__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_utils_storage__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_iview__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_iview___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_iview__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_api_login__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_utils_storage__ = __webpack_require__(92);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
 
 
 
@@ -70001,7 +70004,7 @@ var user = {
   state: {
     user: null,
     roles: [],
-    token: Object(__WEBPACK_IMPORTED_MODULE_2_utils_storage__["a" /* getToken */])()
+    token: Object(__WEBPACK_IMPORTED_MODULE_3_utils_storage__["a" /* getToken */])()
   },
   mutations: {
     SET_TOKEN: function SET_TOKEN(state, token) {
@@ -70016,12 +70019,15 @@ var user = {
       var commit = _ref.commit;
 
       return new Promise(function (resolve, reject) {
-        Object(__WEBPACK_IMPORTED_MODULE_1_api_login__["b" /* login */])(userInfo.email, userInfo.password).then(function (response) {
-          var token = response.access_token;
-
-          Object(__WEBPACK_IMPORTED_MODULE_2_utils_storage__["c" /* setToken */])(token);
-          commit('SET_TOKEN', token);
-          resolve();
+        Object(__WEBPACK_IMPORTED_MODULE_2_api_login__["b" /* login */])(userInfo.email, userInfo.password).then(function (response) {
+          if (response.access_token) {
+            var token = response.access_token;
+            Object(__WEBPACK_IMPORTED_MODULE_3_utils_storage__["c" /* setToken */])(token);
+            commit('SET_TOKEN', token);
+            resolve();
+          } else {
+            __WEBPACK_IMPORTED_MODULE_1_iview__["Message"].error(response.error);
+          }
         });
       });
     },
@@ -70032,7 +70038,7 @@ var user = {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                Object(__WEBPACK_IMPORTED_MODULE_1_api_login__["a" /* getUserInfo */])().then(function (response) {
+                Object(__WEBPACK_IMPORTED_MODULE_2_api_login__["a" /* getUserInfo */])().then(function (response) {
                   console.log(response);
                   commit('SET_USER', response.data);
                 });
@@ -70060,7 +70066,7 @@ var user = {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                Object(__WEBPACK_IMPORTED_MODULE_2_utils_storage__["b" /* removeToken */])();
+                Object(__WEBPACK_IMPORTED_MODULE_3_utils_storage__["b" /* removeToken */])();
                 commit('SET_TOKEN', '');
 
               case 2:
