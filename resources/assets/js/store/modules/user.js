@@ -1,5 +1,5 @@
 import { login, getUserInfo } from 'api/login'
-import { setToken, getToken } from "utils/storage";
+import { setToken, getToken, removeToken } from "utils/storage";
 
 const user = {
   state: {
@@ -32,6 +32,11 @@ const user = {
         console.log(response);
         commit('SET_USER', response.data);
       });
+    },
+    // 前端登出
+    async logout({ commit }) {
+      removeToken();
+      commit('SET_TOKEN', '');
     },
     setToken ({ commit }, token) {
       commit('SET_TOKEN', token);

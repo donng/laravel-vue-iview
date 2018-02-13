@@ -10,20 +10,23 @@ const service = axios.create({
 });
 
 service.interceptors.request.use(config => {
+
   if (store.getters.token) {
     config.headers['Authorization'] = 'Bearer ' + getToken();
   }
+
   return config;
 }, error => {
-  console.log(error); // for debug
   Promise.reject(error);
 });
 
 service.interceptors.response.use(response => {
+  // 用户认证失败
   if (response.status === 401) {
-    // 用户登录认证失败
-    Message.error('邮箱地址或密码错误!');
-    return false;
+    Message.error('登录失效，请重新登录!');
+    store.dispatch('logout').then(() => {
+      location.reload();// 为了重新实例化vue-router对象 避免bug
+    });
   }
 
   return response.data;

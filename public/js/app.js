@@ -70019,7 +70019,7 @@ var user = {
         Object(__WEBPACK_IMPORTED_MODULE_1_api_login__["b" /* login */])(userInfo.email, userInfo.password).then(function (response) {
           var token = response.access_token;
 
-          Object(__WEBPACK_IMPORTED_MODULE_2_utils_storage__["b" /* setToken */])(token);
+          Object(__WEBPACK_IMPORTED_MODULE_2_utils_storage__["c" /* setToken */])(token);
           commit('SET_TOKEN', token);
           resolve();
         });
@@ -70051,8 +70051,34 @@ var user = {
 
       return getUserInfo;
     }(),
-    setToken: function setToken(_ref4, token) {
-      var commit = _ref4.commit;
+
+    // 前端登出
+    logout: function () {
+      var _ref5 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(_ref4) {
+        var commit = _ref4.commit;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                Object(__WEBPACK_IMPORTED_MODULE_2_utils_storage__["b" /* removeToken */])();
+                commit('SET_TOKEN', '');
+
+              case 2:
+              case 'end':
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function logout(_x2) {
+        return _ref5.apply(this, arguments);
+      }
+
+      return logout;
+    }(),
+    setToken: function setToken(_ref6, token) {
+      var commit = _ref6.commit;
 
       commit('SET_TOKEN', token);
     }
@@ -70296,20 +70322,23 @@ var service = __WEBPACK_IMPORTED_MODULE_0_axios___default.a.create({
 });
 
 service.interceptors.request.use(function (config) {
+
   if (__WEBPACK_IMPORTED_MODULE_1__store__["a" /* default */].getters.token) {
     config.headers['Authorization'] = 'Bearer ' + Object(__WEBPACK_IMPORTED_MODULE_2__storage__["a" /* getToken */])();
   }
+
   return config;
 }, function (error) {
-  console.log(error); // for debug
   Promise.reject(error);
 });
 
 service.interceptors.response.use(function (response) {
+  // 用户认证失败
   if (response.status === 401) {
-    // 用户登录认证失败
-    __WEBPACK_IMPORTED_MODULE_3_iview__["Message"].error('邮箱地址或密码错误!');
-    return false;
+    __WEBPACK_IMPORTED_MODULE_3_iview__["Message"].error('登录失效，请重新登录!');
+    __WEBPACK_IMPORTED_MODULE_1__store__["a" /* default */].dispatch('logout').then(function () {
+      location.reload(); // 为了重新实例化vue-router对象 避免bug
+    });
   }
 
   return response.data;
@@ -70323,8 +70352,8 @@ service.interceptors.response.use(function (response) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = getToken;
-/* harmony export (immutable) */ __webpack_exports__["b"] = setToken;
-/* unused harmony export removeToken */
+/* harmony export (immutable) */ __webpack_exports__["c"] = setToken;
+/* harmony export (immutable) */ __webpack_exports__["b"] = removeToken;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_js_cookie__ = __webpack_require__(89);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_js_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_js_cookie__);
 
