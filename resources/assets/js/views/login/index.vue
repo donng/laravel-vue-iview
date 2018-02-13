@@ -4,7 +4,7 @@
     <Row type="flex" justify="center" class-name="row">
       <Col span="6">
       <Card>
-        <p slot="title">Sign In</p>
+        <p slot="title">{{$t('login.title')}}</p>
         <Form ref="form" :model="form" :rules="ruleInline">
           <FormItem prop="email">
             <Input type="text" v-model="form.email" placeholder="邮箱地址">
@@ -79,6 +79,7 @@
       color: #b61924;
       repeat: no-repeat;
       position: 50% 50%;
-    };
+    }
+  ;
   }
 </style>

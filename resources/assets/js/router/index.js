@@ -18,6 +18,7 @@ const whiteList = ['/login'];
 
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start();
+
   if (getToken()) {
     if (to.path === '/login') {
       next('/');

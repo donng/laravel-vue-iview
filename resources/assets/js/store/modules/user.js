@@ -19,7 +19,9 @@ const user = {
   actions: {
     async login({ commit }, userInfo) {
       const response = await login(userInfo.email, userInfo.password);
+
       if (response.access_token) {
+        // login success
         const token = response.access_token;
         setToken(token);
         commit('SET_TOKEN', token);
