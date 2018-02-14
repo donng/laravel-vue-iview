@@ -31,9 +31,7 @@
         </div>
         <div class="header-avator-con">
           <full-screen v-model="isFullScreen" @on-change="fullscreenChange"></full-screen>
-          <lock-screen></lock-screen>
           <message-tip v-model="mesCount"></message-tip>
-          <theme-switch></theme-switch>
 
           <div class="user-dropdown-menu-con">
             <Row type="flex" justify="end" align="middle" class="user-dropdown-innercon">
@@ -52,9 +50,9 @@
           </div>
         </div>
       </div>
-      <div class="tags-con">
-        <tags-page-opened :pageTagsList="pageTagsList"></tags-page-opened>
-      </div>
+      <!--<div class="tags-con">-->
+        <!--<tags-page-opened :pageTagsList="pageTagsList"></tags-page-opened>-->
+      <!--</div>-->
     </div>
     <div class="single-page-con" :style="{left: shrink?'60px':'200px'}">
       <div class="single-page">
@@ -71,9 +69,7 @@
   import tagsPageOpened from './components/tags-page-opened.vue';
   import breadcrumbNav from './components/breadcrumb-nav.vue';
   import fullScreen from './components/fullscreen.vue';
-  import lockScreen from './components/lockscreen/lockscreen.vue';
   import messageTip from './components/message-tip.vue';
-  import themeSwitch from './components/theme-switch/theme-switch.vue';
   import Cookies from 'js-cookie';
   import util from '@/libs/util.js';
 
@@ -83,9 +79,7 @@
       tagsPageOpened,
       breadcrumbNav,
       fullScreen,
-      lockScreen,
       messageTip,
-      themeSwitch
     },
     data () {
       return {
@@ -97,7 +91,7 @@
     },
     computed: {
       menuList () {
-        return this.$store.state.app.menuList;
+        return this.$store.getters.addRouters;
       },
       pageTagsList () {
         return this.$store.state.app.pageOpenedList; // 打开的页面的页面对象
@@ -123,16 +117,17 @@
     },
     methods: {
       init () {
-        let pathArr = util.setCurrentPath(this, this.$route.name);
-        this.$store.commit('updateMenulist');
-        if (pathArr.length >= 2) {
-          this.$store.commit('addOpenSubmenu', pathArr[1].name);
-        }
-        this.userName = Cookies.get('user');
+        // let pathArr = util.setCurrentPath(this, this.$route.name);
+        // this.$store.commit('updateMenulist');
+        // if (pathArr.length >= 2) {
+        //   this.$store.commit('addOpenSubmenu', pathArr[1].name);
+        // }
+        this.userName = this.$store.getters.user.name;
+
         let messageCount = 3;
         this.messageCount = messageCount.toString();
-        this.checkTag(this.$route.name);
-        this.$store.commit('setMessageCount', 3);
+        // this.checkTag(this.$route.name);
+        //this.$store.commit('setMessageCount', 3);
       },
       toggleClick () {
         this.shrink = !this.shrink;
@@ -196,7 +191,7 @@
     },
     created () {
       // 显示打开的页面的列表
-      this.$store.commit('setOpenedList');
+      //this.$store.commit('setOpenedList');
     }
   };
 </script>

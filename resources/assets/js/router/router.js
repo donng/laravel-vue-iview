@@ -16,6 +16,7 @@ export const mainRouter = [
     children: [{
       path: 'home',
       component: require('views/home/index'),
+      title: '首页',
       name: 'home',
       meta: {
         title: 'home',

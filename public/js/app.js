@@ -35398,6 +35398,7 @@ var mainRouter = [{
   children: [{
     path: 'home',
     component: __webpack_require__(110),
+    title: '首页',
     name: 'home',
     meta: {
       title: 'home',
@@ -69354,15 +69355,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_breadcrumb_nav_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_breadcrumb_nav_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_fullscreen_vue__ = __webpack_require__(91);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_fullscreen_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_fullscreen_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_lockscreen_lockscreen_vue__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_lockscreen_lockscreen_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_lockscreen_lockscreen_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_message_tip_vue__ = __webpack_require__(97);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_message_tip_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_message_tip_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_theme_switch_theme_switch_vue__ = __webpack_require__(100);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_theme_switch_theme_switch_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_theme_switch_theme_switch_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_js_cookie__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_js_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_js_cookie__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__libs_util_js__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_message_tip_vue__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_message_tip_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_message_tip_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_js_cookie__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_js_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_js_cookie__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__libs_util_js__ = __webpack_require__(14);
 //
 //
 //
@@ -69429,10 +69426,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-
-
 
 
 
@@ -69448,9 +69441,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     tagsPageOpened: __WEBPACK_IMPORTED_MODULE_1__components_tags_page_opened_vue___default.a,
     breadcrumbNav: __WEBPACK_IMPORTED_MODULE_2__components_breadcrumb_nav_vue___default.a,
     fullScreen: __WEBPACK_IMPORTED_MODULE_3__components_fullscreen_vue___default.a,
-    lockScreen: __WEBPACK_IMPORTED_MODULE_4__components_lockscreen_lockscreen_vue___default.a,
-    messageTip: __WEBPACK_IMPORTED_MODULE_5__components_message_tip_vue___default.a,
-    themeSwitch: __WEBPACK_IMPORTED_MODULE_6__components_theme_switch_theme_switch_vue___default.a
+    messageTip: __WEBPACK_IMPORTED_MODULE_4__components_message_tip_vue___default.a
   },
   data: function data() {
     return {
@@ -69463,7 +69454,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   computed: {
     menuList: function menuList() {
-      return this.$store.state.app.menuList;
+      return this.$store.getters.addRouters;
     },
     pageTagsList: function pageTagsList() {
       return this.$store.state.app.pageOpenedList; // 打开的页面的页面对象
@@ -69489,23 +69480,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   methods: {
     init: function init() {
-      var pathArr = __WEBPACK_IMPORTED_MODULE_8__libs_util_js__["a" /* default */].setCurrentPath(this, this.$route.name);
-      this.$store.commit('updateMenulist');
-      if (pathArr.length >= 2) {
-        this.$store.commit('addOpenSubmenu', pathArr[1].name);
-      }
-      this.userName = __WEBPACK_IMPORTED_MODULE_7_js_cookie___default.a.get('user');
+      // let pathArr = util.setCurrentPath(this, this.$route.name);
+      // this.$store.commit('updateMenulist');
+      // if (pathArr.length >= 2) {
+      //   this.$store.commit('addOpenSubmenu', pathArr[1].name);
+      // }
+      this.userName = this.$store.getters.user.name;
+
       var messageCount = 3;
       this.messageCount = messageCount.toString();
-      this.checkTag(this.$route.name);
-      this.$store.commit('setMessageCount', 3);
+      // this.checkTag(this.$route.name);
+      //this.$store.commit('setMessageCount', 3);
     },
     toggleClick: function toggleClick() {
       this.shrink = !this.shrink;
     },
     handleClickUserDropdown: function handleClickUserDropdown(name) {
       if (name === 'ownSpace') {
-        __WEBPACK_IMPORTED_MODULE_8__libs_util_js__["a" /* default */].openNewPage(this, 'ownspace_index');
+        __WEBPACK_IMPORTED_MODULE_6__libs_util_js__["a" /* default */].openNewPage(this, 'ownspace_index');
         this.$router.push({
           name: 'ownspace_index'
         });
@@ -69526,7 +69518,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
       if (!openpageHasTag) {
         //  解决关闭当前标签后再点击回退按钮会退到当前页时没有标签的问题
-        __WEBPACK_IMPORTED_MODULE_8__libs_util_js__["a" /* default */].openNewPage(this, name, this.$route.params || {}, this.$route.query || {});
+        __WEBPACK_IMPORTED_MODULE_6__libs_util_js__["a" /* default */].openNewPage(this, name, this.$route.params || {}, this.$route.query || {});
       }
     },
     handleSubmenuChange: function handleSubmenuChange(val) {
@@ -69547,7 +69539,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   watch: {
     '$route': function $route(to) {
       this.$store.commit('setCurrentPageName', to.name);
-      var pathArr = __WEBPACK_IMPORTED_MODULE_8__libs_util_js__["a" /* default */].setCurrentPath(this, to.name);
+      var pathArr = __WEBPACK_IMPORTED_MODULE_6__libs_util_js__["a" /* default */].setCurrentPath(this, to.name);
       if (pathArr.length > 2) {
         this.$store.commit('addOpenSubmenu', pathArr[1].name);
       }
@@ -69555,7 +69547,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       localStorage.currentPageName = to.name;
     },
     lang: function lang() {
-      __WEBPACK_IMPORTED_MODULE_8__libs_util_js__["a" /* default */].setCurrentPath(this, this.$route.name); // 在切换语言时用于刷新面包屑
+      __WEBPACK_IMPORTED_MODULE_6__libs_util_js__["a" /* default */].setCurrentPath(this, this.$route.name); // 在切换语言时用于刷新面包屑
     }
   },
   mounted: function mounted() {
@@ -69563,7 +69555,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   created: function created() {
     // 显示打开的页面的列表
-    this.$store.commit('setOpenedList');
+    //this.$store.commit('setOpenedList');
   }
 });
 
@@ -69936,7 +69928,7 @@ var render = function() {
     [
       _vm._l(_vm.menuList, function(item) {
         return [
-          item.children.length <= 1
+          item.children && item.children.length <= 1
             ? _c(
                 "MenuItem",
                 {
@@ -69962,7 +69954,7 @@ var render = function() {
               )
             : _vm._e(),
           _vm._v(" "),
-          item.children.length > 1
+          item.children && item.children.length > 1
             ? _c(
                 "Submenu",
                 { key: item.name, attrs: { name: item.name } },
@@ -70158,7 +70150,7 @@ var render = function() {
             "div",
             { key: index, staticStyle: { "text-align": "center" } },
             [
-              item.children.length !== 1
+              item.children && item.children.length !== 1
                 ? _c(
                     "Dropdown",
                     {
@@ -71672,23 +71664,6 @@ var render = function() {
           "open-names": _vm.openNames
         },
         on: { "on-change": _vm.handleChange }
-      }),
-      _vm._v(" "),
-      _c("sidebar-menu-shrink", {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.shrink,
-            expression: "shrink"
-          }
-        ],
-        attrs: {
-          "menu-theme": _vm.theme,
-          "menu-list": _vm.menuList,
-          "icon-color": _vm.shrinkIconColor
-        },
-        on: { "on-change": _vm.handleChange }
       })
     ],
     2
@@ -72401,162 +72376,9 @@ if (false) {
 }
 
 /***/ }),
-/* 94 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(95)
-/* template */
-var __vue_template__ = __webpack_require__(96)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/views/layout/components/lockscreen/lockscreen.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-e14a2690", Component.options)
-  } else {
-    hotAPI.reload("data-v-e14a2690", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 95 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_js_cookie__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_js_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_js_cookie__);
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-var setLockBackSize = function setLockBackSize() {
-    var x = document.body.clientWidth;
-    var y = document.body.clientHeight;
-    var r = Math.sqrt(x * x + y * y);
-    return parseInt(r);
-};
-/* harmony default export */ __webpack_exports__["default"] = ({
-    name: 'lockScreen',
-    props: {
-        value: {
-            type: Boolean,
-            default: false
-        }
-    },
-    methods: {
-        lockScreen: function lockScreen() {
-            var _this = this;
-
-            var lockScreenBack = document.getElementById('lock_screen_back');
-            lockScreenBack.style.transition = 'all 3s';
-            lockScreenBack.style.zIndex = 10000;
-            lockScreenBack.style.boxShadow = '0 0 0 ' + this.lockScreenSize + 'px #667aa6 inset';
-            this.showUnlock = true;
-            __WEBPACK_IMPORTED_MODULE_0_js_cookie___default.a.set('last_page_name', this.$route.name); // 本地存储锁屏之前打开的页面以便解锁后打开
-            setTimeout(function () {
-                lockScreenBack.style.transition = 'all 0s';
-                _this.$router.push({
-                    name: 'locking'
-                });
-            }, 800);
-            __WEBPACK_IMPORTED_MODULE_0_js_cookie___default.a.set('locking', '1');
-        }
-    },
-    mounted: function mounted() {
-        var _this2 = this;
-
-        var lockScreenBack = void 0;
-        if (!document.getElementById('lock_screen_back')) {
-            var lockdiv = document.createElement('div');
-            lockdiv.setAttribute('id', 'lock_screen_back');
-            lockdiv.setAttribute('class', 'lock-screen-back');
-            document.body.appendChild(lockdiv);
-            lockScreenBack = document.getElementById('lock_screen_back');
-            window.addEventListener('resize', function () {
-                var size = setLockBackSize();
-                _this2.lockScreenSize = size;
-                lockScreenBack.style.transition = 'all 0s';
-                lockScreenBack.style.width = lockScreenBack.style.height = size + 'px';
-            });
-        } else {
-            lockScreenBack = document.getElementById('lock_screen_back');
-        }
-        var size = setLockBackSize();
-        this.lockScreenSize = size;
-        lockScreenBack.style.transition = 'all 3s';
-        lockScreenBack.style.width = lockScreenBack.style.height = size + 'px';
-    }
-});
-
-/***/ }),
-/* 96 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "lock-screen-btn-con", on: { click: _vm.lockScreen } },
-    [
-      _c(
-        "Tooltip",
-        { attrs: { content: "锁屏", placement: "bottom" } },
-        [_c("Icon", { attrs: { type: "locked", size: 20 } })],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-e14a2690", module.exports)
-  }
-}
-
-/***/ }),
+/* 94 */,
+/* 95 */,
+/* 96 */,
 /* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -72686,321 +72508,9 @@ if (false) {
 }
 
 /***/ }),
-/* 100 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(101)
-/* template */
-var __vue_template__ = __webpack_require__(102)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/views/layout/components/theme-switch/theme-switch.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-15e8f850", Component.options)
-  } else {
-    hotAPI.reload("data-v-15e8f850", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 101 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_js_cookie__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_js_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_js_cookie__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-// import config from '../../../../build/config.js';
-/* harmony default export */ __webpack_exports__["default"] = ({
-    name: 'themeSwitch',
-    data: function data() {
-        return {
-            themeList: [{
-                name: 'black_b',
-                menu: '#495060',
-                element: '#2d8cf0'
-            }, {
-                name: 'black_g',
-                menu: '#495060',
-                element: '#00a854'
-            }, {
-                name: 'black_y',
-                menu: '#495060',
-                element: '#e96500'
-            }, {
-                name: 'black_r',
-                menu: '#495060',
-                element: '#e43e31'
-            }, {
-                name: 'light_b',
-                menu: '#495060',
-                element: '#2d8cf0'
-            }, {
-                name: 'light_g',
-                menu: '#495060',
-                element: '#00a854'
-            }, {
-                name: 'light_y',
-                menu: '#495060',
-                element: '#e96500'
-            }, {
-                name: 'light_r',
-                menu: '#495060',
-                element: '#e43e31'
-            }]
-        };
-    },
-
-    methods: {
-        setTheme: function setTheme(themeFile) {
-            var menuTheme = themeFile.substr(0, 1);
-            var mainTheme = themeFile.substr(-1, 1);
-            if (menuTheme === 'b') {
-                // 黑色菜单
-                this.$store.commit('changeMenuTheme', 'dark');
-                menuTheme = 'dark';
-            } else {
-                this.$store.commit('changeMenuTheme', 'light');
-                menuTheme = 'light';
-            }
-            var path = '';
-            var themeLink = document.querySelector('link[name="theme"]');
-            var userName = __WEBPACK_IMPORTED_MODULE_0_js_cookie___default.a.get('user');
-            if (localStorage.theme) {
-                var themeList = JSON.parse(localStorage.theme);
-                var index = 0;
-                var hasThisUser = themeList.some(function (item, i) {
-                    if (item.userName === userName) {
-                        index = i;
-                        return true;
-                    } else {
-                        return false;
-                    }
-                });
-                if (hasThisUser) {
-                    themeList[index].mainTheme = mainTheme;
-                    themeList[index].menuTheme = menuTheme;
-                } else {
-                    themeList.push({
-                        userName: userName,
-                        mainTheme: mainTheme,
-                        menuTheme: menuTheme
-                    });
-                }
-                localStorage.theme = JSON.stringify(themeList);
-            } else {
-                localStorage.theme = JSON.stringify([{
-                    userName: userName,
-                    mainTheme: mainTheme,
-                    menuTheme: menuTheme
-                }]);
-            }
-            var stylePath = '';
-            // if (config.env.indexOf('dev') > -1) {
-            //     stylePath = './src/views/main-components/theme-switch/theme/';
-            // } else {
-            //     stylePath = 'dist/';
-            // }
-            if (mainTheme !== 'b') {
-                path = stylePath + mainTheme + '.css';
-            } else {
-                path = '';
-            }
-            themeLink.setAttribute('href', path);
-        }
-    },
-    created: function created() {
-        var _this = this;
-
-        var path = '';
-        // if (config.env.indexOf('dev') > -1) {
-        //     path = './src/views/main-components/theme-switch/theme/';
-        // } else {
-        //     path = 'dist/';
-        // }
-        var name = __WEBPACK_IMPORTED_MODULE_0_js_cookie___default.a.get('user');
-        if (localStorage.theme) {
-            var hasThisUser = JSON.parse(localStorage.theme).some(function (item) {
-                if (item.userName === name) {
-                    _this.$store.commit('changeMenuTheme', item.menuTheme);
-                    _this.$store.commit('changeMainTheme', item.mainTheme);
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-            if (!hasThisUser) {
-                this.$store.commit('changeMenuTheme', 'dark');
-                this.$store.commit('changeMainTheme', 'b');
-            }
-        } else {
-            this.$store.commit('changeMenuTheme', 'dark');
-            this.$store.commit('changeMainTheme', 'b');
-        }
-        // 根据用户设置主题
-        if (this.$store.state.app.themeColor !== 'b') {
-            var stylesheetPath = path + this.$store.state.app.themeColor + '.css';
-            var themeLink = document.querySelector('link[name="theme"]');
-            themeLink.setAttribute('href', stylesheetPath);
-        }
-    }
-});
-
-/***/ }),
-/* 102 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticStyle: { display: "inline-block", padding: "0 6px" } },
-    [
-      _c(
-        "Dropdown",
-        { attrs: { trigger: "click" }, on: { "on-click": _vm.setTheme } },
-        [
-          _c(
-            "a",
-            { attrs: { href: "javascript:void(0)" } },
-            [
-              _c("Icon", {
-                style: { marginTop: "-2px", verticalAlign: "middle" },
-                attrs: { color: "#495060", size: 18, type: "paintbucket" }
-              }),
-              _vm._v(" "),
-              _c("Icon", { attrs: { type: "arrow-down-b" } })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "DropdownMenu",
-            { attrs: { slot: "list" }, slot: "list" },
-            _vm._l(_vm.themeList, function(item, index) {
-              return _c(
-                "DropdownItem",
-                { key: index, attrs: { name: item.name } },
-                [
-                  _c(
-                    "Row",
-                    {
-                      attrs: {
-                        type: "flex",
-                        justify: "center",
-                        align: "middle"
-                      }
-                    },
-                    [
-                      _c(
-                        "span",
-                        { staticStyle: { "margin-right": "10px" } },
-                        [
-                          _c("Icon", {
-                            attrs: {
-                              size: 20,
-                              type:
-                                item.name.substr(0, 1) !== "b"
-                                  ? "happy-outline"
-                                  : "happy",
-                              color: item.menu
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "span",
-                        [
-                          _c("Icon", {
-                            attrs: {
-                              size: 22,
-                              type: "record",
-                              color: item.element
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ]
-                  )
-                ],
-                1
-              )
-            })
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-15e8f850", module.exports)
-  }
-}
-
-/***/ }),
+/* 100 */,
+/* 101 */,
+/* 102 */,
 /* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -73133,8 +72643,6 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c("lock-screen"),
-                _vm._v(" "),
                 _c("message-tip", {
                   model: {
                     value: _vm.mesCount,
@@ -73144,8 +72652,6 @@ var render = function() {
                     expression: "mesCount"
                   }
                 }),
-                _vm._v(" "),
-                _c("theme-switch"),
                 _vm._v(" "),
                 _c(
                   "div",
@@ -73216,18 +72722,7 @@ var render = function() {
               ],
               1
             )
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "tags-con" },
-            [
-              _c("tags-page-opened", {
-                attrs: { pageTagsList: _vm.pageTagsList }
-              })
-            ],
-            1
-          )
+          ])
         ]
       ),
       _vm._v(" "),
@@ -75249,6 +74744,9 @@ if (false) {
 
 "use strict";
 var getters = {
+  user: function user(state) {
+    return state.user.user;
+  },
   token: function token(state) {
     return state.user.token;
   },
