@@ -72545,41 +72545,11 @@ var render = function() {
               on: { "on-change": _vm.handleSubmenuChange }
             },
             [
-              _c(
-                "div",
-                {
-                  staticClass: "logo-con",
-                  attrs: { slot: "top" },
-                  slot: "top"
-                },
-                [
-                  _c("img", {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: !_vm.shrink,
-                        expression: "!shrink"
-                      }
-                    ],
-                    key: "max-logo",
-                    attrs: { src: __webpack_require__(134) }
-                  }),
-                  _vm._v(" "),
-                  _c("img", {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.shrink,
-                        expression: "shrink"
-                      }
-                    ],
-                    key: "min-logo",
-                    attrs: { src: __webpack_require__(135) }
-                  })
-                ]
-              )
+              _c("div", {
+                staticClass: "logo-con",
+                attrs: { slot: "top" },
+                slot: "top"
+              })
             ]
           )
         ],
@@ -78305,18 +78275,8 @@ module.exports = function (css) {
 /***/ }),
 /* 132 */,
 /* 133 */,
-/* 134 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/logo.jpg?d737babfbd691e25c8d0302df9557b8f";
-
-/***/ }),
-/* 135 */
-/***/ (function(module, exports) {
-
-module.exports = "/images/logo-min.jpg?ba0f3e361b5af591614b72f843e71fe0";
-
-/***/ }),
+/* 134 */,
+/* 135 */,
 /* 136 */
 /***/ (function(module, exports) {
 
