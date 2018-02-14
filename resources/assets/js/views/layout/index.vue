@@ -30,8 +30,9 @@
           </div>
         </div>
         <div class="header-avator-con">
-          <full-screen v-model="isFullScreen" @on-change="fullscreenChange"></full-screen>
-          <message-tip v-model="mesCount"></message-tip>
+          <!--全屏和未读信息提示-->
+          <!--<full-screen v-model="isFullScreen" @on-change="fullscreenChange"></full-screen>-->
+          <!--<message-tip v-model="mesCount"></message-tip>-->
 
           <div class="user-dropdown-menu-con">
             <Row type="flex" justify="end" align="middle" class="user-dropdown-innercon">

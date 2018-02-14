@@ -69426,6 +69426,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -72598,100 +72599,74 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "header-avator-con" },
-              [
-                _c("full-screen", {
-                  on: { "on-change": _vm.fullscreenChange },
-                  model: {
-                    value: _vm.isFullScreen,
-                    callback: function($$v) {
-                      _vm.isFullScreen = $$v
+            _c("div", { staticClass: "header-avator-con" }, [
+              _c(
+                "div",
+                { staticClass: "user-dropdown-menu-con" },
+                [
+                  _c(
+                    "Row",
+                    {
+                      staticClass: "user-dropdown-innercon",
+                      attrs: { type: "flex", justify: "end", align: "middle" }
                     },
-                    expression: "isFullScreen"
-                  }
-                }),
-                _vm._v(" "),
-                _c("message-tip", {
-                  model: {
-                    value: _vm.mesCount,
-                    callback: function($$v) {
-                      _vm.mesCount = $$v
-                    },
-                    expression: "mesCount"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "user-dropdown-menu-con" },
-                  [
-                    _c(
-                      "Row",
-                      {
-                        staticClass: "user-dropdown-innercon",
-                        attrs: { type: "flex", justify: "end", align: "middle" }
-                      },
-                      [
-                        _c(
-                          "Dropdown",
-                          {
-                            attrs: { transfer: "", trigger: "click" },
-                            on: { "on-click": _vm.handleClickUserDropdown }
-                          },
-                          [
-                            _c(
-                              "a",
-                              { attrs: { href: "javascript:void(0)" } },
-                              [
-                                _c("span", { staticClass: "main-user-name" }, [
-                                  _vm._v(_vm._s(_vm.userName))
-                                ]),
-                                _vm._v(" "),
-                                _c("Icon", { attrs: { type: "arrow-down-b" } })
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "DropdownMenu",
-                              { attrs: { slot: "list" }, slot: "list" },
-                              [
-                                _c(
-                                  "DropdownItem",
-                                  { attrs: { name: "ownSpace" } },
-                                  [_vm._v("个人中心")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "DropdownItem",
-                                  { attrs: { name: "loginout", divided: "" } },
-                                  [_vm._v("退出登录")]
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c("Avatar", {
-                          staticStyle: {
-                            background: "#619fe7",
-                            "margin-left": "10px"
-                          },
-                          attrs: { src: _vm.avatorPath }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            )
+                    [
+                      _c(
+                        "Dropdown",
+                        {
+                          attrs: { transfer: "", trigger: "click" },
+                          on: { "on-click": _vm.handleClickUserDropdown }
+                        },
+                        [
+                          _c(
+                            "a",
+                            { attrs: { href: "javascript:void(0)" } },
+                            [
+                              _c("span", { staticClass: "main-user-name" }, [
+                                _vm._v(_vm._s(_vm.userName))
+                              ]),
+                              _vm._v(" "),
+                              _c("Icon", { attrs: { type: "arrow-down-b" } })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "DropdownMenu",
+                            { attrs: { slot: "list" }, slot: "list" },
+                            [
+                              _c(
+                                "DropdownItem",
+                                { attrs: { name: "ownSpace" } },
+                                [_vm._v("个人中心")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "DropdownItem",
+                                { attrs: { name: "loginout", divided: "" } },
+                                [_vm._v("退出登录")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("Avatar", {
+                        staticStyle: {
+                          background: "#619fe7",
+                          "margin-left": "10px"
+                        },
+                        attrs: { src: _vm.avatorPath }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ])
           ])
         ]
       ),
