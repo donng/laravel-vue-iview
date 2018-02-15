@@ -35030,12 +35030,12 @@ exports.default = esExports;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_app__ = __webpack_require__(58);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_user__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_route__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__getters__ = __webpack_require__(115);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__getters__ = __webpack_require__(115);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
@@ -35043,13 +35043,24 @@ exports.default = esExports;
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */]);
 
+// load modules dynamically
+var requireContext = __webpack_require__(137);
+
+var modules = requireContext.keys().map(function (file) {
+  // get file name and store config
+  return [file.replace(/(^.\/)|(\.js$)/g, ''), requireContext(file).default];
+}).reduce(function (modules, _ref) {
+  var _ref2 = _slicedToArray(_ref, 2),
+      name = _ref2[0],
+      module = _ref2[1];
+
+  // generate name:module object
+  return _extends({}, modules, _defineProperty({}, name, module));
+}, {});
+
 var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
-  modules: {
-    app: __WEBPACK_IMPORTED_MODULE_2__modules_app__["a" /* default */],
-    user: __WEBPACK_IMPORTED_MODULE_3__modules_user__["a" /* default */],
-    route: __WEBPACK_IMPORTED_MODULE_4__modules_route__["a" /* default */]
-  },
-  getters: __WEBPACK_IMPORTED_MODULE_5__getters__["a" /* default */]
+  modules: modules,
+  getters: __WEBPACK_IMPORTED_MODULE_2__getters__["a" /* default */]
 });
 
 /* harmony default export */ __webpack_exports__["a"] = (store);
@@ -68120,49 +68131,25 @@ var index_esm = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var app = {
   state: {
     collapse: true //菜单栏伸缩
   },
   mutations: {
-    CHANGE_COLLAPSE: function CHANGE_COLLAPSE(state) {
+    collapse: function collapse(state) {
       state.collapse = !state.collapse;
     }
   },
   actions: {
-    collapse: function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(_ref) {
-        var commit = _ref.commit;
-        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                commit('CHANGE_COLLAPSE');
-
-              case 1:
-              case 'end':
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function collapse(_x) {
-        return _ref2.apply(this, arguments);
-      }
-
-      return collapse;
-    }()
+    collapse: function collapse(_ref) {
+      var commit = _ref.commit;
+      return commit('collapse');
+    }
   }
 };
 
-/* harmony default export */ __webpack_exports__["a"] = (app);
+/* harmony default export */ __webpack_exports__["default"] = (app);
 
 /***/ }),
 /* 59 */
@@ -68943,6 +68930,7 @@ if (hadRuntime) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_iview__ = __webpack_require__(8);
@@ -68964,10 +68952,10 @@ var user = {
     token: Object(__WEBPACK_IMPORTED_MODULE_3_utils_storage__["a" /* getToken */])()
   },
   mutations: {
-    SET_TOKEN: function SET_TOKEN(state, token) {
+    setToken: function setToken(state, token) {
       state.token = token;
     },
-    SET_USER: function SET_USER(state, user) {
+    setUser: function setUser(state, user) {
       state.user = user;
     }
   },
@@ -68992,7 +68980,7 @@ var user = {
                   token = response.access_token;
 
                   Object(__WEBPACK_IMPORTED_MODULE_3_utils_storage__["c" /* setToken */])(token);
-                  commit('SET_TOKEN', token);
+                  commit('setToken', token);
                 } else {
                   __WEBPACK_IMPORTED_MODULE_1_iview__["Message"].error(response.error);
                 }
@@ -69025,7 +69013,7 @@ var user = {
               case 2:
                 user = _context2.sent;
 
-                commit('SET_USER', user);
+                commit('setUser', user);
 
                 return _context2.abrupt('return', user);
 
@@ -69051,7 +69039,7 @@ var user = {
             switch (_context3.prev = _context3.next) {
               case 0:
                 Object(__WEBPACK_IMPORTED_MODULE_3_utils_storage__["b" /* removeToken */])();
-                commit('SET_TOKEN', '');
+                commit('setToken', '');
 
               case 2:
               case 'end':
@@ -69070,7 +69058,7 @@ var user = {
   }
 };
 
-/* harmony default export */ __webpack_exports__["a"] = (user);
+/* harmony default export */ __webpack_exports__["default"] = (user);
 
 /***/ }),
 /* 62 */
@@ -69159,6 +69147,7 @@ service.interceptors.response.use(function (response) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router_router__ = __webpack_require__(20);
@@ -69207,7 +69196,7 @@ var route = {
     addRouters: []
   },
   mutations: {
-    SET_ROUTERS: function SET_ROUTERS(state, routers) {
+    setRoutes: function setRoutes(state, routers) {
       state.addRouters = routers;
       state.routers = __WEBPACK_IMPORTED_MODULE_1__router_router__["a" /* constantRouterMap */].concat(routers);
     }
@@ -69229,7 +69218,7 @@ var route = {
                 } else {
                   accessedRouters = filterAsyncRouter(__WEBPACK_IMPORTED_MODULE_1__router_router__["b" /* mainRouter */], roles);
                 }
-                commit('SET_ROUTERS', accessedRouters);
+                commit('setRoutes', accessedRouters);
 
               case 4:
               case 'end':
@@ -69248,7 +69237,7 @@ var route = {
   }
 };
 
-/* harmony default export */ __webpack_exports__["a"] = (route);
+/* harmony default export */ __webpack_exports__["default"] = (route);
 
 /***/ }),
 /* 65 */
@@ -78256,6 +78245,31 @@ module.exports = function (css) {
 /***/ (function(module, exports) {
 
 module.exports = {"private":true,"scripts":{"dev":"npm run development","development":"cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js","watch":"cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js","watch-poll":"npm run watch -- --watch-poll","hot":"cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js","prod":"npm run production","production":"cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"},"devDependencies":{"axios":"^0.17","bootstrap-sass":"^3.3.7","cross-env":"^5.1","jquery":"^3.2","laravel-mix":"^2.0","lodash":"^4.17.4","node-sass":"^4.7.2","vue":"^2.5.7"},"dependencies":{"css-loader":"^0.28.9","iview":"^2.9.2","js-cookie":"^2.2.0","less":"^3.0.0","less-loader":"^4.0.5","vue-i18n":"^7.4.2","vue-router":"^3.0.1","vuex":"^3.0.1"}}
+
+/***/ }),
+/* 137 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./app.js": 58,
+	"./route.js": 64,
+	"./user.js": 61
+};
+function webpackContext(req) {
+	return __webpack_require__(webpackContextResolve(req));
+};
+function webpackContextResolve(req) {
+	var id = map[req];
+	if(!(id + 1)) // check for number or string
+		throw new Error("Cannot find module '" + req + "'.");
+	return id;
+};
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = 137;
 
 /***/ })
 ],[24]);

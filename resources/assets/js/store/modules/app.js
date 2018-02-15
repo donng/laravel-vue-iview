@@ -3,14 +3,12 @@ const app = {
     collapse: true, //菜单栏伸缩
   },
   mutations: {
-    CHANGE_COLLAPSE: (state) => {
+    collapse: (state) => {
       state.collapse = !state.collapse;
     }
   },
   actions: {
-    async collapse({ commit }) {
-      commit('CHANGE_COLLAPSE');
-    }
+    collapse: ({ commit }) => commit('collapse')
   }
 };
 

@@ -9,10 +9,10 @@ const user = {
     token: getToken()
   },
   mutations: {
-    SET_TOKEN: (state, token) => {
+    setToken: (state, token) => {
       state.token = token;
     },
-    SET_USER: (state, user) => {
+    setUser: (state, user) => {
       state.user = user;
     }
   },
@@ -24,20 +24,20 @@ const user = {
         // login success
         const token = response.access_token;
         setToken(token);
-        commit('SET_TOKEN', token);
+        commit('setToken', token);
       } else {
         Message.error(response.error);
       }
     },
     async getUserInfo({ commit }) {
       const user = await getUserInfo();
-      commit('SET_USER', user);
+      commit('setUser', user);
 
       return user;
     },
     async logout({ commit }) {
       removeToken();
-      commit('SET_TOKEN', '');
+      commit('setToken', '');
     }
   }
 };

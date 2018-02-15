@@ -37,7 +37,7 @@ const route = {
     addRouters: []
   },
   mutations: {
-    SET_ROUTERS: (state, routers) => {
+    setRoutes: (state, routers) => {
       state.addRouters = routers;
       state.routers = constantRouterMap.concat(routers);
     }
@@ -51,7 +51,7 @@ const route = {
       } else {
         accessedRouters = filterAsyncRouter(mainRouter, roles)
       }
-      commit('SET_ROUTERS', accessedRouters)
+      commit('setRoutes', accessedRouters)
     }
   }
 }
