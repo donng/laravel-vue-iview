@@ -3,6 +3,7 @@
 </style>
 <template>
   <div class="main" :class="{'main-hide-text': shrink}">
+    <!-- sidebar start -->
     <div class="sidebar-menu-con" :style="{width: shrink?'60px':'200px', overflow: shrink ? 'visible' : 'auto'}">
       <shrinkable-menu
           :shrink="shrink"
@@ -17,6 +18,8 @@
         </div>
       </shrinkable-menu>
     </div>
+    <!-- sidebar end -->
+    <!-- header start -->
     <div class="main-header-con" :style="{paddingLeft: shrink?'60px':'200px'}">
       <div class="main-header">
         <div class="navicon-con">
@@ -33,7 +36,7 @@
           <!--全屏和未读信息提示-->
           <!--<full-screen v-model="isFullScreen" @on-change="fullscreenChange"></full-screen>-->
           <!--<message-tip v-model="mesCount"></message-tip>-->
-
+          <!--dropdown start -->
           <div class="user-dropdown-menu-con">
             <Row type="flex" justify="end" align="middle" class="user-dropdown-innercon">
               <Dropdown transfer trigger="click" @on-click="clickDropdown">
@@ -49,12 +52,15 @@
               <Avatar :src="avatorPath" style="background: #619fe7;margin-left: 10px;"></Avatar>
             </Row>
           </div>
+          <!-- dropdown end -->
         </div>
       </div>
       <!--<div class="tags-con">-->
         <!--<tags-page-opened :pageTagsList="pageTagsList"></tags-page-opened>-->
       <!--</div>-->
     </div>
+    <!-- header end -->
+    <!-- router-view start -->
     <div class="single-page-con" :style="{left: shrink?'60px':'200px'}">
       <div class="single-page">
         <keep-alive :include="cachePage">
@@ -62,7 +68,7 @@
         </keep-alive>
       </div>
     </div>
-    123
+    <!-- router-view end -->
   </div>
 </template>
 <script>
