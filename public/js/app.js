@@ -35403,16 +35403,31 @@ var mainRouter = [{
   meta: { roles: ['admin'] }
 }, {
   path: '/',
+  name: 'management',
+  icon: 'arrow-move',
   component: __WEBPACK_IMPORTED_MODULE_0_views_layout___default.a,
   redirect: '/home',
+  title: '管理页',
   meta: { roles: ['admin'] }, // you can set roles in root nav
   children: [{
     path: 'home',
+    icon: 'arrow-move',
     component: __webpack_require__(104),
     title: '首页',
     name: 'home',
     meta: {
       title: 'home',
+      noCache: true,
+      roles: ['admin'] // or you can only set roles in sub nav
+    }
+  }, {
+    path: 'example',
+    icon: 'arrow-move',
+    component: __webpack_require__(104),
+    title: '实例页',
+    name: 'example',
+    meta: {
+      title: 'example',
       icon: 'lock',
       noCache: true,
       roles: ['admin'] // or you can only set roles in sub nav
@@ -74472,7 +74487,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -74483,6 +74498,11 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -74500,7 +74520,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c(
+    "div",
+    { staticStyle: { background: "#eee", padding: "20px" } },
+    [
+      _c("Card", { attrs: { bordered: false } }, [
+        _c("p", { attrs: { slot: "title" }, slot: "title" }, [
+          _vm._v("No border title")
+        ]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "Content of no border type. Content of no border type. Content of no border type. Content of no border type. "
+          )
+        ])
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

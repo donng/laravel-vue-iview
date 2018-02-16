@@ -10,21 +10,37 @@ export const mainRouter = [
   },
   {
     path: '/',
+    name: 'management',
+    icon: 'arrow-move',
     component: layout,
     redirect: '/home',
+    title: '管理页',
     meta: { roles: ['admin'] }, // you can set roles in root nav
     children: [{
       path: 'home',
+      icon: 'arrow-move',
       component: require('views/home/index'),
       title: '首页',
       name: 'home',
       meta: {
         title: 'home',
-        icon: 'lock',
         noCache: true,
         roles: ['admin'] // or you can only set roles in sub nav
       }
-    }]
+    },
+      {
+        path: 'example',
+        icon: 'arrow-move',
+        component: require('views/home/index'),
+        title: '实例页',
+        name: 'example',
+        meta: {
+          title: 'example',
+          icon: 'lock',
+          noCache: true,
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      }]
   },
 ];
 
