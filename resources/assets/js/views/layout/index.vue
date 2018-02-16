@@ -36,14 +36,14 @@
 
           <div class="user-dropdown-menu-con">
             <Row type="flex" justify="end" align="middle" class="user-dropdown-innercon">
-              <Dropdown transfer trigger="click" @on-click="handleClickUserDropdown">
+              <Dropdown transfer trigger="click" @on-click="clickDropdown">
                 <a href="javascript:void(0)">
                   <span class="main-user-name">{{ userName }}</span>
                   <Icon type="arrow-down-b"></Icon>
                 </a>
                 <DropdownMenu slot="list">
-                  <DropdownItem name="ownSpace">个人中心</DropdownItem>
-                  <DropdownItem name="loginout" divided>退出登录</DropdownItem>
+                  <DropdownItem name="userCenter">个人中心</DropdownItem>
+                  <DropdownItem name="logout" divided>退出登录</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
               <Avatar :src="avatorPath" style="background: #619fe7;margin-left: 10px;"></Avatar>
@@ -133,19 +133,17 @@
       toggleClick () {
         this.shrink = !this.shrink;
       },
-      handleClickUserDropdown (name) {
-        if (name === 'ownSpace') {
+      clickDropdown (name) {
+        if (name === 'userCenter') {
+          // 用户中心
           util.openNewPage(this, 'ownspace_index');
           this.$router.push({
             name: 'ownspace_index'
           });
-        } else if (name === 'loginout') {
+        } else if (name === 'logout') {
           // 退出登录
-          this.$store.commit('logout', this);
-          this.$store.commit('clearOpenedSubmenu');
-          this.$router.push({
-            name: 'login'
-          });
+          this.$store.dispatch('logout').then(() => this.$router.push('login'));
+          //this.$store.commit('clearOpenedSubmenu');
         }
       },
       checkTag (name) {
