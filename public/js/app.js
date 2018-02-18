@@ -69570,6 +69570,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   methods: {
+    // name 是路由名，此方法为子组件 emit 的方法
     handleChange: function handleChange(name) {
       var willpush = true;
       if (this.beforePush !== undefined) {
@@ -69577,6 +69578,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           willpush = false;
         }
       }
+      // 路由跳转
       if (willpush) {
         this.$router.push({
           name: name
@@ -69714,41 +69716,45 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: 'sidebarMenu',
-    props: {
-        menuList: Array,
-        iconSize: Number,
-        menuTheme: {
-            type: String,
-            default: 'dark'
-        },
-        openNames: {
-            type: Array
-        }
+  name: 'sidebarMenu',
+  props: {
+    menuList: Array,
+    iconSize: Number,
+    menuTheme: {
+      type: String,
+      default: 'dark'
     },
-    methods: {
-        changeMenu: function changeMenu(active) {
-            this.$emit('on-change', active);
-        },
-        itemTitle: function itemTitle(item) {
-            if (_typeof(item.title) === 'object') {
-                return this.$t(item.title.i18n);
-            } else {
-                return item.title;
-            }
-        }
-    },
-    updated: function updated() {
-        var _this = this;
-
-        this.$nextTick(function () {
-            if (_this.$refs.sideMenu) {
-                _this.$refs.sideMenu.updateOpened();
-            }
-        });
+    openNames: {
+      type: Array
     }
+  },
+  methods: {
+    changeMenu: function changeMenu(active) {
+      this.$emit('on-change', active);
+    },
+    itemTitle: function itemTitle(item) {
+      if (_typeof(item.title) === 'object') {
+        return this.$t(item.title.i18n);
+      } else {
+        return item.title;
+      }
+    }
+  },
+  updated: function updated() {
+    var _this = this;
+
+    this.$nextTick(function () {
+      if (_this.$refs.sideMenu) {
+        _this.$refs.sideMenu.updateOpened();
+      }
+    });
+  }
 });
 
 /***/ }),

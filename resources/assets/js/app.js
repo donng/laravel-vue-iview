@@ -10,7 +10,6 @@ import { router } from './router';
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 
-
 Vue.use(iView);
 
 const app = new Vue({

@@ -61,6 +61,7 @@
       }
     },
     methods: {
+      // name 是路由名，此方法为子组件 emit 的方法
       handleChange (name) {
         let willpush = true;
         if (this.beforePush !== undefined) {
@@ -68,6 +69,7 @@
             willpush = false;
           }
         }
+        // 路由跳转
         if (willpush) {
           this.$router.push({
             name: name
