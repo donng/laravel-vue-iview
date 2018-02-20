@@ -6,14 +6,14 @@ export const mainRouter = [
     path: '/login',
     component: require('views/login/index'),
     name: 'login',
-    meta: { roles: ['admin']}
+    meta: { roles: ['admin'] }
   },
   {
     path: '/',
     name: 'management',
     icon: 'arrow-move',
     component: layout,
-    redirect: '/home',
+    redirect: 'home',
     title: '管理页',
     meta: { roles: ['admin'] }, // you can set roles in root nav
     children: [{
@@ -44,9 +44,7 @@ export const mainRouter = [
   },
 ];
 
-export const constantRouterMap = [
-
-];
+export const constantRouterMap = [];
 
 // 导出所有的路由配置
 export const routes = [

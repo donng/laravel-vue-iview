@@ -35406,7 +35406,7 @@ var mainRouter = [{
   name: 'management',
   icon: 'arrow-move',
   component: __WEBPACK_IMPORTED_MODULE_0_views_layout___default.a,
-  redirect: '/home',
+  redirect: 'home',
   title: '管理页',
   meta: { roles: ['admin'] }, // you can set roles in root nav
   children: [{
@@ -69324,7 +69324,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   methods: {
     init: function init() {
-      // let pathArr = util.setCurrentPath(this, this.$route.name);
+      //let pathArr = util.setCurrentPath(this, this.$route.name);
       // this.$store.commit('updateMenulist');
       // if (pathArr.length >= 2) {
       //   this.$store.commit('addOpenSubmenu', pathArr[1].name);
@@ -72012,21 +72012,37 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: 'breadcrumbNav',
-    props: {
-        currentPath: Array
-    },
-    methods: {
-        itemTitle: function itemTitle(item) {
-            if (_typeof(item.title) === 'object') {
-                return this.$t(item.title.i18n);
-            } else {
-                return item.title;
-            }
-        }
+  name: 'breadcrumbNav',
+  // props: {
+  //   currentPath: Array
+  // },
+  data: function data() {
+    return {
+      currentPath: []
+    };
+  },
+
+  methods: {
+    itemTitle: function itemTitle(item) {
+      if (_typeof(item.title) === 'object') {
+        return this.$t(item.title.i18n);
+      } else {
+        return item.title;
+      }
     }
+  },
+  created: function created() {
+    var route = this.$route;
+    this.currentPath = [{
+      title: 'hah',
+      name: route.name,
+      path: route.path
+    }];
+    //console.log(this.$route);
+  }
 });
 
 /***/ }),
@@ -72043,7 +72059,7 @@ var render = function() {
       return _c(
         "BreadcrumbItem",
         { key: item.name, attrs: { href: item.path } },
-        [_vm._v(_vm._s(_vm.itemTitle(item)))]
+        [_vm._v(_vm._s(_vm.itemTitle(item)) + "\n  ")]
       )
     })
   )
@@ -75111,7 +75127,6 @@ router.beforeEach(function (to, from, next) {
           __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].dispatch('generateRoutes', { roles: roles }).then(function () {
             // 根据roles权限生成可访问的路由表
             router.addRoutes(__WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].getters.addRouters); // 动态添加可访问路由表
-            console.log(__WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].getters.addRouters);
             next();
             //next({ ...to, replace: true }); // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
           });
