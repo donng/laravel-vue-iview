@@ -72659,7 +72659,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.row[data-v-c175f96e] {\n  padding-top: 180px;\n}\n.row .bottom[data-v-c175f96e] {\n    margin-bottom: 12px;\n}\n.row .bottom .rememberMe[data-v-c175f96e] {\n      margin-left: 10px;\n}\n.row .bottom .forgetPassword[data-v-c175f96e] {\n      float: right;\n}\n#particles-js[data-v-c175f96e] {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  background-size: cover;\n  background-color: #b61924;\n  background-repeat: no-repeat;\n  background-position: 50% 50%;\n}\n", ""]);
+exports.push([module.i, "\n.row[data-v-c175f96e] {\n  padding-top: 180px;\n}\n.row .bottom[data-v-c175f96e] {\n    margin-bottom: 14px;\n}\n.row .bottom .rememberMe[data-v-c175f96e] {\n      margin-left: 5px;\n}\n.row .bottom .forgetPassword[data-v-c175f96e] {\n      float: right;\n}\n#particles-js[data-v-c175f96e] {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  background-size: cover;\n  background-color: #b61924;\n  background-repeat: no-repeat;\n  background-position: 50% 50%;\n}\n", ""]);
 
 // exports
 
@@ -72715,7 +72715,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       form: {
         email: '',
-        password: ''
+        password: '',
+        remember: false
       },
       ruleInline: {
         email: [{ required: true, message: '请填写邮箱地址', trigger: 'blur' }],
@@ -74394,11 +74395,11 @@ var render = function() {
                             {
                               staticClass: "rememberMe",
                               model: {
-                                value: _vm.single,
+                                value: _vm.form.remember,
                                 callback: function($$v) {
-                                  _vm.single = $$v
+                                  _vm.$set(_vm.form, "remember", $$v)
                                 },
-                                expression: "single"
+                                expression: "form.remember"
                               }
                             },
                             [_vm._v("记住我")]

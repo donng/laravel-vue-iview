@@ -17,7 +17,7 @@
             </Input>
           </FormItem>
           <FormItem class="bottom">
-            <Checkbox v-model="single" class="rememberMe">记住我</Checkbox>
+            <Checkbox v-model="form.remember" class="rememberMe">记住我</Checkbox>
             <router-link :to="{ name: 'password/reset'}" class="forgetPassword">
               <span>忘记密码？</span>
             </router-link>
@@ -41,7 +41,8 @@
       return {
         form: {
           email: '',
-          password: ''
+          password: '',
+          remember: false
         },
         ruleInline: {
           email: [
@@ -75,9 +76,9 @@
   .row {
     padding-top: 180px;
     .bottom {
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       .rememberMe {
-        margin-left: 10px;
+        margin-left: 5px;
       }
       .forgetPassword {
         float: right;
