@@ -72659,7 +72659,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.row[data-v-c175f96e] {\n  padding-top: 180px;\n}\n#particles-js[data-v-c175f96e] {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  background-size: cover;\n  background-color: #b61924;\n  background-repeat: no-repeat;\n  background-position: 50% 50%;\n}\n", ""]);
+exports.push([module.i, "\n.row[data-v-c175f96e] {\n  padding-top: 180px;\n}\n.row .bottom[data-v-c175f96e] {\n    margin-bottom: 12px;\n}\n.row .bottom .rememberMe[data-v-c175f96e] {\n      margin-left: 10px;\n}\n.row .bottom .forgetPassword[data-v-c175f96e] {\n      float: right;\n}\n#particles-js[data-v-c175f96e] {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  background-size: cover;\n  background-color: #b61924;\n  background-repeat: no-repeat;\n  background-position: 50% 50%;\n}\n", ""]);
 
 // exports
 
@@ -72672,6 +72672,12 @@ exports.push([module.i, "\n.row[data-v-c175f96e] {\n  padding-top: 180px;\n}\n#p
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_particles_js__ = __webpack_require__(102);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_particles_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_particles_js__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -74350,7 +74356,7 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "FormItem",
-                        { attrs: { prop: "password" } },
+                        { staticClass: "bottom", attrs: { prop: "password" } },
                         [
                           _c(
                             "Input",
@@ -74381,6 +74387,38 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "FormItem",
+                        { staticClass: "bottom" },
+                        [
+                          _c(
+                            "Checkbox",
+                            {
+                              staticClass: "rememberMe",
+                              model: {
+                                value: _vm.single,
+                                callback: function($$v) {
+                                  _vm.single = $$v
+                                },
+                                expression: "single"
+                              }
+                            },
+                            [_vm._v("记住我")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "forgetPassword",
+                              attrs: { to: { name: "password/reset" } }
+                            },
+                            [_c("span", [_vm._v("忘记密码？")])]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "FormItem",
+                        { staticClass: "bottom" },
                         [
                           _c(
                             "Button",

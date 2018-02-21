@@ -11,12 +11,18 @@
             <Icon type="email" slot="prepend"></Icon>
             </Input>
           </FormItem>
-          <FormItem prop="password">
+          <FormItem prop="password" class="bottom">
             <Input type="password" v-model="form.password" :placeholder="$t('login.password')">
             <Icon type="locked" slot="prepend"></Icon>
             </Input>
           </FormItem>
-          <FormItem>
+          <FormItem class="bottom">
+            <Checkbox v-model="single" class="rememberMe">记住我</Checkbox>
+            <router-link :to="{ name: 'password/reset'}" class="forgetPassword">
+              <span>忘记密码？</span>
+            </router-link>
+          </FormItem>
+          <FormItem class="bottom">
             <Button type="primary" @click="submit('form')" long>{{$t('login.login')}}</Button>
           </FormItem>
         </Form>
@@ -68,6 +74,15 @@
 <style rel="stylesheet/scss" lang="scss" scoped>
   .row {
     padding-top: 180px;
+    .bottom {
+      margin-bottom: 12px;
+      .rememberMe {
+        margin-left: 10px;
+      }
+      .forgetPassword {
+        float: right;
+      }
+    }
   }
 
   #particles-js {
