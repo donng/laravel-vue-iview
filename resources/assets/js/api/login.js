@@ -8,7 +8,7 @@ import request from '../utils/request'
  */
 export function login(email, password) {
   return request({
-    url: '/auth/login',
+    url: '/api/login',
     method: 'post',
     data: {
       email,
@@ -23,6 +23,6 @@ export function login(email, password) {
  */
 export function getUserInfo() {
   return request({
-    url: '/auth/user',
+    url: '/api/user',
   })
 }

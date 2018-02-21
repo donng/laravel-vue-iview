@@ -74724,7 +74724,7 @@ var user = {
  */
 function login(email, password) {
   return Object(__WEBPACK_IMPORTED_MODULE_0__utils_request__["a" /* default */])({
-    url: '/auth/login',
+    url: '/api/login',
     method: 'post',
     data: {
       email: email,
@@ -74739,7 +74739,7 @@ function login(email, password) {
  */
 function getUserInfo() {
   return Object(__WEBPACK_IMPORTED_MODULE_0__utils_request__["a" /* default */])({
-    url: '/auth/user'
+    url: '/api/user'
   });
 }
 

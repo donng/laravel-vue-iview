@@ -14,17 +14,3 @@
 Route::get('/', function () {
     return view('index');
 });
-
-Auth::routes();
-
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => []], function () {
-    Route::post('login', 'LoginController@login');
-});
-
-Route::group(['middleware' => 'web', 'prefix' => 'auth'], function ($router) {
-    Route::post('login', 'AuthController@login');
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::get('user', 'AuthController@user');
-});
-//Route::get('/home', 'HomeController@index')->name('home');
