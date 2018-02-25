@@ -26,3 +26,16 @@ export function getUserInfo() {
     url: '/api/user',
   })
 }
+
+/**
+ * 密码重置的邮件发送
+ * @param email
+ * @returns {*}
+ */
+export function sendEmail(email) {
+  return request({
+    url: '/api/password/email',
+    method: 'post',
+    data: { email }
+  })
+}

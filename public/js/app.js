@@ -72776,7 +72776,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         remember: false
       },
       ruleInline: {
-        email: [{ required: true, message: '请填写邮箱地址', trigger: 'blur' }],
+        email: [{ required: true, message: '请填写邮箱地址', trigger: 'blur' }, { type: 'email', message: '请填写正确的邮箱地址', trigger: 'blur' }],
         password: [{ required: true, message: '请填写登录密码', trigger: 'blur' }, { type: 'string', min: 6, message: '密码长度不能低于6个字符', trigger: 'blur' }]
       }
     };
@@ -74618,6 +74618,7 @@ exports.push([module.i, "\n.row[data-v-4eccb3c1] {\n  padding-top: 180px;\n}\n.r
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_particles_js__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_particles_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_particles_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_api_login__ = __webpack_require__(115);
 //
 //
 //
@@ -74639,6 +74640,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 
 
 
@@ -74648,12 +74651,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       form: {
         email: ''
+      },
+      rules: {
+        email: [{ required: true, message: '请填写邮箱地址', trigger: 'blur' }, { type: 'email', message: '请填写正确的邮箱地址', trigger: 'blur' }]
       }
     };
   },
 
   methods: {
-    submit: function submit() {}
+    submit: function submit(name) {
+      var _this = this;
+
+      this.$refs[name].validate(function (valid) {
+        if (valid) {
+          Object(__WEBPACK_IMPORTED_MODULE_1_api_login__["c" /* sendEmail */])(_this.form.email).then(function (response) {
+            console.log(response);
+          });
+        }
+      });
+    }
   },
   mounted: function mounted() {
     particlesJS.load('particles-js', 'particles.json');
@@ -74690,11 +74706,18 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "Form",
-                    { attrs: { model: _vm.form, "label-position": "top" } },
+                    {
+                      ref: "form",
+                      attrs: {
+                        model: _vm.form,
+                        rules: _vm.rules,
+                        "label-position": "top"
+                      }
+                    },
                     [
                       _c(
                         "FormItem",
-                        { attrs: { label: "邮箱" } },
+                        { attrs: { label: "邮箱", prop: "email" } },
                         [
                           _c("Input", {
                             model: {
@@ -74993,6 +75016,7 @@ var user = {
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["b"] = login;
 /* harmony export (immutable) */ __webpack_exports__["a"] = getUserInfo;
+/* harmony export (immutable) */ __webpack_exports__["c"] = sendEmail;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_request__ = __webpack_require__(116);
 
 
@@ -75020,6 +75044,19 @@ function login(email, password) {
 function getUserInfo() {
   return Object(__WEBPACK_IMPORTED_MODULE_0__utils_request__["a" /* default */])({
     url: '/api/user'
+  });
+}
+
+/**
+ * 密码重置的邮件发送
+ * @param email
+ * @returns {*}
+ */
+function sendEmail(email) {
+  return Object(__WEBPACK_IMPORTED_MODULE_0__utils_request__["a" /* default */])({
+    url: '/api/password/email',
+    method: 'post',
+    data: { email: email }
   });
 }
 

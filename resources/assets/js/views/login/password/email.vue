@@ -5,8 +5,8 @@
       <Col span="6">
       <Card>
         <p slot="title">找回密码</p>
-        <Form :model="form" label-position="top">
-          <FormItem label="邮箱">
+        <Form ref="form" :model="form" :rules="rules" label-position="top">
+          <FormItem label="邮箱" prop="email">
             <Input v-model="form.email"></Input>
           </FormItem>
           <FormItem class="bottom">
@@ -22,18 +22,32 @@
 <script>
   import particles from 'particles.js'
 
+  import { sendEmail } from "api/login";
+
   export default {
     name: "email",
     data () {
       return {
         form: {
           email: ''
+        },
+        rules: {
+          email: [
+            { required: true, message: '请填写邮箱地址', trigger: 'blur' },
+            { type: 'email', message: '请填写正确的邮箱地址', trigger: 'blur'}
+          ],
         }
       }
     },
     methods: {
-      submit () {
-
+      submit (name) {
+        this.$refs[name].validate((valid) => {
+          if (valid) {
+            sendEmail(this.form.email).then((response) => {
+              console.log(response);
+            })
+          }
+        })
       }
     },
     mounted () {

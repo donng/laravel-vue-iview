@@ -12,13 +12,21 @@ class ResetPassword extends Notification
     use Queueable;
 
     /**
+     * The password reset token.
+     *
+     * @var string
+     */
+    public $token;
+
+    /**
      * Create a new notification instance.
      *
+     * @param  string  $token
      * @return void
      */
-    public function __construct()
+    public function __construct($token)
     {
-        //
+        $this->token = $token;
     }
 
     /**
@@ -42,7 +50,7 @@ class ResetPassword extends Notification
     {
         return (new MailMessage)
             ->line('我们接收到重置密码的请求，所以您接收到这封邮件。')
-            ->action('点击链接重置', url(config('app.url') . '/password/reset/' . $this->token) . '?email=' . urlencode($notifiable->email))
+            ->action('点击链接重置', url(config('app.url') . '/#/password/reset/' . $this->token) . '?email=' . urlencode($notifiable->email))
             ->line('如果您没有请求重置密码，请忽略此邮件');
     }
 

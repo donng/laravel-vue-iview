@@ -46,7 +46,8 @@
         },
         ruleInline: {
           email: [
-            { required: true, message: '请填写邮箱地址', trigger: 'blur' }
+            { required: true, message: '请填写邮箱地址', trigger: 'blur' },
+            { type: 'email', message: '请填写正确的邮箱地址', trigger: 'blur' }
           ],
           password: [
             { required: true, message: '请填写登录密码', trigger: 'blur' },
