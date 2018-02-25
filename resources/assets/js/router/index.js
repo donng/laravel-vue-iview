@@ -14,7 +14,7 @@ export const router = new VueRouter({
   routes
 });
 
-const whiteList = ['/login'];
+const whiteList = ['/login', '/password/reset'];
 
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start();
@@ -28,7 +28,7 @@ router.beforeEach((to, from, next) => {
         store.dispatch('getUserInfo').then(user => {
           const roles = user.roles || ['admin'];
           store.dispatch('generateRoutes', { roles }).then(() => { // 根据roles权限生成可访问的路由表
-            router.addRoutes(store.getters.addRouters); // 动态添加可访问路由表
+            router.addRoutes(store.getters.routers); // 动态添加可访问路由表
             next();
             //next({ ...to, replace: true }); // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
           });

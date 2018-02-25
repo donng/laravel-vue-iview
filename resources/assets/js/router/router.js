@@ -3,12 +3,6 @@ import layout from 'views/layout'
 
 export const mainRouter = [
   {
-    path: '/login',
-    component: require('views/login/index'),
-    name: 'login',
-    meta: { roles: ['admin'] }
-  },
-  {
     path: '/',
     name: 'management',
     icon: 'arrow-move',
@@ -44,7 +38,18 @@ export const mainRouter = [
   },
 ];
 
-export const constantRouterMap = [];
+export const constantRouterMap = [
+  {
+    path: '/login',
+    component: require('views/login/index'),
+    name: 'login',
+  },
+  {
+    path: '/password/reset',
+    component: require('views/login/password/email'),
+    name: 'password.request',
+  },
+];
 
 // 导出所有的路由配置
 export const routes = [
