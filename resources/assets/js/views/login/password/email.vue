@@ -20,8 +20,6 @@
 </template>
 
 <script>
-  import particles from 'particles.js'
-
   import { sendEmail } from "api/login";
 
   export default {

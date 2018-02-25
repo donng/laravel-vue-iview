@@ -38603,7 +38603,8 @@ window.particlesJS.load = function(tag_id, path_config_json, callback){
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["b"] = login;
 /* harmony export (immutable) */ __webpack_exports__["a"] = getUserInfo;
-/* harmony export (immutable) */ __webpack_exports__["c"] = sendEmail;
+/* harmony export (immutable) */ __webpack_exports__["d"] = sendEmail;
+/* harmony export (immutable) */ __webpack_exports__["c"] = resetPassword;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_request__ = __webpack_require__(114);
 
 
@@ -38644,6 +38645,14 @@ function sendEmail(email) {
     url: '/api/password/email',
     method: 'post',
     data: { email: email }
+  });
+}
+
+function resetPassword() {
+  return Object(__WEBPACK_IMPORTED_MODULE_0__utils_request__["a" /* default */])({
+    url: '',
+    method: 'post',
+    data: {}
   });
 }
 
@@ -74768,9 +74777,7 @@ exports.push([module.i, "\n.row[data-v-4eccb3c1] {\n  padding-top: 180px;\n}\n.r
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_particles_js__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_particles_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_particles_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_api_login__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_api_login__ = __webpack_require__(24);
 //
 //
 //
@@ -74792,8 +74799,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
-
 
 
 
@@ -74816,7 +74821,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.$refs[name].validate(function (valid) {
         if (valid) {
-          Object(__WEBPACK_IMPORTED_MODULE_1_api_login__["c" /* sendEmail */])(_this.form.email).then(function (response) {
+          Object(__WEBPACK_IMPORTED_MODULE_0_api_login__["d" /* sendEmail */])(_this.form.email).then(function (response) {
             console.log(response);
           });
         }
@@ -75071,6 +75076,7 @@ exports.push([module.i, "\n.row[data-v-490a73f4] {\n  padding-top: 160px;\n}\n.r
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_api_login__ = __webpack_require__(24);
 //
 //
 //
@@ -75098,6 +75104,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "reset",
@@ -75125,6 +75133,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         confirmPassword: [{ validator: validatePassCheck, trigger: 'blur' }]
       }
     };
+  },
+
+  methods: {
+    submit: function submit(name) {
+      var _this2 = this;
+
+      this.$refs[name].validate(function (valid) {
+        if (valid) {
+          Object(__WEBPACK_IMPORTED_MODULE_0_api_login__["c" /* resetPassword */])(_this2.form.email).then(function (response) {
+            console.log(response);
+          });
+        }
+      });
+    }
   },
   created: function created() {
     this.form.email = this.$route.query.email;

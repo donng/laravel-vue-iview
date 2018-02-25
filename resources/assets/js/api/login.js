@@ -39,3 +39,11 @@ export function sendEmail(email) {
     data: { email }
   })
 }
+
+export function resetPassword() {
+  return request({
+    url: '',
+    method: 'post',
+    data: {}
+  })
+}

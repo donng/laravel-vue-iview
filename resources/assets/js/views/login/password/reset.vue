@@ -26,6 +26,8 @@
 </template>
 
 <script>
+  import { resetPassword } from "api/login";
+
   export default {
     name: "reset",
     data () {
@@ -51,6 +53,17 @@
             { validator: validatePassCheck, trigger: 'blur' }
           ],
         },
+      }
+    },
+    methods: {
+      submit (name) {
+        this.$refs[name].validate((valid) => {
+          if (valid) {
+            resetPassword(this.form.email).then((response) => {
+              console.log(response);
+            })
+          }
+        })
       }
     },
     created () {
