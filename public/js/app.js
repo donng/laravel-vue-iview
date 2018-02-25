@@ -75102,6 +75102,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "reset",
   data: function data() {
+    var _this = this;
+
+    var validatePassCheck = function validatePassCheck(rule, value, callback) {
+      if (value === '') {
+        callback(new Error('请再次输入新密码'));
+      } else if (value !== _this.form.password) {
+        callback(new Error('两次输入的密码不匹配'));
+      } else {
+        callback();
+      }
+    };
     return {
       form: {
         email: '',
@@ -75111,7 +75122,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       },
       rules: {
         password: [],
-        confirmPassword: []
+        confirmPassword: [{ validator: validatePassCheck, trigger: 'blur' }]
       }
     };
   },
