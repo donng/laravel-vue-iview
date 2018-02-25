@@ -49,6 +49,11 @@ export const constantRouterMap = [
     component: require('views/login/password/email'),
     name: 'password.request',
   },
+  {
+    path: '/password/reset/:token',
+    component: require('views/login/password/reset'),
+    name: 'password.reset',
+  },
 ];
 
 // 导出所有的路由配置

@@ -14,7 +14,7 @@ export const router = new VueRouter({
   routes
 });
 
-const whiteList = ['/login', '/password/reset'];
+const whiteList = ['login', 'password.request', 'password.reset'];
 
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start();
@@ -38,7 +38,7 @@ router.beforeEach((to, from, next) => {
       }
     }
   } else {
-    if (whiteList.includes(to.path)) {
+    if (whiteList.includes(to.name)) {
       // 无 token 白名单可访问路由
       next();
     } else {
