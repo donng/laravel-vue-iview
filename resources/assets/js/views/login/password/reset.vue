@@ -65,6 +65,7 @@
           if (valid) {
             resetPassword(this.form).then((response) => {
               this.showAlert = true;
+              this.$refs[name].resetFields();
             })
           }
         })

@@ -69965,9 +69965,10 @@ var route = {
                 } else {
                   accessedRouters = filterAsyncRouter(__WEBPACK_IMPORTED_MODULE_1__router_router__["b" /* mainRouter */], roles);
                 }
+                console.log(accessedRouters);
                 commit('setRoutes', accessedRouters);
 
-              case 4:
+              case 5:
               case 'end':
                 return _context.stop();
             }
@@ -75184,6 +75185,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         if (valid) {
           Object(__WEBPACK_IMPORTED_MODULE_0_api_login__["c" /* resetPassword */])(_this2.form).then(function (response) {
             _this2.showAlert = true;
+            _this2.$refs[name].resetFields();
           });
         }
       });
@@ -75832,7 +75834,7 @@ router.beforeEach(function (to, from, next) {
           var roles = user.roles || ['admin'];
           __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].dispatch('generateRoutes', { roles: roles }).then(function () {
             // 根据roles权限生成可访问的路由表
-            router.addRoutes(__WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].getters.routers); // 动态添加可访问路由表
+            router.addRoutes(__WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].getters.addRouters); // 动态添加可访问路由表
             next();
             //next({ ...to, replace: true }); // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
           });
