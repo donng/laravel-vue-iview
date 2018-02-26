@@ -10,13 +10,13 @@
             <Input v-model="form.email" disabled></Input>
           </FormItem>
           <FormItem label="新密码" prop="password" class="bottom">
-            <Input v-model="form.password"></Input>
+            <Input type="password" v-model="form.password"></Input>
           </FormItem>
-          <FormItem label="确认密码" prop="confirmPassword">
-            <Input v-model="form.confirmPassword"></Input>
+          <FormItem label="确认密码" prop="password_confirmation">
+            <Input type="password" v-model="form.password_confirmation"></Input>
           </FormItem>
           <FormItem class="bottom">
-            <Button type="primary" @click="submit('form')" long>下一步</Button>
+            <Button type="primary" @click="submit('form')" long>重置密码</Button>
           </FormItem>
         </Form>
       </Card>
@@ -45,11 +45,11 @@
           email: '',
           token: '',
           password: '',
-          confirmPassword: ''
+          password_confirmation: ''
         },
         rules: {
           password: [],
-          confirmPassword: [
+          password_confirmation: [
             { validator: validatePassCheck, trigger: 'blur' }
           ],
         },
@@ -59,7 +59,7 @@
       submit (name) {
         this.$refs[name].validate((valid) => {
           if (valid) {
-            resetPassword(this.form.email).then((response) => {
+            resetPassword(this.form).then((response) => {
               console.log(response);
             })
           }

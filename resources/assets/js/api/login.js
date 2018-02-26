@@ -40,10 +40,14 @@ export function sendEmail(email) {
   })
 }
 
-export function resetPassword() {
+/**
+ * 密码重置的请求
+ * @returns {*}
+ */
+export function resetPassword(form) {
   return request({
-    url: '',
+    url: '/api/password/reset',
     method: 'post',
-    data: {}
+    data: { ...form }
   })
 }

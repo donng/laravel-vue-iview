@@ -38606,6 +38606,8 @@ window.particlesJS.load = function(tag_id, path_config_json, callback){
 /* harmony export (immutable) */ __webpack_exports__["d"] = sendEmail;
 /* harmony export (immutable) */ __webpack_exports__["c"] = resetPassword;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_request__ = __webpack_require__(114);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 
 
 /**
@@ -38648,11 +38650,15 @@ function sendEmail(email) {
   });
 }
 
-function resetPassword() {
+/**
+ * 密码重置的请求
+ * @returns {*}
+ */
+function resetPassword(form) {
   return Object(__WEBPACK_IMPORTED_MODULE_0__utils_request__["a" /* default */])({
-    url: '',
+    url: '/api/password/reset',
     method: 'post',
-    data: {}
+    data: _extends({}, form)
   });
 }
 
@@ -75126,11 +75132,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         email: '',
         token: '',
         password: '',
-        confirmPassword: ''
+        password_confirmation: ''
       },
       rules: {
         password: [],
-        confirmPassword: [{ validator: validatePassCheck, trigger: 'blur' }]
+        password_confirmation: [{ validator: validatePassCheck, trigger: 'blur' }]
       }
     };
   },
@@ -75141,7 +75147,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.$refs[name].validate(function (valid) {
         if (valid) {
-          Object(__WEBPACK_IMPORTED_MODULE_0_api_login__["c" /* resetPassword */])(_this2.form.email).then(function (response) {
+          Object(__WEBPACK_IMPORTED_MODULE_0_api_login__["c" /* resetPassword */])(_this2.form).then(function (response) {
             console.log(response);
           });
         }
@@ -75221,6 +75227,7 @@ var render = function() {
                         },
                         [
                           _c("Input", {
+                            attrs: { type: "password" },
                             model: {
                               value: _vm.form.password,
                               callback: function($$v) {
@@ -75236,16 +75243,20 @@ var render = function() {
                       _c(
                         "FormItem",
                         {
-                          attrs: { label: "确认密码", prop: "confirmPassword" }
+                          attrs: {
+                            label: "确认密码",
+                            prop: "password_confirmation"
+                          }
                         },
                         [
                           _c("Input", {
+                            attrs: { type: "password" },
                             model: {
-                              value: _vm.form.confirmPassword,
+                              value: _vm.form.password_confirmation,
                               callback: function($$v) {
-                                _vm.$set(_vm.form, "confirmPassword", $$v)
+                                _vm.$set(_vm.form, "password_confirmation", $$v)
                               },
-                              expression: "form.confirmPassword"
+                              expression: "form.password_confirmation"
                             }
                           })
                         ],
@@ -75266,7 +75277,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("下一步")]
+                            [_vm._v("重置密码")]
                           )
                         ],
                         1
