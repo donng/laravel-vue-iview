@@ -5,12 +5,15 @@
       <Col span="6">
       <Card>
         <p slot="title">找回密码</p>
+        <Alert type="success" show-icon closable v-show="showAlert">
+          我们已将重置链接发送到您的邮箱，请注意查收，此链接30分钟内有效。
+        </Alert>
         <Form ref="form" :model="form" :rules="rules" label-position="top">
           <FormItem label="邮箱" prop="email">
             <Input v-model="form.email"></Input>
           </FormItem>
           <FormItem class="bottom">
-            <Button type="primary" @click="submit('form')" long>下一步</Button>
+            <Button type="primary" @click="submit('form')" long :loading="loading">下一步</Button>
           </FormItem>
         </Form>
       </Card>
@@ -26,6 +29,8 @@
     name: "email",
     data () {
       return {
+        loading: false,
+        showAlert: false,
         form: {
           email: ''
         },
@@ -41,9 +46,13 @@
       submit (name) {
         this.$refs[name].validate((valid) => {
           if (valid) {
+            this.loading = true;
             sendEmail(this.form.email).then((response) => {
-              console.log(response);
-            })
+              this.loading = false;
+              this.showAlert = true;
+            }).catch((error) => {
+
+            });
           }
         })
       }

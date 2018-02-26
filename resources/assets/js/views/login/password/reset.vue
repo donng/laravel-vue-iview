@@ -5,6 +5,9 @@
       <Col span="6">
       <Card>
         <p slot="title">重置密码</p>
+        <Alert type="success" show-icon closable v-show="showAlert">
+          密码已经被重置！
+        </Alert>
         <Form ref="form" :model="form" :rules="rules">
           <FormItem label="邮箱" prop="email" class="bottom">
             <Input v-model="form.email" disabled></Input>
@@ -41,6 +44,7 @@
         }
       };
       return {
+        showAlert: false,
         form: {
           email: '',
           token: '',
@@ -60,7 +64,7 @@
         this.$refs[name].validate((valid) => {
           if (valid) {
             resetPassword(this.form).then((response) => {
-              console.log(response);
+              this.showAlert = true;
             })
           }
         })

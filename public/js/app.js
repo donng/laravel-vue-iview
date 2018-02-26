@@ -74805,6 +74805,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -74812,6 +74815,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   name: "email",
   data: function data() {
     return {
+      loading: false,
+      showAlert: false,
       form: {
         email: ''
       },
@@ -74827,9 +74832,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.$refs[name].validate(function (valid) {
         if (valid) {
+          _this.loading = true;
           Object(__WEBPACK_IMPORTED_MODULE_0_api_login__["d" /* sendEmail */])(_this.form.email).then(function (response) {
-            console.log(response);
-          });
+            _this.loading = false;
+            _this.showAlert = true;
+          }).catch(function (error) {});
         }
       });
     }
@@ -74913,6 +74920,26 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c(
+                    "Alert",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.showAlert,
+                          expression: "showAlert"
+                        }
+                      ],
+                      attrs: { type: "success", "show-icon": "", closable: "" }
+                    },
+                    [
+                      _vm._v(
+                        "\n        我们已将重置链接发送到您的邮箱，请注意查收，此链接30分钟内有效。\n      "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
                     "Form",
                     {
                       ref: "form",
@@ -74947,7 +74974,11 @@ var render = function() {
                           _c(
                             "Button",
                             {
-                              attrs: { type: "primary", long: "" },
+                              attrs: {
+                                type: "primary",
+                                long: "",
+                                loading: _vm.loading
+                              },
                               on: {
                                 click: function($event) {
                                   _vm.submit("form")
@@ -75110,6 +75141,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -75128,6 +75162,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     };
     return {
+      showAlert: false,
       form: {
         email: '',
         token: '',
@@ -75148,7 +75183,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.$refs[name].validate(function (valid) {
         if (valid) {
           Object(__WEBPACK_IMPORTED_MODULE_0_api_login__["c" /* resetPassword */])(_this2.form).then(function (response) {
-            console.log(response);
+            _this2.showAlert = true;
           });
         }
       });
@@ -75190,6 +75225,22 @@ var render = function() {
                   _c("p", { attrs: { slot: "title" }, slot: "title" }, [
                     _vm._v("重置密码")
                   ]),
+                  _vm._v(" "),
+                  _c(
+                    "Alert",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.showAlert,
+                          expression: "showAlert"
+                        }
+                      ],
+                      attrs: { type: "success", "show-icon": "", closable: "" }
+                    },
+                    [_vm._v("\n        密码已经被重置！\n      ")]
+                  ),
                   _vm._v(" "),
                   _c(
                     "Form",
