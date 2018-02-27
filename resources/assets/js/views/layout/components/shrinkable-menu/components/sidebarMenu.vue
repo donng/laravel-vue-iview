@@ -5,7 +5,7 @@
     <!-- 属性不为隐藏且存在孩子节点 -->
     <template v-for="item in menuList" v-if="!item.hidden && item.children">
       <!-- menu-item 没有子页面 -->
-      <MenuItem v-if="item.children.length === 1" :name="item.children[0].name" :key="'menuitem' + item.name">
+      <MenuItem v-if="item.children.length === 1 && !item.showParent" :name="item.children[0].name" :key="'menuitem' + item.name">
         <Icon v-if="item.children[0].meta && item.children[0].meta.icon" :type="item.children[0].meta.icon" :size="iconSize" :key="'menuicon' + item.name"></Icon>
         <span v-if="item.children[0].meta && item.children[0].meta.title" :key="'title' + item.name">{{ item.children[0].meta.title }}</span>
       </MenuItem>

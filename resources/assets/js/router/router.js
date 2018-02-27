@@ -1,55 +1,46 @@
 // 所有路由信息的配置
 import layout from 'views/layout'
 
+/**
+ * meta.title : 导航显示的中文名称
+ * showParent : 无论子节点数量，都会显示为二级菜单（默认一个子节点只显示一级菜单）
+ */
+
 // 权限相关路由
 export const mainRouter = [
   {
-    path: '/add',
+    path: '/',
     component: layout,
-    redirect: 'dashboard',
-    name: 'dashbord',
+    redirect: 'home',
     children: [{
-      path: 'dashboard',
+      path: 'home',
       component: require('views/home/index'),
-      name: 'dashboard',
+      name: 'home',
       meta: {
         title: '首页',
         noCache: true,
-        icon: 'arrow-move'
+        icon: 'home',
+        roles: ['admin']
       }
     }]
   },
   {
-    path: '/',
-    name: 'management',
+    path: '/management',
     component: layout,
-    redirect: 'home',
+    redirect: 'example',
     name: 'management',
+    showParent: true,
     meta: {
-      roles: ['admin'],
       title: '管理页面',
-      icon: 'arrow-move'
+      icon: 'easel'
     }, // you can set roles in root nav
     children: [
       {
-        path: 'home',
-        component: require('views/home/index'),
-        name: 'home',
-        meta: {
-          title: '首页',
-          icon: 'arrow-move',
-          noCache: true,
-          roles: ['admin'] // or you can only set roles in sub nav
-        }
-      },
-      {
         path: 'example',
-        icon: 'arrow-move',
         component: require('views/home/index'),
         name: 'example',
         meta: {
           title: '实例',
-          icon: 'arrow-move',
           noCache: true,
           roles: ['admin'] // or you can only set roles in sub nav
         }
@@ -59,9 +50,9 @@ export const mainRouter = [
 
 // 无权限相关的路由
 export const constantRouterMap = [
-  { path: '/login', name: 'login', component: require('views/login/index') },
-  { path: '/password/reset', name: 'password.request', component: require('views/login/password/email') },
-  { path: '/password/reset/:token', name: 'password.reset', component: require('views/login/password/reset') },
+  { path: '/login', component: require('views/login/index') },
+  { path: '/password/send', component: require('views/login/password/email') },
+  { path: '/password/reset/:token', component: require('views/login/password/reset') },
 ];
 
 // 导出所有的路由配置

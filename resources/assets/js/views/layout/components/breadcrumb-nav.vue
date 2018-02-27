@@ -14,6 +14,11 @@
         currentPath: []
       }
     },
+    watch: {
+      $route() {
+        this.getBreadcrumb()
+      }
+    },
     methods: {
       itemTitle (item) {
         if (typeof item.title === 'object') {
@@ -24,9 +29,9 @@
       },
       getBreadcrumb() {
         let matched = this.$route.matched.filter(item => item.name);
-        const root = matched[0]
+        const root = matched[0];
         if (root && root.name !== 'home') {
-          matched = [{ path: '/home', meta: { title: 'dashboard' }}].concat(matched)
+          matched = [{ path: '/home', meta: { title: '首页' }}].concat(matched)
         }
         this.currentPath = matched;
         console.log(this.currentPath);

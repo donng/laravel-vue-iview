@@ -18,7 +18,7 @@
           </FormItem>
           <FormItem class="bottom">
             <Checkbox v-model="form.remember" class="rememberMe">记住我</Checkbox>
-            <router-link :to="{ name: 'password.request'}" class="forgetPassword">
+            <router-link to="/password/send" class="forgetPassword">
               <span>忘记密码？</span>
             </router-link>
           </FormItem>

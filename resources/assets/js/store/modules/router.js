@@ -46,7 +46,7 @@ const route = {
     async generateRoutes({commit}, data) {
       const { roles } = data;
       let accessedRouters;
-      if (roles.indexOf('admin') >= 0) {
+      if (roles.includes('admin')) {
         accessedRouters = mainRouter
       } else {
         accessedRouters = filterAsyncRouter(mainRouter, roles)

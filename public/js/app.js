@@ -35456,66 +35456,57 @@ module.exports = __webpack_require__(64);
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return mainRouter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return constantRouterMap; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return routes; });
+/* unused harmony export routes */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_views_layout__ = __webpack_require__(66);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_views_layout___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_views_layout__);
-var _ref;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 // 所有路由信息的配置
 
 
+/**
+ * meta.title : 导航显示的中文名称
+ * showParent : 无论子节点数量，都会显示为二级菜单（默认一个子节点只显示一级菜单）
+ */
+
 // 权限相关路由
 var mainRouter = [{
-  path: '/add',
+  path: '/',
   component: __WEBPACK_IMPORTED_MODULE_0_views_layout___default.a,
-  redirect: 'dashboard',
-  name: 'dashbord',
+  redirect: 'home',
   children: [{
-    path: 'dashboard',
+    path: 'home',
     component: __webpack_require__(23),
-    name: 'dashboard',
+    name: 'home',
     meta: {
       title: '首页',
       noCache: true,
-      icon: 'arrow-move'
+      icon: 'home',
+      roles: ['admin']
     }
   }]
-}, (_ref = {
-  path: '/',
-  name: 'management',
-  component: __WEBPACK_IMPORTED_MODULE_0_views_layout___default.a,
-  redirect: 'home'
-}, _defineProperty(_ref, 'name', 'management'), _defineProperty(_ref, 'meta', {
-  roles: ['admin'],
-  title: '管理页面',
-  icon: 'arrow-move'
-}), _defineProperty(_ref, 'children', [{
-  path: 'home',
-  component: __webpack_require__(23),
-  name: 'home',
-  meta: {
-    title: '首页',
-    icon: 'arrow-move',
-    noCache: true,
-    roles: ['admin'] // or you can only set roles in sub nav
-  }
 }, {
-  path: 'example',
-  icon: 'arrow-move',
-  component: __webpack_require__(23),
-  name: 'example',
+  path: '/management',
+  component: __WEBPACK_IMPORTED_MODULE_0_views_layout___default.a,
+  redirect: 'example',
+  name: 'management',
+  showParent: true,
   meta: {
-    title: '实例',
-    icon: 'arrow-move',
-    noCache: true,
-    roles: ['admin'] // or you can only set roles in sub nav
-  }
-}]), _ref)];
+    title: '管理页面',
+    icon: 'easel'
+  }, // you can set roles in root nav
+  children: [{
+    path: 'example',
+    component: __webpack_require__(23),
+    name: 'example',
+    meta: {
+      title: '实例',
+      noCache: true,
+      roles: ['admin'] // or you can only set roles in sub nav
+    }
+  }]
+}];
 
 // 无权限相关的路由
-var constantRouterMap = [{ path: '/login', name: 'login', component: __webpack_require__(104) }, { path: '/password/reset', name: 'password.request', component: __webpack_require__(110) }, { path: '/password/reset/:token', name: 'password.reset', component: __webpack_require__(116) }];
+var constantRouterMap = [{ path: '/login', component: __webpack_require__(104) }, { path: '/password/send', component: __webpack_require__(110) }, { path: '/password/reset/:token', component: __webpack_require__(116) }];
 
 // 导出所有的路由配置
 var routes = [].concat(mainRouter, constantRouterMap);
@@ -71849,6 +71840,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
   },
 
+  watch: {
+    $route: function $route() {
+      this.getBreadcrumb();
+    }
+  },
   methods: {
     itemTitle: function itemTitle(item) {
       if (_typeof(item.title) === 'object') {
@@ -71863,7 +71859,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       });
       var root = matched[0];
       if (root && root.name !== 'home') {
-        matched = [{ path: '/home', meta: { title: 'dashboard' } }].concat(matched);
+        matched = [{ path: '/home', meta: { title: '首页' } }].concat(matched);
       }
       this.currentPath = matched;
       console.log(this.currentPath);
@@ -74313,7 +74309,7 @@ var render = function() {
                             "router-link",
                             {
                               staticClass: "forgetPassword",
-                              attrs: { to: { name: "password.request" } }
+                              attrs: { to: "/password/send" }
                             },
                             [_c("span", [_vm._v("忘记密码？")])]
                           )
@@ -75486,6 +75482,8 @@ Object(__WEBPACK_IMPORTED_MODULE_0__lang__["a" /* default */])(lang);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_router__ = __webpack_require__(128);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__router__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_utils_storage__ = __webpack_require__(14);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 // 导出路由并配置守卫
 
 
@@ -75499,10 +75497,10 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vue_
 
 // 创建并导出 router 实例，然后传 `routes` 配置
 var router = new __WEBPACK_IMPORTED_MODULE_3_vue_router__["a" /* default */]({
-  routes: __WEBPACK_IMPORTED_MODULE_4__router__["c" /* routes */]
+  routes: __WEBPACK_IMPORTED_MODULE_4__router__["a" /* constantRouterMap */]
 });
 
-var whiteList = ['login', 'password.request', 'password.reset'];
+var whiteList = ['/login', '/password/send', '/password/reset'];
 
 router.beforeEach(function (to, from, next) {
   __WEBPACK_IMPORTED_MODULE_1_iview___default.a.LoadingBar.start();
@@ -75518,8 +75516,8 @@ router.beforeEach(function (to, from, next) {
           __WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].dispatch('generateRoutes', { roles: roles }).then(function () {
             // 根据roles权限生成可访问的路由表
             router.addRoutes(__WEBPACK_IMPORTED_MODULE_2__store__["a" /* default */].getters.addRouters); // 动态添加可访问路由表
-            next();
-            //next({ ...to, replace: true }); // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
+            // next();
+            next(_extends({}, to, { replace: true })); // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
           });
         });
       } else {
@@ -75527,7 +75525,7 @@ router.beforeEach(function (to, from, next) {
       }
     }
   } else {
-    if (whiteList.includes(to.name)) {
+    if (whiteList.includes(to.path)) {
       // 无 token 白名单可访问路由
       next();
     } else {
@@ -78790,7 +78788,7 @@ var route = {
                 roles = data.roles;
                 accessedRouters = void 0;
 
-                if (roles.indexOf('admin') >= 0) {
+                if (roles.includes('admin')) {
                   accessedRouters = __WEBPACK_IMPORTED_MODULE_1__router_router__["b" /* mainRouter */];
                 } else {
                   accessedRouters = filterAsyncRouter(__WEBPACK_IMPORTED_MODULE_1__router_router__["b" /* mainRouter */], roles);
@@ -78880,7 +78878,7 @@ var render = function() {
       _vm._l(_vm.menuList, function(item) {
         return !item.hidden && item.children
           ? [
-              item.children.length === 1
+              item.children.length === 1 && !item.showParent
                 ? _c(
                     "MenuItem",
                     {
