@@ -8,7 +8,6 @@
       <shrinkable-menu
           :shrink="shrink"
           @on-change="handleSubmenuChange"
-          :theme="menuTheme"
           :before-push="beforePush"
           :open-names="openedSubmenuArr"
           :menu-list="menuList">
@@ -22,11 +21,11 @@
     <!-- header start -->
     <div class="main-header-con" :style="{paddingLeft: shrink?'60px':'200px'}">
       <div class="main-header">
-        <div class="navicon-con">
-          <Button :style="{transform: 'rotateZ(' + (this.shrink ? '-90' : '0') + 'deg)'}" type="text" @click="toggleClick">
-            <Icon type="navicon" size="32"></Icon>
-          </Button>
-        </div>
+        <!--<div class="navicon-con">-->
+          <!--<Button :style="{transform: 'rotateZ(' + (this.shrink ? '-90' : '0') + 'deg)'}" type="text" @click="toggleClick">-->
+            <!--<Icon type="navicon" size="32"></Icon>-->
+          <!--</Button>-->
+        <!--</div>-->
         <div class="header-middle-con">
           <div class="main-breadcrumb">
             <breadcrumb-nav :currentPath="currentPath"></breadcrumb-nav>
@@ -98,7 +97,7 @@
     },
     computed: {
       menuList () {
-        return this.$store.getters.addRouters;
+        return this.$store.getters.routers;
       },
       pageTagsList () {
         return this.$store.state.app.pageOpenedList; // 打开的页面的页面对象
@@ -114,9 +113,6 @@
       },
       lang () {
         return this.$store.state.app.lang;
-      },
-      menuTheme () {
-        return this.$store.state.app.menuTheme;
       },
       mesCount () {
         return this.$store.state.app.messageCount;
@@ -177,20 +173,20 @@
         // console.log(isFullScreen);
       }
     },
-    watch: {
-      '$route' (to) {
-        this.$store.commit('setCurrentPageName', to.name);
-        let pathArr = util.setCurrentPath(this, to.name);
-        if (pathArr.length > 2) {
-          this.$store.commit('addOpenSubmenu', pathArr[1].name);
-        }
-        this.checkTag(to.name);
-        localStorage.currentPageName = to.name;
-      },
-      lang () {
-        util.setCurrentPath(this, this.$route.name); // 在切换语言时用于刷新面包屑
-      }
-    },
+    // watch: {
+    //   '$route' (to) {
+    //     this.$store.commit('setCurrentPageName', to.name);
+    //     let pathArr = util.setCurrentPath(this, to.name);
+    //     if (pathArr.length > 2) {
+    //       this.$store.commit('addOpenSubmenu', pathArr[1].name);
+    //     }
+    //     this.checkTag(to.name);
+    //     localStorage.currentPageName = to.name;
+    //   },
+    //   lang () {
+    //     util.setCurrentPath(this, this.$route.name); // 在切换语言时用于刷新面包屑
+    //   }
+    // },
     mounted () {
       this.init();
     },

@@ -1,10 +1,7 @@
 <template>
   <Breadcrumb>
-    <BreadcrumbItem
-        v-for="item in currentPath"
-        :href="item.path"
-        :key="item.name"
-    >{{ itemTitle(item) }}
+    <BreadcrumbItem v-for="item in currentPath" :to="item.path" :key="item.name">
+      {{ item.meta.title }}
     </BreadcrumbItem>
   </Breadcrumb>
 </template>
@@ -12,9 +9,6 @@
 <script>
   export default {
     name: 'breadcrumbNav',
-    // props: {
-    //   currentPath: Array
-    // },
     data() {
       return {
         currentPath: []
@@ -27,16 +21,19 @@
         } else {
           return item.title;
         }
+      },
+      getBreadcrumb() {
+        let matched = this.$route.matched.filter(item => item.name);
+        const root = matched[0]
+        if (root && root.name !== 'home') {
+          matched = [{ path: '/home', meta: { title: 'dashboard' }}].concat(matched)
+        }
+        this.currentPath = matched;
+        console.log(this.currentPath);
       }
     },
     created() {
-      const route = this.$route;
-      this.currentPath = [{
-        title: 'hah',
-        name: route.name,
-        path: route.path
-      }]
-      //console.log(this.$route);
+      this.getBreadcrumb();
     }
   };
 </script>

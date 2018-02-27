@@ -51,7 +51,6 @@ const route = {
       } else {
         accessedRouters = filterAsyncRouter(mainRouter, roles)
       }
-      console.log(accessedRouters);
       commit('setRoutes', accessedRouters)
     }
   }

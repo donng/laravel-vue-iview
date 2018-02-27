@@ -3,8 +3,8 @@ const getters = {
   token: state => state.user.token,
   roles: state => state.user.roles,
   collapse: state => state.app.collapse,
-  routers: state => state.app.routers,
-  addRouters: state => state.route.addRouters,
+  routers: state => state.router.routers,
+  addRouters: state => state.router.addRouters,
 };
 
 export default getters

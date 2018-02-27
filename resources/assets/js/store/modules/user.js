@@ -14,6 +14,9 @@ const user = {
     },
     setUser: (state, user) => {
       state.user = user;
+    },
+    setRoles: (state, roles) => {
+      state.roles = ['admin'];
     }
   },
   actions: {
@@ -32,7 +35,8 @@ const user = {
     async getUserInfo({ commit }) {
       const user = await getUserInfo();
       commit('setUser', user);
-
+      // 测试数据
+      commit('setRoles');
       return user;
     },
     async logout({ commit }) {
