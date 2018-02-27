@@ -1,6 +1,6 @@
 <template>
   <Breadcrumb>
-    <BreadcrumbItem v-for="item in currentPath" :to="item.path" :key="item.name">
+    <BreadcrumbItem v-for="item in currentPath" :to="item.redirect || item.path" :key="item.name">
       {{ item.meta.title }}
     </BreadcrumbItem>
   </Breadcrumb>
@@ -34,7 +34,6 @@
           matched = [{ path: '/home', meta: { title: '首页' }}].concat(matched)
         }
         this.currentPath = matched;
-        console.log(this.currentPath);
       }
     },
     created() {

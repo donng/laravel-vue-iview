@@ -71862,7 +71862,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         matched = [{ path: '/home', meta: { title: '首页' } }].concat(matched);
       }
       this.currentPath = matched;
-      console.log(this.currentPath);
     }
   },
   created: function created() {
@@ -71883,7 +71882,7 @@ var render = function() {
     _vm._l(_vm.currentPath, function(item) {
       return _c(
         "BreadcrumbItem",
-        { key: item.name, attrs: { to: item.path } },
+        { key: item.name, attrs: { to: item.redirect || item.path } },
         [_vm._v("\n    " + _vm._s(item.meta.title) + "\n  ")]
       )
     })
