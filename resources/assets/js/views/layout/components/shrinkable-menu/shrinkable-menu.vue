@@ -8,11 +8,11 @@
         :open-names="openNames"
         @on-change="handleChange"
     ></sidebar-menu>
-    <!--<sidebar-menu-shrink-->
-        <!--v-show="shrink"-->
-        <!--:menu-list="menuList"-->
-        <!--@on-change="handleChange"-->
-    <!--&gt;</sidebar-menu-shrink>-->
+    <sidebar-menu-shrink
+        v-show="shrink"
+        :menu-list="menuList"
+        @on-change="handleChange"
+    ></sidebar-menu-shrink>
   </div>
 </template>
 

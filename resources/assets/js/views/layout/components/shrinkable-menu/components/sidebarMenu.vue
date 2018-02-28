@@ -54,6 +54,9 @@
           this.$refs.sideMenu.updateOpened();
         }
       });
+    },
+    created() {
+      console.log(this.menuList);
     }
   };
 </script>

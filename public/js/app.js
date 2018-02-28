@@ -69317,7 +69317,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   data: function data() {
     return {
-      shrink: false,
+      shrink: true,
       userName: '',
       isFullScreen: false,
       openedSubmenuArr: this.$store.state.app.openedSubmenuArr
@@ -69716,6 +69716,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         _this.$refs.sideMenu.updateOpened();
       }
     });
+  },
+  created: function created() {
+    console.log(this.menuList);
   }
 });
 
@@ -69813,6 +69816,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       type: Array
     }
   },
+  data: function data() {
+    return {
+      color: 'white'
+    };
+  },
+
   methods: {
     changeMenu: function changeMenu(active) {
       this.$emit('on-change', active);
@@ -69842,119 +69851,78 @@ var render = function() {
     "div",
     [
       _vm._l(_vm.menuList, function(item, index) {
-        return [
-          item.children && item.children.length !== 1
-            ? _c(
-                "Dropdown",
-                {
-                  key: index,
-                  attrs: { transfer: "", placement: "right-start" },
-                  on: { "on-click": _vm.changeMenu }
-                },
-                [
-                  _c(
-                    "Button",
+        return !item.hidden && item.children
+          ? [
+              item.children.length === 1 && !item.showParent
+                ? _c(
+                    "Dropdown",
                     {
-                      staticStyle: {
-                        width: "70px",
-                        "margin-left": "-5px",
-                        padding: "10px 0"
-                      },
-                      attrs: { type: "text" }
-                    },
-                    [_c("Icon", { attrs: { size: 20, type: item.icon } })],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "DropdownMenu",
-                    {
-                      staticStyle: { width: "200px" },
-                      attrs: { slot: "list" },
-                      slot: "list"
+                      key: index,
+                      attrs: { transfer: "", placement: "right-start" },
+                      on: { "on-click": _vm.changeMenu }
                     },
                     [
-                      _vm._l(item.children, function(child, i) {
-                        return [
+                      _c(
+                        "Button",
+                        {
+                          staticStyle: {
+                            width: "70px",
+                            "margin-left": "-5px",
+                            padding: "10px 0"
+                          },
+                          attrs: { type: "text" },
+                          on: {
+                            click: function($event) {
+                              _vm.changeMenu(item.children[0].name)
+                            }
+                          }
+                        },
+                        [
+                          _c("Icon", {
+                            attrs: {
+                              size: 20,
+                              color: _vm.color,
+                              type: item.children[0].meta.icon || item.icon
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "DropdownMenu",
+                        {
+                          staticStyle: { width: "200px" },
+                          attrs: { slot: "list" },
+                          slot: "list"
+                        },
+                        [
                           _c(
                             "DropdownItem",
-                            { key: i, attrs: { name: child.name } },
+                            {
+                              key: "d" + index,
+                              attrs: { name: item.children[0].name }
+                            },
                             [
-                              _c("Icon", { attrs: { type: child.icon } }),
+                              item.children[0].meta &&
+                              item.children[0].meta.icon
+                                ? _c("Icon", {
+                                    attrs: {
+                                      color: _vm.color,
+                                      type:
+                                        item.children[0].meta.icon ||
+                                        item.meta.icon
+                                    }
+                                  })
+                                : _vm._e(),
                               _vm._v(" "),
                               _c(
                                 "span",
                                 { staticStyle: { "padding-left": "10px" } },
-                                [_vm._v(_vm._s(_vm.itemTitle(child)))]
+                                [_vm._v(_vm._s(item.children[0].meta.title))]
                               )
                             ],
                             1
-                          )
-                        ]
-                      })
-                    ],
-                    2
-                  )
-                ],
-                1
-              )
-            : _c(
-                "Dropdown",
-                {
-                  key: index,
-                  attrs: { transfer: "", placement: "right-start" },
-                  on: { "on-click": _vm.changeMenu }
-                },
-                [
-                  _c(
-                    "Button",
-                    {
-                      staticStyle: {
-                        width: "70px",
-                        "margin-left": "-5px",
-                        padding: "10px 0"
-                      },
-                      attrs: { type: "text" },
-                      on: {
-                        click: function($event) {
-                          _vm.changeMenu(item.children[0].name)
-                        }
-                      }
-                    },
-                    [
-                      _c("Icon", {
-                        attrs: {
-                          size: 20,
-                          type: item.children[0].icon || item.icon
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "DropdownMenu",
-                    {
-                      staticStyle: { width: "200px" },
-                      attrs: { slot: "list" },
-                      slot: "list"
-                    },
-                    [
-                      _c(
-                        "DropdownItem",
-                        {
-                          key: "d" + index,
-                          attrs: { name: item.children[0].name }
-                        },
-                        [
-                          _c("Icon", {
-                            attrs: { type: item.children[0].icon || item.icon }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            { staticStyle: { "padding-left": "10px" } },
-                            [_vm._v(_vm._s(_vm.itemTitle(item.children[0])))]
                           )
                         ],
                         1
@@ -69962,10 +69930,79 @@ var render = function() {
                     ],
                     1
                   )
-                ],
-                1
-              )
-        ]
+                : _c(
+                    "Dropdown",
+                    {
+                      key: index,
+                      attrs: { transfer: "", placement: "right-start" },
+                      on: { "on-click": _vm.changeMenu }
+                    },
+                    [
+                      _c(
+                        "Button",
+                        {
+                          staticStyle: {
+                            width: "70px",
+                            "margin-left": "-5px",
+                            padding: "10px 0"
+                          },
+                          attrs: { type: "text" }
+                        },
+                        [
+                          item.meta && item.meta.icon
+                            ? _c("Icon", {
+                                attrs: {
+                                  color: _vm.color,
+                                  size: 20,
+                                  type: item.meta.icon
+                                }
+                              })
+                            : _vm._e()
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "DropdownMenu",
+                        {
+                          staticStyle: { width: "200px" },
+                          attrs: { slot: "list" },
+                          slot: "list"
+                        },
+                        [
+                          _vm._l(item.children, function(child, i) {
+                            return [
+                              _c(
+                                "DropdownItem",
+                                { key: i, attrs: { name: child.name } },
+                                [
+                                  child.meta && child.meta.title
+                                    ? _c("Icon", {
+                                        attrs: {
+                                          color: _vm.color,
+                                          type: child.icon
+                                        }
+                                      })
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    { staticStyle: { "padding-left": "10px" } },
+                                    [_vm._v(_vm._s(child.meta.title))]
+                                  )
+                                ],
+                                1
+                              )
+                            ]
+                          })
+                        ],
+                        2
+                      )
+                    ],
+                    1
+                  )
+            ]
+          : _vm._e()
       })
     ],
     2
@@ -71343,6 +71380,19 @@ var render = function() {
         ],
         attrs: { "menu-list": _vm.menuList, "open-names": _vm.openNames },
         on: { "on-change": _vm.handleChange }
+      }),
+      _vm._v(" "),
+      _c("sidebar-menu-shrink", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.shrink,
+            expression: "shrink"
+          }
+        ],
+        attrs: { "menu-list": _vm.menuList },
+        on: { "on-change": _vm.handleChange }
       })
     ],
     2
@@ -72255,6 +72305,27 @@ var render = function() {
         },
         [
           _c("div", { staticClass: "main-header" }, [
+            _c(
+              "div",
+              { staticClass: "navicon-con" },
+              [
+                _c(
+                  "Button",
+                  {
+                    style: {
+                      transform:
+                        "rotateZ(" + (this.shrink ? "-90" : "0") + "deg)"
+                    },
+                    attrs: { type: "text" },
+                    on: { click: _vm.toggleClick }
+                  },
+                  [_c("Icon", { attrs: { type: "navicon", size: "32" } })],
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
             _c("div", { staticClass: "header-middle-con" }, [
               _c(
                 "div",

@@ -21,11 +21,11 @@
     <!-- header start -->
     <div class="main-header-con" :style="{paddingLeft: shrink?'60px':'200px'}">
       <div class="main-header">
-        <!--<div class="navicon-con">-->
-          <!--<Button :style="{transform: 'rotateZ(' + (this.shrink ? '-90' : '0') + 'deg)'}" type="text" @click="toggleClick">-->
-            <!--<Icon type="navicon" size="32"></Icon>-->
-          <!--</Button>-->
-        <!--</div>-->
+        <div class="navicon-con">
+          <Button :style="{transform: 'rotateZ(' + (this.shrink ? '-90' : '0') + 'deg)'}" type="text" @click="toggleClick">
+            <Icon type="navicon" size="32"></Icon>
+          </Button>
+        </div>
         <div class="header-middle-con">
           <div class="main-breadcrumb">
             <breadcrumb-nav :currentPath="currentPath"></breadcrumb-nav>
@@ -89,7 +89,7 @@
     },
     data () {
       return {
-        shrink: false,
+        shrink: true,
         userName: '',
         isFullScreen: false,
         openedSubmenuArr: this.$store.state.app.openedSubmenuArr

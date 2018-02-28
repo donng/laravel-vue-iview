@@ -1,27 +1,27 @@
 <template>
   <div>
-    <template v-for="(item, index) in menuList">
-        <Dropdown transfer v-if="item.children && item.children.length !== 1" placement="right-start" :key="index" @on-click="changeMenu">
+    <template v-for="(item, index) in menuList" v-if="!item.hidden && item.children">
+      <!-- 需要显示孩子节点的：只有一个孩子节点，且没有设置显示parent -->
+      <Dropdown transfer  v-if="item.children.length === 1 && !item.showParent" placement="right-start" :key="index" @on-click="changeMenu">
+        <Button @click="changeMenu(item.children[0].name)" style="width: 70px;margin-left: -5px;padding:10px 0;" type="text">
+          <Icon :size="20" :color="color" :type="item.children[0].meta.icon || item.icon"></Icon>
+        </Button>
+        <DropdownMenu style="width: 200px;" slot="list">
+          <DropdownItem :name="item.children[0].name" :key="'d' + index">
+            <Icon  v-if="item.children[0].meta && item.children[0].meta.icon" :color="color" :type="item.children[0].meta.icon || item.meta.icon"></Icon>
+            <span style="padding-left:10px;">{{ item.children[0].meta.title }}</span></DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+        <Dropdown transfer  v-else placement="right-start" :key="index" @on-click="changeMenu">
           <Button style="width: 70px;margin-left: -5px;padding:10px 0;" type="text">
-            <Icon :size="20" :type="item.icon"></Icon>
+            <Icon v-if="item.meta && item.meta.icon" :color="color" :size="20" :type="item.meta.icon"></Icon>
           </Button>
           <DropdownMenu style="width: 200px;" slot="list">
             <template v-for="(child, i) in item.children">
               <DropdownItem :name="child.name" :key="i">
-                <Icon :type="child.icon"></Icon>
-                <span style="padding-left:10px;">{{ itemTitle(child) }}</span></DropdownItem>
+                <Icon v-if="child.meta && child.meta.title" :color="color"  :type="child.icon"></Icon>
+                <span style="padding-left:10px;">{{ child.meta.title }}</span></DropdownItem>
             </template>
-          </DropdownMenu>
-        </Dropdown>
-        <Dropdown transfer v-else placement="right-start" :key="index" @on-click="changeMenu">
-          <Button @click="changeMenu(item.children[0].name)" style="width: 70px;margin-left: -5px;padding:10px 0;"
-                  type="text">
-            <Icon :size="20" :type="item.children[0].icon || item.icon"></Icon>
-          </Button>
-          <DropdownMenu style="width: 200px;" slot="list">
-            <DropdownItem :name="item.children[0].name" :key="'d' + index">
-              <Icon :type="item.children[0].icon || item.icon"></Icon>
-              <span style="padding-left:10px;">{{ itemTitle(item.children[0]) }}</span></DropdownItem>
           </DropdownMenu>
         </Dropdown>
     </template>
@@ -34,6 +34,11 @@
     props: {
       menuList: {
         type: Array
+      }
+    },
+    data() {
+      return {
+        color: 'white'
       }
     },
     methods: {
