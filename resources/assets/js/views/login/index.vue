@@ -23,7 +23,7 @@
             </router-link>
           </FormItem>
           <FormItem class="bottom">
-            <Button type="primary" @click="submit('form')" long>{{$t('login.login')}}</Button>
+            <Button type="primary" @click="submit('form')" long :loading="loading">{{$t('login.login')}}</Button>
           </FormItem>
         </Form>
       </Card>
@@ -39,6 +39,7 @@
     name: "index",
     data () {
       return {
+        loading: false,
         form: {
           email: '',
           password: '',
@@ -60,7 +61,9 @@
       submit (name) {
         this.$refs[name].validate((valid) => {
           if (valid) {
+            this.loading = true;
             this.$store.dispatch('login', this.form).then(() => {
+              this.loading = false;
               this.$router.push('/');
             })
           }

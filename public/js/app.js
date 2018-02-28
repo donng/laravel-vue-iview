@@ -72956,6 +72956,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   name: "index",
   data: function data() {
     return {
+      loading: false,
       form: {
         email: '',
         password: '',
@@ -72974,7 +72975,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.$refs[name].validate(function (valid) {
         if (valid) {
+          _this.loading = true;
           _this.$store.dispatch('login', _this.form).then(function () {
+            _this.loading = false;
             _this.$router.push('/');
           });
         }
@@ -74667,7 +74670,11 @@ var render = function() {
                           _c(
                             "Button",
                             {
-                              attrs: { type: "primary", long: "" },
+                              attrs: {
+                                type: "primary",
+                                long: "",
+                                loading: _vm.loading
+                              },
                               on: {
                                 click: function($event) {
                                   _vm.submit("form")
