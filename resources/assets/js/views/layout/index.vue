@@ -54,9 +54,9 @@
           <!-- dropdown end -->
         </div>
       </div>
-      <!--<div class="tags-con">-->
-        <!--<tags-page-opened :pageTagsList="pageTagsList"></tags-page-opened>-->
-      <!--</div>-->
+      <div class="tags-con">
+        <tags-page-opened></tags-page-opened>
+      </div>
     </div>
     <!-- header end -->
     <!-- router-view start -->
@@ -89,7 +89,7 @@
     },
     data () {
       return {
-        shrink: true,
+        shrink: false,
         userName: '',
         isFullScreen: false,
         openedSubmenuArr: this.$store.state.app.openedSubmenuArr

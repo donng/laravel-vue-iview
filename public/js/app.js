@@ -68297,7 +68297,7 @@ var getters = {
 
 var map = {
 	"./app.js": 62,
-	"./router.js": 140,
+	"./router.js": 63,
 	"./user.js": 121
 };
 function webpackContext(req) {
@@ -68324,17 +68324,35 @@ webpackContext.id = 61;
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var app = {
   state: {
-    collapse: true //菜单栏伸缩
+    collapse: true, //菜单栏伸缩
+    tagsList: []
   },
   mutations: {
     collapse: function collapse(state) {
       state.collapse = !state.collapse;
+    },
+    addTags: function addTags(state, view) {
+      if (state.tagsList.some(function (v) {
+        return v.path === view.path;
+      })) return;
+      state.tagsList.push({
+        name: view.name,
+        path: view.path,
+        title: view.meta.title || 'no-name'
+      });
+      // if (!view.meta.noCache) {
+      //   state.cachedViews.push(view.name)
+      // }
     }
   },
   actions: {
     collapse: function collapse(_ref) {
       var commit = _ref.commit;
       return commit('collapse');
+    },
+    addTags: function addTags(_ref2, view) {
+      var commit = _ref2.commit;
+      return commit('addTags', view);
     }
   }
 };
@@ -68342,7 +68360,103 @@ var app = {
 /* harmony default export */ __webpack_exports__["default"] = (app);
 
 /***/ }),
-/* 63 */,
+/* 63 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router_router__ = __webpack_require__(21);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+
+
+/**
+ * 通过meta.role判断是否与当前用户权限匹配
+ * @param roles
+ * @param route
+ */
+function hasPermission(roles, route) {
+  if (route.meta && route.meta.roles) {
+    return roles.some(function (role) {
+      return route.meta.roles.indexOf(role) >= 0;
+    });
+  } else {
+    return true;
+  }
+}
+
+/**
+ * 递归过滤异步路由表，返回符合用户角色权限的路由表
+ * @param asyncRouterMap
+ * @param roles
+ */
+function filterAsyncRouter(asyncRouterMap, roles) {
+  var accessedRouters = asyncRouterMap.filter(function (route) {
+    if (hasPermission(roles, route)) {
+      if (route.children && route.children.length) {
+        route.children = filterAsyncRouter(route.children, roles);
+      }
+      return true;
+    }
+    return false;
+  });
+  return accessedRouters;
+}
+
+var route = {
+  state: {
+    routers: __WEBPACK_IMPORTED_MODULE_1__router_router__["a" /* constantRouterMap */],
+    addRouters: []
+  },
+  mutations: {
+    setRoutes: function setRoutes(state, routers) {
+      state.addRouters = routers;
+      state.routers = __WEBPACK_IMPORTED_MODULE_1__router_router__["a" /* constantRouterMap */].concat(routers);
+    }
+  },
+  actions: {
+    generateRoutes: function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(_ref, data) {
+        var commit = _ref.commit;
+        var roles, accessedRouters;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                roles = data.roles;
+                accessedRouters = void 0;
+
+                if (roles.includes('admin')) {
+                  accessedRouters = __WEBPACK_IMPORTED_MODULE_1__router_router__["b" /* mainRouter */];
+                } else {
+                  accessedRouters = filterAsyncRouter(__WEBPACK_IMPORTED_MODULE_1__router_router__["b" /* mainRouter */], roles);
+                }
+                commit('setRoutes', accessedRouters);
+
+              case 4:
+              case 'end':
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function generateRoutes(_x, _x2) {
+        return _ref2.apply(this, arguments);
+      }
+
+      return generateRoutes;
+    }()
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (route);
+
+/***/ }),
 /* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -69317,7 +69431,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   data: function data() {
     return {
-      shrink: true,
+      shrink: false,
       userName: '',
       isFullScreen: false,
       openedSubmenuArr: this.$store.state.app.openedSubmenuArr
@@ -69604,13 +69718,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(141)
+  __webpack_require__(75)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(77)
 /* template */
-var __vue_template__ = __webpack_require__(143)
+var __vue_template__ = __webpack_require__(78)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -69649,8 +69763,46 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 75 */,
-/* 76 */,
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(76);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("2ada88c6", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../../node_modules/_css-loader@0.28.9@css-loader/index.js!../../../../../../../../node_modules/_vue-loader@13.7.1@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7a6d7e4f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../../node_modules/_sass-loader@6.0.6@sass-loader/lib/loader.js!../../../../../../../../node_modules/_vue-loader@13.7.1@vue-loader/lib/selector.js?type=styles&index=0!./sidebarMenu.vue", function() {
+     var newContent = require("!!../../../../../../../../node_modules/_css-loader@0.28.9@css-loader/index.js!../../../../../../../../node_modules/_vue-loader@13.7.1@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7a6d7e4f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../../node_modules/_sass-loader@6.0.6@sass-loader/lib/loader.js!../../../../../../../../node_modules/_vue-loader@13.7.1@vue-loader/lib/selector.js?type=styles&index=0!./sidebarMenu.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.layout-text[data-v-7a6d7e4f] {\n  height: 25px;\n  display: inline-block;\n  white-space: nowrap;\n  position: absolute;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
 /* 77 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -69723,7 +69875,129 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 });
 
 /***/ }),
-/* 78 */,
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "Menu",
+    {
+      ref: "sideMenu",
+      attrs: {
+        "active-name": _vm.$route.name,
+        "open-names": _vm.openNames,
+        theme: "dark",
+        width: "auto"
+      },
+      on: { "on-select": _vm.changeMenu }
+    },
+    [
+      _vm._l(_vm.menuList, function(item) {
+        return !item.hidden && item.children
+          ? [
+              item.children.length === 1 && !item.showParent
+                ? _c(
+                    "MenuItem",
+                    {
+                      key: "menuitem" + item.name,
+                      attrs: { name: item.children[0].name }
+                    },
+                    [
+                      item.children[0].meta && item.children[0].meta.icon
+                        ? _c("Icon", {
+                            key: "menuicon" + item.name,
+                            attrs: {
+                              type: item.children[0].meta.icon,
+                              size: _vm.iconSize
+                            }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      item.children[0].meta && item.children[0].meta.title
+                        ? _c("span", { key: "title" + item.name }, [
+                            _vm._v(_vm._s(item.children[0].meta.title))
+                          ])
+                        : _vm._e()
+                    ],
+                    1
+                  )
+                : _c(
+                    "Submenu",
+                    { key: item.name, attrs: { name: item.name } },
+                    [
+                      _c(
+                        "template",
+                        { slot: "title" },
+                        [
+                          item.meta && item.meta.icon
+                            ? _c("Icon", {
+                                attrs: {
+                                  type: item.meta.icon,
+                                  size: _vm.iconSize
+                                }
+                              })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          item.meta && item.meta.title
+                            ? _c("span", [_vm._v(_vm._s(item.meta.title))])
+                            : _vm._e()
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _vm._l(item.children, function(child) {
+                        return [
+                          _c(
+                            "MenuItem",
+                            {
+                              key: "menuitem" + child.name,
+                              attrs: { name: child.name }
+                            },
+                            [
+                              child.meta && child.meta.icon
+                                ? _c("Icon", {
+                                    key: "icon" + child.name,
+                                    attrs: {
+                                      type: child.meta.icon,
+                                      size: _vm.iconSize
+                                    }
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              child.meta && child.meta.title
+                                ? _c("span", { key: "title" + child.name }, [
+                                    _vm._v(_vm._s(child.meta.title))
+                                  ])
+                                : _vm._e()
+                            ],
+                            1
+                          )
+                        ]
+                      })
+                    ],
+                    2
+                  )
+            ]
+          : _vm._e()
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-7a6d7e4f", module.exports)
+  }
+}
+
+/***/ }),
 /* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -71353,7 +71627,7 @@ function coerce(version) {
 /* 83 */
 /***/ (function(module, exports) {
 
-module.exports = {"private":true,"scripts":{"dev":"npm run development","development":"cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js","watch":"cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js","watch-poll":"npm run watch -- --watch-poll","hot":"cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js","prod":"npm run production","production":"cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"},"devDependencies":{"axios":"^0.17","bootstrap-sass":"^3.3.7","cross-env":"^5.1","jquery":"^3.2","laravel-mix":"^2.0","lodash":"^4.17.4","node-sass":"^4.7.2","vue":"^2.5.7"},"dependencies":{"css-loader":"^0.28.9","iview":"^2.9.2","js-cookie":"^2.2.0","less":"^3.0.0","less-loader":"^4.0.5","vue-i18n":"^7.4.2","vue-router":"^3.0.1","vuex":"^3.0.1"}}
+module.exports = {"private":true,"scripts":{"dev":"npm run development","development":"cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js","watch":"cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js","watch-poll":"npm run watch -- --watch-poll","hot":"cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js","prod":"npm run production","production":"cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"},"devDependencies":{"axios":"^0.17","bootstrap-sass":"^3.3.7","cross-env":"^5.1","jquery":"^3.2","laravel-mix":"^2.0","lodash":"^4.17.4","node-sass":"^4.7.2","vue":"^2.5.7"},"dependencies":{"css-loader":"^0.28.9","iview":"^2.9.2","js-cookie":"^2.2.0","less":"^3.0.0","less-loader":"^4.0.5","particles.js":"^2.0.0","vue-i18n":"^7.4.2","vue-router":"^3.0.1","vuex":"^3.0.1"}}
 
 /***/ }),
 /* 84 */
@@ -71510,6 +71784,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_i18n__ = __webpack_require__(22);
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -71546,164 +71822,160 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+
 
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_i18n__["a" /* default */]);
-/* harmony default export */ __webpack_exports__["default"] = ({
-    name: 'tagsPageOpened',
-    data: function data() {
-        return {
-            currentPageName: this.$route.name,
-            tagBodyLeft: 0,
-            refsTag: [],
-            tagsCount: 1
-        };
-    },
+/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
+  name: 'tagsPageOpened',
+  data: function data() {
+    return {
+      currentPageName: this.$route.name,
+      tagBodyLeft: 0,
+      refsTag: [],
+      tagsCount: 1
+    };
+  },
 
-    props: {
-        pageTagsList: Array,
-        beforePush: {
-            type: Function,
-            default: function _default(item) {
-                return true;
-            }
-        }
+  computed: {
+    title: function title() {
+      return this.$store.state.app.currentTitle;
     },
-    computed: {
-        title: function title() {
-            return this.$store.state.app.currentTitle;
-        },
-        tagsList: function tagsList() {
-            return this.$store.state.app.pageOpenedList;
-        }
-    },
-    methods: {
-        itemTitle: function itemTitle(item) {
-            if (_typeof(item.title) === 'object') {
-                return this.$t(item.title.i18n);
-            } else {
-                return item.title;
-            }
-        },
-        closePage: function closePage(event, name) {
-            var pageOpenedList = this.$store.state.app.pageOpenedList;
-            var lastPageObj = pageOpenedList[0];
-            if (this.currentPageName === name) {
-                var len = pageOpenedList.length;
-                for (var i = 1; i < len; i++) {
-                    if (pageOpenedList[i].name === name) {
-                        if (i < len - 1) {
-                            lastPageObj = pageOpenedList[i + 1];
-                        } else {
-                            lastPageObj = pageOpenedList[i - 1];
-                        }
-                        break;
-                    }
-                }
-            } else {
-                var tagWidth = event.target.parentNode.offsetWidth;
-                this.tagBodyLeft = Math.min(this.tagBodyLeft + tagWidth, 0);
-            }
-            this.$store.commit('removeTag', name);
-            this.$store.commit('closePage', name);
-            pageOpenedList = this.$store.state.app.pageOpenedList;
-            localStorage.pageOpenedList = JSON.stringify(pageOpenedList);
-            if (this.currentPageName === name) {
-                this.linkTo(lastPageObj);
-            }
-        },
-        linkTo: function linkTo(item) {
-            var routerObj = {};
-            routerObj.name = item.name;
-            if (item.argu) {
-                routerObj.params = item.argu;
-            }
-            if (item.query) {
-                routerObj.query = item.query;
-            }
-            if (this.beforePush(item)) {
-                this.$router.push(routerObj);
-            }
-        },
-        handlescroll: function handlescroll(e) {
-            var type = e.type;
-            var delta = 0;
-            if (type === 'DOMMouseScroll' || type === 'mousewheel') {
-                delta = e.wheelDelta ? e.wheelDelta : -(e.detail || 0) * 40;
-            }
-            var left = 0;
-            if (delta > 0) {
-                left = Math.min(0, this.tagBodyLeft + delta);
-            } else {
-                if (this.$refs.scrollCon.offsetWidth - 100 < this.$refs.scrollBody.offsetWidth) {
-                    if (this.tagBodyLeft < -(this.$refs.scrollBody.offsetWidth - this.$refs.scrollCon.offsetWidth + 100)) {
-                        left = this.tagBodyLeft;
-                    } else {
-                        left = Math.max(this.tagBodyLeft + delta, this.$refs.scrollCon.offsetWidth - this.$refs.scrollBody.offsetWidth - 100);
-                    }
-                } else {
-                    this.tagBodyLeft = 0;
-                }
-            }
-            this.tagBodyLeft = left;
-        },
-        handleTagsOption: function handleTagsOption(type) {
-            if (type === 'clearAll') {
-                this.$store.commit('clearAllTags');
-                this.$router.push({
-                    name: 'home_index'
-                });
-            } else {
-                this.$store.commit('clearOtherTags', this);
-            }
-            this.tagBodyLeft = 0;
-        },
-        moveToView: function moveToView(tag) {
-            if (tag.offsetLeft < -this.tagBodyLeft) {
-                // 标签在可视区域左侧
-                this.tagBodyLeft = -tag.offsetLeft + 10;
-            } else if (tag.offsetLeft + 10 > -this.tagBodyLeft && tag.offsetLeft + tag.offsetWidth < -this.tagBodyLeft + this.$refs.scrollCon.offsetWidth - 100) {
-                // 标签在可视区域
-                this.tagBodyLeft = Math.min(0, this.$refs.scrollCon.offsetWidth - 100 - tag.offsetWidth - tag.offsetLeft - 20);
-            } else {
-                // 标签在可视区域右侧
-                this.tagBodyLeft = -(tag.offsetLeft - (this.$refs.scrollCon.offsetWidth - 100 - tag.offsetWidth) + 20);
-            }
-        }
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.refsTag = this.$refs.tagsPageOpened;
-        setTimeout(function () {
-            _this.refsTag.forEach(function (item, index) {
-                if (_this.$route.name === item.name) {
-                    var tag = _this.refsTag[index].$el;
-                    _this.moveToView(tag);
-                }
-            });
-        }, 1); // 这里不设定时器就会有偏移bug
-        this.tagsCount = this.tagsList.length;
-    },
-
-    watch: {
-        '$route': function $route(to) {
-            var _this2 = this;
-
-            this.currentPageName = to.name;
-            this.$nextTick(function () {
-                _this2.refsTag.forEach(function (item, index) {
-                    if (to.name === item.name) {
-                        var tag = _this2.refsTag[index].$el;
-                        _this2.moveToView(tag);
-                    }
-                });
-            });
-            this.tagsCount = this.tagsList.length;
-        }
+    tagsList: function tagsList() {
+      console.log(this.$store.state.app.tagsList);
+      return this.$store.state.app.tagsList;
     }
-});
+  },
+  watch: {
+    $route: function $route() {
+      this.addTags();
+    }
+  },
+  mounted: function mounted() {
+    this.addTags();
+  },
+
+  methods: {
+    generateRoute: function generateRoute() {
+      if (this.$route.name) {
+        return this.$route;
+      }
+      return false;
+    },
+    addTags: function addTags() {
+      var route = this.generateRoute();
+      if (!route) return false;
+
+      this.$store.dispatch('addTags', route);
+    },
+    itemTitle: function itemTitle(item) {
+      if (_typeof(item.title) === 'object') {
+        return this.$t(item.title.i18n);
+      } else {
+        return item.title;
+      }
+    },
+    closePage: function closePage(event, name) {
+      var pageOpenedList = this.$store.state.app.pageOpenedList;
+      var lastPageObj = pageOpenedList[0];
+      if (this.currentPageName === name) {
+        var len = pageOpenedList.length;
+        for (var i = 1; i < len; i++) {
+          if (pageOpenedList[i].name === name) {
+            if (i < len - 1) {
+              lastPageObj = pageOpenedList[i + 1];
+            } else {
+              lastPageObj = pageOpenedList[i - 1];
+            }
+            break;
+          }
+        }
+      } else {
+        var tagWidth = event.target.parentNode.offsetWidth;
+        this.tagBodyLeft = Math.min(this.tagBodyLeft + tagWidth, 0);
+      }
+      this.$store.commit('removeTag', name);
+      this.$store.commit('closePage', name);
+      pageOpenedList = this.$store.state.app.pageOpenedList;
+      localStorage.pageOpenedList = JSON.stringify(pageOpenedList);
+      if (this.currentPageName === name) {
+        this.linkTo(lastPageObj);
+      }
+    },
+    linkTo: function linkTo(item) {
+      var routerObj = {};
+      routerObj.name = item.name;
+      if (item.argu) {
+        routerObj.params = item.argu;
+      }
+      if (item.query) {
+        routerObj.query = item.query;
+      }
+      if (this.beforePush(item)) {
+        this.$router.push(routerObj);
+      }
+    },
+    handlescroll: function handlescroll(e) {
+      var type = e.type;
+      var delta = 0;
+      if (type === 'DOMMouseScroll' || type === 'mousewheel') {
+        delta = e.wheelDelta ? e.wheelDelta : -(e.detail || 0) * 40;
+      }
+      var left = 0;
+      if (delta > 0) {
+        left = Math.min(0, this.tagBodyLeft + delta);
+      } else {
+        if (this.$refs.scrollCon.offsetWidth - 100 < this.$refs.scrollBody.offsetWidth) {
+          if (this.tagBodyLeft < -(this.$refs.scrollBody.offsetWidth - this.$refs.scrollCon.offsetWidth + 100)) {
+            left = this.tagBodyLeft;
+          } else {
+            left = Math.max(this.tagBodyLeft + delta, this.$refs.scrollCon.offsetWidth - this.$refs.scrollBody.offsetWidth - 100);
+          }
+        } else {
+          this.tagBodyLeft = 0;
+        }
+      }
+      this.tagBodyLeft = left;
+    },
+    handleTagsOption: function handleTagsOption(type) {
+      if (type === 'clearAll') {
+        this.$store.commit('clearAllTags');
+        this.$router.push({
+          name: 'home_index'
+        });
+      } else {
+        this.$store.commit('clearOtherTags', this);
+      }
+      this.tagBodyLeft = 0;
+    },
+    moveToView: function moveToView(tag) {
+      if (tag.offsetLeft < -this.tagBodyLeft) {
+        // 标签在可视区域左侧
+        this.tagBodyLeft = -tag.offsetLeft + 10;
+      } else if (tag.offsetLeft + 10 > -this.tagBodyLeft && tag.offsetLeft + tag.offsetWidth < -this.tagBodyLeft + this.$refs.scrollCon.offsetWidth - 100) {
+        // 标签在可视区域
+        this.tagBodyLeft = Math.min(0, this.$refs.scrollCon.offsetWidth - 100 - tag.offsetWidth - tag.offsetLeft - 20);
+      } else {
+        // 标签在可视区域右侧
+        this.tagBodyLeft = -(tag.offsetLeft - (this.$refs.scrollCon.offsetWidth - 100 - tag.offsetWidth) + 20);
+      }
+    }
+  }
+}, 'mounted', function mounted() {
+  var _this = this;
+
+  this.refsTag = this.$refs.tagsPageOpened;
+  setTimeout(function () {
+    _this.refsTag.forEach(function (item, index) {
+      if (_this.$route.name === item.name) {
+        var tag = _this.refsTag[index].$el;
+        _this.moveToView(tag);
+      }
+    });
+  }, 1); // 这里不设定时器就会有偏移bug
+  this.tagsCount = this.tagsList.length;
+}));
 
 /***/ }),
 /* 89 */
@@ -71736,7 +72008,7 @@ var render = function() {
                 "Button",
                 { attrs: { size: "small", type: "primary" } },
                 [
-                  _vm._v("\n                标签选项\n                "),
+                  _vm._v("\n        标签选项\n        "),
                   _c("Icon", { attrs: { type: "arrow-down-b" } })
                 ],
                 1
@@ -71774,7 +72046,7 @@ var render = function() {
           _c(
             "transition-group",
             { attrs: { name: "taglist-moving-animation" } },
-            _vm._l(_vm.pageTagsList, function(item, index) {
+            _vm._l(_vm.tagsList, function(item, index) {
               return _c(
                 "Tag",
                 {
@@ -71784,21 +72056,20 @@ var render = function() {
                   attrs: {
                     type: "dot",
                     name: item.name,
-                    closable: item.name === "home_index" ? false : true,
+                    closable: item.name === "home" ? false : true,
                     color: item.children
                       ? item.children[0].name === _vm.currentPageName
                         ? "blue"
                         : "default"
                       : item.name === _vm.currentPageName ? "blue" : "default"
                   },
-                  on: { "on-close": _vm.closePage },
                   nativeOn: {
                     click: function($event) {
                       _vm.linkTo(item)
                     }
                   }
                 },
-                [_vm._v(_vm._s(_vm.itemTitle(item)))]
+                [_vm._v(_vm._s(_vm.itemTitle(item)) + "\n      ")]
               )
             })
           )
@@ -72407,7 +72678,9 @@ var render = function() {
                 1
               )
             ])
-          ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "tags-con" }, [_c("tags-page-opened")], 1)
         ]
       ),
       _vm._v(" "),
@@ -78784,268 +79057,6 @@ module.exports = function (css) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 138 */,
-/* 139 */,
-/* 140 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router_router__ = __webpack_require__(21);
-
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-
-
-/**
- * 通过meta.role判断是否与当前用户权限匹配
- * @param roles
- * @param route
- */
-function hasPermission(roles, route) {
-  if (route.meta && route.meta.roles) {
-    return roles.some(function (role) {
-      return route.meta.roles.indexOf(role) >= 0;
-    });
-  } else {
-    return true;
-  }
-}
-
-/**
- * 递归过滤异步路由表，返回符合用户角色权限的路由表
- * @param asyncRouterMap
- * @param roles
- */
-function filterAsyncRouter(asyncRouterMap, roles) {
-  var accessedRouters = asyncRouterMap.filter(function (route) {
-    if (hasPermission(roles, route)) {
-      if (route.children && route.children.length) {
-        route.children = filterAsyncRouter(route.children, roles);
-      }
-      return true;
-    }
-    return false;
-  });
-  return accessedRouters;
-}
-
-var route = {
-  state: {
-    routers: __WEBPACK_IMPORTED_MODULE_1__router_router__["a" /* constantRouterMap */],
-    addRouters: []
-  },
-  mutations: {
-    setRoutes: function setRoutes(state, routers) {
-      state.addRouters = routers;
-      state.routers = __WEBPACK_IMPORTED_MODULE_1__router_router__["a" /* constantRouterMap */].concat(routers);
-    }
-  },
-  actions: {
-    generateRoutes: function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(_ref, data) {
-        var commit = _ref.commit;
-        var roles, accessedRouters;
-        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                roles = data.roles;
-                accessedRouters = void 0;
-
-                if (roles.includes('admin')) {
-                  accessedRouters = __WEBPACK_IMPORTED_MODULE_1__router_router__["b" /* mainRouter */];
-                } else {
-                  accessedRouters = filterAsyncRouter(__WEBPACK_IMPORTED_MODULE_1__router_router__["b" /* mainRouter */], roles);
-                }
-                commit('setRoutes', accessedRouters);
-
-              case 4:
-              case 'end':
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function generateRoutes(_x, _x2) {
-        return _ref2.apply(this, arguments);
-      }
-
-      return generateRoutes;
-    }()
-  }
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (route);
-
-/***/ }),
-/* 141 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(142);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(3)("2ada88c6", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../../../../node_modules/_css-loader@0.28.9@css-loader/index.js!../../../../../../../../node_modules/_vue-loader@13.7.1@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7a6d7e4f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../../node_modules/_sass-loader@6.0.6@sass-loader/lib/loader.js!../../../../../../../../node_modules/_vue-loader@13.7.1@vue-loader/lib/selector.js?type=styles&index=0!./sidebarMenu.vue", function() {
-     var newContent = require("!!../../../../../../../../node_modules/_css-loader@0.28.9@css-loader/index.js!../../../../../../../../node_modules/_vue-loader@13.7.1@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7a6d7e4f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../../../../node_modules/_sass-loader@6.0.6@sass-loader/lib/loader.js!../../../../../../../../node_modules/_vue-loader@13.7.1@vue-loader/lib/selector.js?type=styles&index=0!./sidebarMenu.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 142 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.layout-text[data-v-7a6d7e4f] {\n  height: 25px;\n  display: inline-block;\n  white-space: nowrap;\n  position: absolute;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 143 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "Menu",
-    {
-      ref: "sideMenu",
-      attrs: {
-        "active-name": _vm.$route.name,
-        "open-names": _vm.openNames,
-        theme: "dark",
-        width: "auto"
-      },
-      on: { "on-select": _vm.changeMenu }
-    },
-    [
-      _vm._l(_vm.menuList, function(item) {
-        return !item.hidden && item.children
-          ? [
-              item.children.length === 1 && !item.showParent
-                ? _c(
-                    "MenuItem",
-                    {
-                      key: "menuitem" + item.name,
-                      attrs: { name: item.children[0].name }
-                    },
-                    [
-                      item.children[0].meta && item.children[0].meta.icon
-                        ? _c("Icon", {
-                            key: "menuicon" + item.name,
-                            attrs: {
-                              type: item.children[0].meta.icon,
-                              size: _vm.iconSize
-                            }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      item.children[0].meta && item.children[0].meta.title
-                        ? _c("span", { key: "title" + item.name }, [
-                            _vm._v(_vm._s(item.children[0].meta.title))
-                          ])
-                        : _vm._e()
-                    ],
-                    1
-                  )
-                : _c(
-                    "Submenu",
-                    { key: item.name, attrs: { name: item.name } },
-                    [
-                      _c(
-                        "template",
-                        { slot: "title" },
-                        [
-                          item.meta && item.meta.icon
-                            ? _c("Icon", {
-                                attrs: {
-                                  type: item.meta.icon,
-                                  size: _vm.iconSize
-                                }
-                              })
-                            : _vm._e(),
-                          _vm._v(" "),
-                          item.meta && item.meta.title
-                            ? _c("span", [_vm._v(_vm._s(item.meta.title))])
-                            : _vm._e()
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _vm._l(item.children, function(child) {
-                        return [
-                          _c(
-                            "MenuItem",
-                            {
-                              key: "menuitem" + child.name,
-                              attrs: { name: child.name }
-                            },
-                            [
-                              child.meta && child.meta.icon
-                                ? _c("Icon", {
-                                    key: "icon" + child.name,
-                                    attrs: {
-                                      type: child.meta.icon,
-                                      size: _vm.iconSize
-                                    }
-                                  })
-                                : _vm._e(),
-                              _vm._v(" "),
-                              child.meta && child.meta.title
-                                ? _c("span", { key: "title" + child.name }, [
-                                    _vm._v(_vm._s(child.meta.title))
-                                  ])
-                                : _vm._e()
-                            ],
-                            1
-                          )
-                        ]
-                      })
-                    ],
-                    2
-                  )
-            ]
-          : _vm._e()
-      })
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-7a6d7e4f", module.exports)
-  }
-}
 
 /***/ })
 ],[26]);
