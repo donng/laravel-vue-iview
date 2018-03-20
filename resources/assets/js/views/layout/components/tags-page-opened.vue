@@ -4,6 +4,7 @@
 
 <template>
   <div ref="scrollCon" @DOMMouseScroll="handlescroll" @mousewheel="handlescroll" class="tags-outer-scroll-con">
+
     <div class="close-all-tag-con">
       <Dropdown transfer @on-click="handleTagsOption">
         <Button size="small" type="primary">
@@ -16,21 +17,23 @@
         </DropdownMenu>
       </Dropdown>
     </div>
+
     <div ref="scrollBody" class="tags-inner-scroll-body" :style="{left: tagBodyLeft + 'px'}">
       <transition-group name="taglist-moving-animation">
         <Tag
             type="dot"
-            v-for="(item, index) in tagsList"
+            v-for="(item, index) in tags"
             ref="tagsPageOpened"
             :key="item.name"
             :name="item.name"
             @click.native="linkTo(item)"
             :closable="item.name === 'home' ? false : true"
-            :color="item.children?(item.children[0].name===currentPageName?'blue':'default'):(item.name===currentPageName?'blue':'default')"
+            :color="color(item)"
         >{{ itemTitle(item) }}
         </Tag>
       </transition-group>
     </div>
+
   </div>
 </template>
 
@@ -43,41 +46,29 @@
     name: 'tagsPageOpened',
     data () {
       return {
-        currentPageName: this.$route.name,
         tagBodyLeft: 0,
         refsTag: [],
         tagsCount: 1
       };
     },
     computed: {
-      title () {
-        return this.$store.state.app.currentTitle;
+      currentPageName () {
+        return this.$route.name;
       },
-      tagsList () {
-        console.log(this.$store.state.app.tagsList)
-        return this.$store.state.app.tagsList;
+      tags () {
+        return this.$store.state.app.tags;
       }
     },
     watch: {
       $route() {
-        this.addTags();
+        this.appendTag();
       },
-    },
-    mounted() {
-      this.addTags();
     },
     methods: {
-      generateRoute () {
-        if (this.$route.name) {
-          return this.$route
+      appendTag () {
+        if (this.$route.name && this.$route.meta && this.$route.meta.title) {
+          this.$store.dispatch('appendTag', this.$route);
         }
-        return false
-      },
-      addTags () {
-        const route = this.generateRoute();
-        if (!route) return false;
-
-        this.$store.dispatch('addTags', route)
       },
       itemTitle (item) {
         if (typeof item.title === 'object') {
@@ -113,18 +104,25 @@
           this.linkTo(lastPageObj);
         }
       },
+      color(item) {
+        const currentItem = item.children ? item.children[0] : item;
+
+        return (currentItem.name === this.currentPageName) ? 'blue' : 'default';
+      },
       linkTo (item) {
-        let routerObj = {};
-        routerObj.name = item.name;
-        if (item.argu) {
-          routerObj.params = item.argu;
-        }
-        if (item.query) {
-          routerObj.query = item.query;
-        }
-        if (this.beforePush(item)) {
-          this.$router.push(routerObj);
-        }
+        this.$router.push(item);
+        //  待处理
+        // let routerObj = {};
+        // routerObj.name = item.name;
+        // if (item.argu) {
+        //   routerObj.params = item.argu;
+        // }
+        // if (item.query) {
+        //   routerObj.query = item.query;
+        // }
+        // if (this.beforePush(item)) {
+        //   this.$router.push(routerObj);
+        // }
       },
       handlescroll (e) {
         var type = e.type;
@@ -182,7 +180,7 @@
           }
         });
       }, 1); // 这里不设定时器就会有偏移bug
-      this.tagsCount = this.tagsList.length;
+      this.tagsCount = this.tags.length;
     },
     // watch: {
     //   '$route' (to) {
@@ -195,7 +193,7 @@
     //         }
     //       });
     //     });
-    //     this.tagsCount = this.tagsList.length;
+    //     this.tagsCount = this.tags.length;
     //   }
     // }
   };

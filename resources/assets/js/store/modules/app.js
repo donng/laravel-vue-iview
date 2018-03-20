@@ -1,27 +1,31 @@
 const app = {
   state: {
+    tags: [],
     collapse: true, //菜单栏伸缩
-    tagsList: []
   },
   mutations: {
     collapse: (state) => {
       state.collapse = !state.collapse;
     },
-    addTags: (state, view) => {
-      if (state.tagsList.some(v => v.path === view.path)) return;
-      state.tagsList.push({
-        name: view.name,
-        path: view.path,
-        title: view.meta.title || 'no-name'
+    appendTag: (state, tag) => {
+      if (state.tags.some(v => v.path === tag.path)) {
+        return false;
+      }
+
+      state.tags.push({
+        name: tag.name,
+        path: tag.path,
+        title: tag.meta.title || '未知页面'
       });
-      // if (!view.meta.noCache) {
-      //   state.cachedViews.push(view.name)
+      // if (!tag.meta.noCache) {
+      //   state.cachedtags.push(tag.name)
       // }
     },
   },
   actions: {
     collapse: ({ commit }) => commit('collapse'),
-    addTags: ({ commit }, view) => commit('addTags', view)
+
+    appendTag: ({ commit }, tag) => commit('appendTag', tag)
   }
 };
 

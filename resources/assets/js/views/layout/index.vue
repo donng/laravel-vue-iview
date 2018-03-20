@@ -1,10 +1,8 @@
-<style lang="less">
-  @import "./main.less";
-</style>
 <template>
   <div class="main" :class="{'main-hide-text': shrink}">
+
     <!-- sidebar start -->
-    <div class="sidebar-menu-con" :style="{width: shrink?'60px':'200px', overflow: shrink ? 'visible' : 'auto'}">
+    <div class="sidebar-menu-con" :style="{width: shrink ? '60px' : '200px', overflow: shrink ? 'visible' : 'auto'}">
       <shrinkable-menu
           :shrink="shrink"
           @on-change="handleSubmenuChange"
@@ -18,11 +16,13 @@
       </shrinkable-menu>
     </div>
     <!-- sidebar end -->
+
     <!-- header start -->
     <div class="main-header-con" :style="{paddingLeft: shrink?'60px':'200px'}">
       <div class="main-header">
         <div class="navicon-con">
-          <Button :style="{transform: 'rotateZ(' + (this.shrink ? '-90' : '0') + 'deg)'}" type="text" @click="toggleClick">
+          <Button :style="{transform: 'rotateZ(' + (this.shrink ? '-90' : '0') + 'deg)'}" type="text"
+                  @click="toggleClick">
             <Icon type="navicon" size="32"></Icon>
           </Button>
         </div>
@@ -59,8 +59,9 @@
       </div>
     </div>
     <!-- header end -->
+
     <!-- router-view start -->
-    <div class="single-page-con" :style="{left: shrink?'60px':'200px'}">
+    <div class="single-page-con" :style="{left: shrink ? '60px' : '200px'}">
       <div class="single-page">
         <keep-alive :include="cachePage">
           <router-view></router-view>
@@ -68,6 +69,7 @@
       </div>
     </div>
     <!-- router-view end -->
+
   </div>
 </template>
 <script>
@@ -196,3 +198,9 @@
     }
   };
 </script>
+
+<style rel="stylesheet/scss" lang="scss" scoped>
+  .main {
+
+  }
+</style>
