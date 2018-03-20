@@ -19,7 +19,7 @@ const modules = requireContext.keys()
 
 const store = new Vuex.Store({
   modules,
-  getters
+  getters,
 });
 
 export default store
