@@ -68955,7 +68955,11 @@ webpackContext.id = 61;
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var app = {
   state: {
-    tags: [],
+    tags: [{
+      name: 'home',
+      path: '/home',
+      title: '首页'
+    }],
     collapse: true //菜单栏伸缩
   },
   mutations: {
@@ -68977,6 +68981,23 @@ var app = {
       // if (!tag.meta.noCache) {
       //   state.cachedtags.push(tag.name)
       // }
+    },
+    clearAllTags: function clearAllTags(state) {
+      state.tags.splice(1);
+    },
+    clearOtherTags: function clearOtherTags(state, currentPageName) {
+      console.log(state.tags);
+      // 留下首页和当前页
+      var currentPageIndex = state.tags.findIndex(function (tag) {
+        return tag.name === currentPageName;
+      });
+
+      if (currentPageIndex === 0) {
+        state.tags.splice(1);
+      } else {
+        state.tags.splice(currentPageIndex + 1);
+        state.tags.spiice(1, currentPageIndex - 1);
+      }
     }
   },
   actions: {
@@ -68988,6 +69009,16 @@ var app = {
     appendTag: function appendTag(_ref2, tag) {
       var commit = _ref2.commit;
       return commit('appendTag', tag);
+    },
+
+    clearAllTags: function clearAllTags(_ref3) {
+      var commit = _ref3.commit;
+      return commit('clearAllTags');
+    },
+
+    clearOtherTags: function clearOtherTags(_ref4, currentPageName) {
+      var commit = _ref4.commit;
+      return commit('clearOtherTags', currentPageName);
     }
   }
 };
@@ -72534,14 +72565,15 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       }
       this.tagBodyLeft = left;
     },
-    handleTagsOption: function handleTagsOption(type) {
+    clearTags: function clearTags(type) {
+      console.log(type);
       if (type === 'clearAll') {
-        this.$store.commit('clearAllTags');
+        this.$store.dispatch('clearAllTags');
         this.$router.push({
-          name: 'home_index'
+          name: 'home'
         });
       } else {
-        this.$store.commit('clearOtherTags', this);
+        this.$store.dispatch('clearOtherTags', this.currentPageName);
       }
       this.tagBodyLeft = 0;
     },
@@ -72559,18 +72591,16 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
     }
   },
   mounted: function mounted() {
-    var _this = this;
-
-    this.refsTag = this.$refs.tagsPageOpened;
-    setTimeout(function () {
-      _this.refsTag.forEach(function (item, index) {
-        if (_this.$route.name === item.name) {
-          var tag = _this.refsTag[index].$el;
-          _this.moveToView(tag);
-        }
-      });
-    }, 1); // 这里不设定时器就会有偏移bug
-    this.tagsCount = this.tags.length;
+    // this.refsTag = this.$refs.tagsPageOpened;
+    // setTimeout(() => {
+    //   this.refsTag.forEach((item, index) => {
+    //     if (this.$route.name === item.name) {
+    //       let tag = this.refsTag[index].$el;
+    //       this.moveToView(tag);
+    //     }
+    //   });
+    // }, 1); // 这里不设定时器就会有偏移bug
+    // this.tagsCount = this.tags.length;
   }
 });
 
@@ -72596,10 +72626,7 @@ var render = function() {
         [
           _c(
             "Dropdown",
-            {
-              attrs: { transfer: "" },
-              on: { "on-click": _vm.handleTagsOption }
-            },
+            { attrs: { transfer: "" }, on: { "on-click": _vm.clearTags } },
             [
               _c(
                 "Button",

@@ -6,7 +6,7 @@
   <div ref="scrollCon" @DOMMouseScroll="handlescroll" @mousewheel="handlescroll" class="tags-outer-scroll-con">
 
     <div class="close-all-tag-con">
-      <Dropdown transfer @on-click="handleTagsOption">
+      <Dropdown transfer @on-click="clearTags">
         <Button size="small" type="primary">
           标签选项
           <Icon type="arrow-down-b"></Icon>
@@ -146,14 +146,15 @@
         }
         this.tagBodyLeft = left;
       },
-      handleTagsOption (type) {
+      clearTags (type) {
+        console.log(type);
         if (type === 'clearAll') {
-          this.$store.commit('clearAllTags');
+          this.$store.dispatch('clearAllTags');
           this.$router.push({
-            name: 'home_index'
+            name: 'home'
           });
         } else {
-          this.$store.commit('clearOtherTags', this);
+          this.$store.dispatch('clearOtherTags', this.currentPageName);
         }
         this.tagBodyLeft = 0;
       },
@@ -171,16 +172,16 @@
       }
     },
     mounted () {
-      this.refsTag = this.$refs.tagsPageOpened;
-      setTimeout(() => {
-        this.refsTag.forEach((item, index) => {
-          if (this.$route.name === item.name) {
-            let tag = this.refsTag[index].$el;
-            this.moveToView(tag);
-          }
-        });
-      }, 1); // 这里不设定时器就会有偏移bug
-      this.tagsCount = this.tags.length;
+      // this.refsTag = this.$refs.tagsPageOpened;
+      // setTimeout(() => {
+      //   this.refsTag.forEach((item, index) => {
+      //     if (this.$route.name === item.name) {
+      //       let tag = this.refsTag[index].$el;
+      //       this.moveToView(tag);
+      //     }
+      //   });
+      // }, 1); // 这里不设定时器就会有偏移bug
+      // this.tagsCount = this.tags.length;
     },
     // watch: {
     //   '$route' (to) {
