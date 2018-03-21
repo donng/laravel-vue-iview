@@ -21,15 +21,11 @@ const app = {
         path: tag.path,
         title: tag.meta.title || '未知页面'
       });
-      // if (!tag.meta.noCache) {
-      //   state.cachedtags.push(tag.name)
-      // }
     },
     clearAllTags: (state) => {
       state.tags.splice(1);
     },
     clearOtherTags: (state, currentPageName) => {
-      console.log(state.tags);
       // 留下首页和当前页
       const currentPageIndex = state.tags.findIndex(tag =>  tag.name === currentPageName);
 
@@ -37,7 +33,7 @@ const app = {
         state.tags.splice(1);
       } else {
         state.tags.splice(currentPageIndex + 1);
-        state.tags.spiice(1, currentPageIndex - 1);
+        state.tags.splice(1, currentPageIndex - 1);
       }
     }
   },

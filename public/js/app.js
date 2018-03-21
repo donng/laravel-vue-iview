@@ -68978,15 +68978,11 @@ var app = {
         path: tag.path,
         title: tag.meta.title || '未知页面'
       });
-      // if (!tag.meta.noCache) {
-      //   state.cachedtags.push(tag.name)
-      // }
     },
     clearAllTags: function clearAllTags(state) {
       state.tags.splice(1);
     },
     clearOtherTags: function clearOtherTags(state, currentPageName) {
-      console.log(state.tags);
       // 留下首页和当前页
       var currentPageIndex = state.tags.findIndex(function (tag) {
         return tag.name === currentPageName;
@@ -68996,7 +68992,7 @@ var app = {
         state.tags.splice(1);
       } else {
         state.tags.splice(currentPageIndex + 1);
-        state.tags.spiice(1, currentPageIndex - 1);
+        state.tags.splice(1, currentPageIndex - 1);
       }
     }
   },
