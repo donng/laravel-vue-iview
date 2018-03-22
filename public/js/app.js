@@ -69959,13 +69959,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_tags_page_opened_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_tags_page_opened_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_breadcrumb_nav_vue__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_breadcrumb_nav_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_breadcrumb_nav_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_fullscreen_vue__ = __webpack_require__(95);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_fullscreen_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_fullscreen_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_message_tip_vue__ = __webpack_require__(98);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_message_tip_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_message_tip_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_js_cookie__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_js_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_js_cookie__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__libs_util_js__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_message_tip_vue__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_message_tip_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_message_tip_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_js_cookie__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_js_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_js_cookie__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__libs_util_js__ = __webpack_require__(11);
 //
 //
 //
@@ -70038,9 +70036,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-
 
 
 
@@ -70054,8 +70049,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     shrinkableMenu: __WEBPACK_IMPORTED_MODULE_0__components_shrinkable_menu_shrinkable_menu_vue___default.a,
     tagsPageOpened: __WEBPACK_IMPORTED_MODULE_1__components_tags_page_opened_vue___default.a,
     breadcrumbNav: __WEBPACK_IMPORTED_MODULE_2__components_breadcrumb_nav_vue___default.a,
-    fullScreen: __WEBPACK_IMPORTED_MODULE_3__components_fullscreen_vue___default.a,
-    messageTip: __WEBPACK_IMPORTED_MODULE_4__components_message_tip_vue___default.a
+    fullScreen: fullScreen,
+    messageTip: __WEBPACK_IMPORTED_MODULE_3__components_message_tip_vue___default.a
   },
   data: function data() {
     return {
@@ -70111,7 +70106,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       if (name === 'userCenter') {
         // 用户中心
-        __WEBPACK_IMPORTED_MODULE_6__libs_util_js__["a" /* default */].openNewPage(this, 'ownspace_index');
+        __WEBPACK_IMPORTED_MODULE_5__libs_util_js__["a" /* default */].openNewPage(this, 'ownspace_index');
         this.$router.push({
           name: 'ownspace_index'
         });
@@ -70131,11 +70126,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
       if (!openpageHasTag) {
         //  解决关闭当前标签后再点击回退按钮会退到当前页时没有标签的问题
-        __WEBPACK_IMPORTED_MODULE_6__libs_util_js__["a" /* default */].openNewPage(this, name, this.$route.params || {}, this.$route.query || {});
+        __WEBPACK_IMPORTED_MODULE_5__libs_util_js__["a" /* default */].openNewPage(this, name, this.$route.params || {}, this.$route.query || {});
       }
-    },
-    handleSubmenuChange: function handleSubmenuChange(val) {
-      // console.log(val)
     },
     beforePush: function beforePush(name) {
       // if (name === 'accesstest_index') {
@@ -70144,9 +70136,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       //     return true;
       // }
       return true;
-    },
-    fullscreenChange: function fullscreenChange(isFullScreen) {
-      // console.log(isFullScreen);
     }
   },
   // watch: {
@@ -72836,181 +72825,9 @@ if (false) {
 }
 
 /***/ }),
-/* 95 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(96)
-/* template */
-var __vue_template__ = __webpack_require__(97)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/views/layout/components/fullscreen.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-125a14e2", Component.options)
-  } else {
-    hotAPI.reload("data-v-125a14e2", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 96 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    name: 'fullScreen',
-    props: {
-        value: {
-            type: Boolean,
-            default: false
-        }
-    },
-    computed: {
-        showFullScreenBtn: function showFullScreenBtn() {
-            return window.navigator.userAgent.indexOf('MSIE') < 0;
-        }
-    },
-    methods: {
-        handleFullscreen: function handleFullscreen() {
-            var main = document.body;
-            if (this.value) {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.mozCancelFullScreen) {
-                    document.mozCancelFullScreen();
-                } else if (document.webkitCancelFullScreen) {
-                    document.webkitCancelFullScreen();
-                } else if (document.msExitFullscreen) {
-                    document.msExitFullscreen();
-                }
-            } else {
-                if (main.requestFullscreen) {
-                    main.requestFullscreen();
-                } else if (main.mozRequestFullScreen) {
-                    main.mozRequestFullScreen();
-                } else if (main.webkitRequestFullScreen) {
-                    main.webkitRequestFullScreen();
-                } else if (main.msRequestFullscreen) {
-                    main.msRequestFullscreen();
-                }
-            }
-        },
-        handleChange: function handleChange() {
-            this.handleFullscreen();
-        }
-    },
-    created: function created() {
-        var _this = this;
-
-        var isFullscreen = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen;
-        isFullscreen = !!isFullscreen;
-        document.addEventListener('fullscreenchange', function () {
-            _this.$emit('input', !_this.value);
-            _this.$emit('on-change', !_this.value);
-        });
-        document.addEventListener('mozfullscreenchange', function () {
-            _this.$emit('input', !_this.value);
-            _this.$emit('on-change', !_this.value);
-        });
-        document.addEventListener('webkitfullscreenchange', function () {
-            _this.$emit('input', !_this.value);
-            _this.$emit('on-change', !_this.value);
-        });
-        document.addEventListener('msfullscreenchange', function () {
-            _this.$emit('input', !_this.value);
-            _this.$emit('on-change', !_this.value);
-        });
-        this.$emit('input', isFullscreen);
-    }
-});
-
-/***/ }),
-/* 97 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm.showFullScreenBtn
-    ? _c(
-        "div",
-        { staticClass: "full-screen-btn-con", on: { click: _vm.handleChange } },
-        [
-          _c(
-            "Tooltip",
-            {
-              attrs: {
-                content: _vm.value ? "退出全屏" : "全屏",
-                placement: "bottom"
-              }
-            },
-            [
-              _c("Icon", {
-                attrs: {
-                  type: _vm.value ? "arrow-shrink" : "arrow-expand",
-                  size: 23
-                }
-              })
-            ],
-            1
-          )
-        ],
-        1
-      )
-    : _vm._e()
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-125a14e2", module.exports)
-  }
-}
-
-/***/ }),
+/* 95 */,
+/* 96 */,
+/* 97 */,
 /* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -73169,8 +72986,7 @@ var render = function() {
                 "before-push": _vm.beforePush,
                 "open-names": _vm.openedSubmenuArr,
                 "menu-list": _vm.menuList
-              },
-              on: { "on-change": _vm.handleSubmenuChange }
+              }
             },
             [
               _c("div", {

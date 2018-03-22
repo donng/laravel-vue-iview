@@ -5,7 +5,6 @@
     <div class="sidebar-menu-con" :style="{width: shrink ? '60px' : '200px', overflow: shrink ? 'visible' : 'auto'}">
       <shrinkable-menu
           :shrink="shrink"
-          @on-change="handleSubmenuChange"
           :before-push="beforePush"
           :open-names="openedSubmenuArr"
           :menu-list="menuList">
@@ -33,7 +32,6 @@
         </div>
         <div class="header-avator-con">
           <!--全屏和未读信息提示-->
-          <!--<full-screen v-model="isFullScreen" @on-change="fullscreenChange"></full-screen>-->
           <!--<message-tip v-model="mesCount"></message-tip>-->
           <!--dropdown start -->
           <div class="user-dropdown-menu-con">
@@ -76,7 +74,6 @@
   import shrinkableMenu from './components/shrinkable-menu/shrinkable-menu.vue';
   import tagsPageOpened from './components/tags-page-opened.vue';
   import breadcrumbNav from './components/breadcrumb-nav.vue';
-  import fullScreen from './components/fullscreen.vue';
   import messageTip from './components/message-tip.vue';
   import Cookies from 'js-cookie';
   import util from '@/libs/util.js';
@@ -160,9 +157,6 @@
           util.openNewPage(this, name, this.$route.params || {}, this.$route.query || {});
         }
       },
-      handleSubmenuChange (val) {
-        // console.log(val)
-      },
       beforePush (name) {
         // if (name === 'accesstest_index') {
         //     return false;
@@ -170,9 +164,6 @@
         //     return true;
         // }
         return true;
-      },
-      fullscreenChange (isFullScreen) {
-        // console.log(isFullScreen);
       }
     },
     // watch: {
