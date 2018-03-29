@@ -5,5 +5,9 @@ export default {
     emailRequire: 'please input email',
     password: 'password',
     login: 'Log In',
+    rememberMe: 'Remember Me',
+    forgetPassword: 'Forget Password',
+    nextStep: 'Next Step',
+    retrievePassword: 'Retrieve Password'
   }
 }

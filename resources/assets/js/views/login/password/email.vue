@@ -4,16 +4,16 @@
     <Row type="flex" justify="center" class-name="row">
       <Col span="6">
       <Card>
-        <p slot="title">找回密码</p>
+        <p slot="title">{{ $t('login.retrievePassword') }}</p>
         <Alert type="success" show-icon closable v-show="showAlert">
           我们已将重置链接发送到您的邮箱，请注意查收，此链接30分钟内有效。
         </Alert>
         <Form ref="form" :model="form" :rules="rules" label-position="top">
-          <FormItem label="邮箱" prop="email">
+          <FormItem :label="$t('login.email')" prop="email">
             <Input v-model="form.email"></Input>
           </FormItem>
           <FormItem class="bottom">
-            <Button type="primary" @click="submit('form')" long :loading="loading">下一步</Button>
+            <Button type="primary" @click="submit('form')" long :loading="loading">{{ $t('Next Step') }}</Button>
           </FormItem>
         </Form>
       </Card>

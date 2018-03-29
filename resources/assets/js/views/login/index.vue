@@ -17,9 +17,9 @@
             </Input>
           </FormItem>
           <FormItem class="bottom">
-            <Checkbox v-model="form.remember" class="rememberMe">记住我</Checkbox>
+            <Checkbox v-model="form.remember" class="rememberMe">{{$t('login.rememberMe')}}</Checkbox>
             <router-link to="/password/send" class="forgetPassword">
-              <span>忘记密码？</span>
+              <span>{{$t('login.forgetPassword')}}？</span>
             </router-link>
           </FormItem>
           <FormItem class="bottom">

@@ -75111,7 +75111,7 @@ var render = function() {
                                 expression: "form.remember"
                               }
                             },
-                            [_vm._v("记住我")]
+                            [_vm._v(_vm._s(_vm.$t("login.rememberMe")))]
                           ),
                           _vm._v(" "),
                           _c(
@@ -75120,7 +75120,13 @@ var render = function() {
                               staticClass: "forgetPassword",
                               attrs: { to: "/password/send" }
                             },
-                            [_c("span", [_vm._v("忘记密码？")])]
+                            [
+                              _c("span", [
+                                _vm._v(
+                                  _vm._s(_vm.$t("login.forgetPassword")) + "？"
+                                )
+                              ])
+                            ]
                           )
                         ],
                         1
@@ -75405,7 +75411,7 @@ var render = function() {
                 "Card",
                 [
                   _c("p", { attrs: { slot: "title" }, slot: "title" }, [
-                    _vm._v("找回密码")
+                    _vm._v(_vm._s(_vm.$t("login.retrievePassword")))
                   ]),
                   _vm._v(" "),
                   _c(
@@ -75441,7 +75447,9 @@ var render = function() {
                     [
                       _c(
                         "FormItem",
-                        { attrs: { label: "邮箱", prop: "email" } },
+                        {
+                          attrs: { label: _vm.$t("login.email"), prop: "email" }
+                        },
                         [
                           _c("Input", {
                             model: {
@@ -75474,7 +75482,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("下一步")]
+                            [_vm._v(_vm._s(_vm.$t("Next Step")))]
                           )
                         ],
                         1
@@ -76262,7 +76270,11 @@ Object(__WEBPACK_IMPORTED_MODULE_0__lang__["a" /* default */])(lang);
     email: 'email',
     emailRequire: 'please input email',
     password: 'password',
-    login: 'Log In'
+    login: 'Log In',
+    rememberMe: 'Remember Me',
+    forgetPassword: 'Forget Password',
+    nextStep: 'Next Step',
+    retrievePassword: 'Retrieve Password'
   }
 });
 
@@ -76277,7 +76289,11 @@ Object(__WEBPACK_IMPORTED_MODULE_0__lang__["a" /* default */])(lang);
     email: '邮箱地址',
     emailRequire: '请填写邮箱地址',
     password: '密码',
-    login: '登录'
+    login: '登录',
+    rememberMe: '记住我',
+    forgetPassword: '忘记密码',
+    nextStep: '下一步',
+    retrievePassword: '找回密码'
   }
 });
 

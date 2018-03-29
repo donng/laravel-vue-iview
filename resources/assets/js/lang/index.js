@@ -6,7 +6,7 @@ import iviewEnLocale from 'iview/src/locale/lang/en-US';
 import enLocale from './en'
 import zhLocale from './zh'
 
-Vue.use(VueI18n)
+Vue.use(VueI18n);
 
 const messages = {
   en: {
@@ -17,11 +17,11 @@ const messages = {
     ...zhLocale,
     ...iviewZhLocale
   }
-}
+};
 
 const i18n = new VueI18n({
   locale: Cookies.get('language') || 'en', // set locale
   messages // set locale messages
-})
+});
 
 export default i18n
