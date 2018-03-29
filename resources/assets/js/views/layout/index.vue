@@ -83,14 +83,12 @@
       shrinkableMenu,
       tagsPageOpened,
       breadcrumbNav,
-      fullScreen,
       messageTip,
     },
     data () {
       return {
         shrink: false,
         userName: '',
-        isFullScreen: false,
         openedSubmenuArr: this.$store.state.app.openedSubmenuArr
       };
     },
