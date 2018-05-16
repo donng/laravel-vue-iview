@@ -47,8 +47,8 @@ npm run prod
 
 ## 项目截图
 <p align="center">
-  <img height="170" width="350" src="https://thumbnail0.baidupcs.com/thumbnail/6e376844f7ffbe1f61a90296355a82a8?fid=1527749992-250528-1108898575940719&time=1521532800&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-voTG3%2BWyTHqfkyyUfBxMdocSXBo%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=1824572634255829434&dp-callid=0&size=c710_u400&quality=100&vuk=-&ft=video"/>
-    <img height="170" width="350" src="https://thumbnail0.baidupcs.com/thumbnail/483c0973e5471dbc12124b12e63eabca?fid=1527749992-250528-318426434474247&time=1521532800&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-%2BElYamuzZAYkdRKRS2k8u4LAGDw%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=1824613737631294660&dp-callid=0&size=c710_u400&quality=100&vuk=-&ft=video"/>
+  <img src='http://i2.bvimg.com/646005/22bad7fd57852453.jpg'>
+  <img src='http://i2.bvimg.com/646005/c5e89ba1f72cc2e2.jpg'>
 </p>
 
 ## 访问
