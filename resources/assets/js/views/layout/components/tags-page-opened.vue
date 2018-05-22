@@ -29,6 +29,7 @@
             @click.native="linkTo(item)"
             :closable="item.name === 'home' ? false : true"
             :color="color(item)"
+            @on-close="closeTag"
         >{{ itemTitle(item) }}
         </Tag>
       </transition-group>
@@ -146,8 +147,11 @@
         }
         this.tagBodyLeft = left;
       },
+      // 关闭标签
+      closeTag(event, name) {
+        this.$store.dispatch('closeTag', name);
+      },
       clearTags (type) {
-        console.log(type);
         if (type === 'clearAll') {
           this.$store.dispatch('clearAllTags');
           this.$router.push({
@@ -170,32 +174,6 @@
           this.tagBodyLeft = -(tag.offsetLeft - (this.$refs.scrollCon.offsetWidth - 100 - tag.offsetWidth) + 20);
         }
       }
-    },
-    mounted () {
-      // this.refsTag = this.$refs.tagsPageOpened;
-      // setTimeout(() => {
-      //   this.refsTag.forEach((item, index) => {
-      //     if (this.$route.name === item.name) {
-      //       let tag = this.refsTag[index].$el;
-      //       this.moveToView(tag);
-      //     }
-      //   });
-      // }, 1); // 这里不设定时器就会有偏移bug
-      // this.tagsCount = this.tags.length;
-    },
-    // watch: {
-    //   '$route' (to) {
-    //     this.currentPageName = to.name;
-    //     this.$nextTick(() => {
-    //       this.refsTag.forEach((item, index) => {
-    //         if (to.name === item.name) {
-    //           let tag = this.refsTag[index].$el;
-    //           this.moveToView(tag);
-    //         }
-    //       });
-    //     });
-    //     this.tagsCount = this.tags.length;
-    //   }
-    // }
+    }
   };
 </script>

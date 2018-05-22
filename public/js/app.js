@@ -68994,6 +68994,12 @@ var app = {
         state.tags.splice(currentPageIndex + 1);
         state.tags.splice(1, currentPageIndex - 1);
       }
+    },
+    closeTag: function closeTag(state, name) {
+      var tagIndex = state.tags.findIndex(function (tag) {
+        return tag.name === name;
+      });
+      state.tags.splice(tagIndex, 1);
     }
   },
   actions: {
@@ -69001,20 +69007,25 @@ var app = {
       var commit = _ref.commit;
       return commit('collapse');
     },
-
+    // 添加标签
     appendTag: function appendTag(_ref2, tag) {
       var commit = _ref2.commit;
       return commit('appendTag', tag);
     },
-
+    // 清空所有标签
     clearAllTags: function clearAllTags(_ref3) {
       var commit = _ref3.commit;
       return commit('clearAllTags');
     },
-
+    // 清空其他标签
     clearOtherTags: function clearOtherTags(_ref4, currentPageName) {
       var commit = _ref4.commit;
       return commit('clearOtherTags', currentPageName);
+    },
+    // 关闭当前标签
+    closeTag: function closeTag(_ref5, name) {
+      var commit = _ref5.commit;
+      return commit('closeTag', name);
     }
   }
 };
@@ -70120,7 +70131,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   methods: {
     init: function init() {
-      //let pathArr = util.setCurrentPath(this, this.$route.name);
+      // let pathArr = util.setCurrentPath(this, this.$route.name);
       // this.$store.commit('updateMenulist');
       // if (pathArr.length >= 2) {
       //   this.$store.commit('addOpenSubmenu', pathArr[1].name);
@@ -72474,6 +72485,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
+//
 
 
 
@@ -72584,8 +72596,12 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       }
       this.tagBodyLeft = left;
     },
+
+    // 关闭标签
+    closeTag: function closeTag(event, name) {
+      this.$store.dispatch('closeTag', name);
+    },
     clearTags: function clearTags(type) {
-      console.log(type);
       if (type === 'clearAll') {
         this.$store.dispatch('clearAllTags');
         this.$router.push({
@@ -72608,18 +72624,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
         this.tagBodyLeft = -(tag.offsetLeft - (this.$refs.scrollCon.offsetWidth - 100 - tag.offsetWidth) + 20);
       }
     }
-  },
-  mounted: function mounted() {
-    // this.refsTag = this.$refs.tagsPageOpened;
-    // setTimeout(() => {
-    //   this.refsTag.forEach((item, index) => {
-    //     if (this.$route.name === item.name) {
-    //       let tag = this.refsTag[index].$el;
-    //       this.moveToView(tag);
-    //     }
-    //   });
-    // }, 1); // 这里不设定时器就会有偏移bug
-    // this.tagsCount = this.tags.length;
   }
 });
 
@@ -72702,6 +72706,7 @@ var render = function() {
                     closable: item.name === "home" ? false : true,
                     color: _vm.color(item)
                   },
+                  on: { "on-close": _vm.closeTag },
                   nativeOn: {
                     click: function($event) {
                       _vm.linkTo(item)
