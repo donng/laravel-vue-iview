@@ -78,33 +78,6 @@
           return item.title;
         }
       },
-      closePage (event, name) {
-        let pageOpenedList = this.$store.state.app.pageOpenedList;
-        let lastPageObj = pageOpenedList[0];
-        if (this.currentPageName === name) {
-          let len = pageOpenedList.length;
-          for (let i = 1; i < len; i++) {
-            if (pageOpenedList[i].name === name) {
-              if (i < (len - 1)) {
-                lastPageObj = pageOpenedList[i + 1];
-              } else {
-                lastPageObj = pageOpenedList[i - 1];
-              }
-              break;
-            }
-          }
-        } else {
-          let tagWidth = event.target.parentNode.offsetWidth;
-          this.tagBodyLeft = Math.min(this.tagBodyLeft + tagWidth, 0);
-        }
-        this.$store.commit('removeTag', name);
-        this.$store.commit('closePage', name);
-        pageOpenedList = this.$store.state.app.pageOpenedList;
-        localStorage.pageOpenedList = JSON.stringify(pageOpenedList);
-        if (this.currentPageName === name) {
-          this.linkTo(lastPageObj);
-        }
-      },
       color(item) {
         const currentItem = item.children ? item.children[0] : item;
 
@@ -112,18 +85,6 @@
       },
       linkTo (item) {
         this.$router.push(item);
-        //  待处理
-        // let routerObj = {};
-        // routerObj.name = item.name;
-        // if (item.argu) {
-        //   routerObj.params = item.argu;
-        // }
-        // if (item.query) {
-        //   routerObj.query = item.query;
-        // }
-        // if (this.beforePush(item)) {
-        //   this.$router.push(routerObj);
-        // }
       },
       handlescroll (e) {
         var type = e.type;
@@ -162,18 +123,6 @@
         }
         this.tagBodyLeft = 0;
       },
-      moveToView (tag) {
-        if (tag.offsetLeft < -this.tagBodyLeft) {
-          // 标签在可视区域左侧
-          this.tagBodyLeft = -tag.offsetLeft + 10;
-        } else if (tag.offsetLeft + 10 > -this.tagBodyLeft && tag.offsetLeft + tag.offsetWidth < -this.tagBodyLeft + this.$refs.scrollCon.offsetWidth - 100) {
-          // 标签在可视区域
-          this.tagBodyLeft = Math.min(0, this.$refs.scrollCon.offsetWidth - 100 - tag.offsetWidth - tag.offsetLeft - 20);
-        } else {
-          // 标签在可视区域右侧
-          this.tagBodyLeft = -(tag.offsetLeft - (this.$refs.scrollCon.offsetWidth - 100 - tag.offsetWidth) + 20);
-        }
-      }
     }
   };
 </script>
