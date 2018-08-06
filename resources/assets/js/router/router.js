@@ -25,6 +25,28 @@ export const mainRouter = [
     }]
   },
   {
+    path: '/components',
+    component: layout,
+    redirect: 'index',
+    name: 'components',
+    showParent: true,
+    meta: {
+      title: '公共组件',
+      icon: 'md-construct'
+    },
+    children: [
+      {
+        path: 'index',
+        component: require('views/components/index'),
+        name: 'component',
+        meta: {
+          title: '图片上传',
+          noCache: true,
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      }]
+  },
+  {
     path: '/management',
     component: layout,
     redirect: 'example',
@@ -32,7 +54,7 @@ export const mainRouter = [
     showParent: true,
     meta: {
       title: '内容管理',
-      icon: 'ios-paper'
+      icon: 'md-paper'
     },
     children: [
       {
