@@ -56,7 +56,7 @@
       });
     },
     created() {
-      console.log(this.menuList);
+
     }
   };
 </script>

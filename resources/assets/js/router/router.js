@@ -3,7 +3,7 @@ import layout from 'views/layout'
 
 /**
  * meta.title : 导航显示的中文名称
- * showParent : 无论子节点数量，都会显示为二级菜单（默认一个子节点只显示一级菜单）
+ * showParent : 无论子节量，都会显示为二级菜单（默认一个子节点只显示一级菜单）点数
  */
 
 // 权限相关路由
@@ -19,7 +19,7 @@ export const mainRouter = [
       meta: {
         title: '首页',
         noCache: true,
-        icon: 'home',
+        icon: 'md-home',
         roles: ['admin']
       }
     }]
@@ -31,9 +31,9 @@ export const mainRouter = [
     name: 'management',
     showParent: true,
     meta: {
-      title: '管理页面',
-      icon: 'easel'
-    }, // you can set roles in root nav
+      title: '内容管理',
+      icon: 'ios-paper'
+    },
     children: [
       {
         path: 'example',

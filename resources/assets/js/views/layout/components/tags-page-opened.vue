@@ -71,6 +71,9 @@
           this.$store.dispatch('appendTag', this.$route);
         }
       },
+      initTags () {
+        this.appendTag()
+      },
       itemTitle (item) {
         if (typeof item.title === 'object') {
           return this.$t(item.title.i18n);
@@ -80,8 +83,7 @@
       },
       color(item) {
         const currentItem = item.children ? item.children[0] : item;
-
-        return (currentItem.name === this.currentPageName) ? 'blue' : 'default';
+        return (currentItem.name === this.currentPageName) ? 'primary' : 'default';
       },
       linkTo (item) {
         this.$router.push(item);
@@ -123,6 +125,9 @@
         }
         this.tagBodyLeft = 0;
       },
+    },
+    created() {
+      this.initTags()
     }
   };
 </script>
