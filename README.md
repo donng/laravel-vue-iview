@@ -45,15 +45,15 @@ php artisan db:seed
 ```bash
 # 开发环境编译
 npm run dev (或 npm run watch 监控文件修改)
-# 生产环境编译
+# 生产环境编译，压缩JS文件
 npm run prod
 ```
 
 ## 项目截图
 
 <p align="center">
-  <img src='http://i2.bvimg.com/646005/22bad7fd57852453.jpg'>
-  <img src='http://i2.bvimg.com/646005/c5e89ba1f72cc2e2.jpg'>
+  <img src='image.donnebox.com/github/laravel-vue-iview-login.jpg'/>
+  <img src='image.donnebox.com/github/laravel-vue-iview-dashboard.jpg'/>
 </p>
 
 ## 访问

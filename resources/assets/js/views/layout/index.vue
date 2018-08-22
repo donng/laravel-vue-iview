@@ -1,38 +1,25 @@
 <template>
-  <div class="main" :class="{'main-hide-text': shrink}">
+  <div class="main">
 
     <!-- sidebar start -->
-    <div class="sidebar-menu-con" :style="{width: shrink ? '60px' : '200px', overflow: shrink ? 'visible' : 'auto'}">
+    <div class="sidebar-menu-con" :style="{width: '200px', overflow: 'auto'}">
       <shrinkable-menu
-          :shrink="shrink"
-          :before-push="beforePush"
           :open-names="openedSubmenuArr"
           :menu-list="menuList">
-        <div slot="top" class="logo-con">
-          <!--<img v-show="!shrink"  src="@/images/logo.jpg" key="max-logo" />-->
-          <!--<img v-show="shrink" src="@/images/logo-min.jpg" key="min-logo" />-->
-        </div>
       </shrinkable-menu>
     </div>
     <!-- sidebar end -->
 
     <!-- header start -->
-    <div class="main-header-con" :style="{paddingLeft: shrink?'60px':'200px'}">
+    <div class="main-header-con" :style="{paddingLeft: '200px'}">
       <div class="main-header">
-        <div class="navicon-con">
-          <Button :style="{transform: 'rotateZ(' + (this.shrink ? '-90' : '0') + 'deg)'}" type="text"
-                  @click="toggleClick">
-            <Icon type="ios-menu" size="30"></Icon>
-          </Button>
-        </div>
         <div class="header-middle-con">
           <div class="main-breadcrumb">
             <breadcrumb-nav :currentPath="currentPath"></breadcrumb-nav>
           </div>
         </div>
         <div class="header-avator-con">
-          <!--全屏和未读信息提示-->
-          <!--<message-tip v-model="mesCount"></message-tip>-->
+
           <!--dropdown start -->
           <div class="user-dropdown-menu-con">
             <Row type="flex" justify="end" align="middle" class="user-dropdown-innercon">
@@ -59,7 +46,7 @@
     <!-- header end -->
 
     <!-- router-view start -->
-    <div class="single-page-con" :style="{left: shrink ? '60px' : '200px'}">
+    <div class="single-page-con" :style="{left: '200px'}">
       <div class="single-page">
         <keep-alive :include="cachePage">
           <router-view></router-view>
@@ -87,7 +74,6 @@
     },
     data () {
       return {
-        shrink: false,
         userName: '',
         openedSubmenuArr: this.$store.state.app.openedSubmenuArr
       };
@@ -117,17 +103,10 @@
     },
     methods: {
       init () {
-        // let pathArr = util.setCurrentPath(this, this.$route.name);
-        // this.$store.commit('updateMenulist');
-        // if (pathArr.length >= 2) {
-        //   this.$store.commit('addOpenSubmenu', pathArr[1].name);
-        // }
         this.userName = this.$store.getters.user.name;
 
         let messageCount = 3;
         this.messageCount = messageCount.toString();
-        // this.checkTag(this.$route.name);
-        //this.$store.commit('setMessageCount', 3);
       },
       toggleClick () {
         this.shrink = !this.shrink;
@@ -154,42 +133,14 @@
         if (!openpageHasTag) { //  解决关闭当前标签后再点击回退按钮会退到当前页时没有标签的问题
           util.openNewPage(this, name, this.$route.params || {}, this.$route.query || {});
         }
-      },
-      beforePush (name) {
-        // if (name === 'accesstest_index') {
-        //     return false;
-        // } else {
-        //     return true;
-        // }
-        return true;
       }
     },
-    // watch: {
-    //   '$route' (to) {
-    //     this.$store.commit('setCurrentPageName', to.name);
-    //     let pathArr = util.setCurrentPath(this, to.name);
-    //     if (pathArr.length > 2) {
-    //       this.$store.commit('addOpenSubmenu', pathArr[1].name);
-    //     }
-    //     this.checkTag(to.name);
-    //     localStorage.currentPageName = to.name;
-    //   },
-    //   lang () {
-    //     util.setCurrentPath(this, this.$route.name); // 在切换语言时用于刷新面包屑
-    //   }
-    // },
     mounted () {
       this.init();
-    },
-    created () {
-      // 显示打开的页面的列表
-      //this.$store.commit('setOpenedList');
     }
   };
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-  .main {
 
-  }
 </style>
