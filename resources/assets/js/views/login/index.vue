@@ -8,12 +8,12 @@
         <Form ref="form" :model="form" :rules="ruleInline">
           <FormItem prop="email">
             <Input type="text" v-model="form.email" :placeholder="$t('login.email')">
-            <Icon type="email" slot="prepend"></Icon>
+            <Icon type="md-mail" slot="prepend"></Icon>
             </Input>
           </FormItem>
           <FormItem prop="password" class="bottom">
             <Input type="password" v-model="form.password" :placeholder="$t('login.password')">
-            <Icon type="locked" slot="prepend"></Icon>
+            <Icon type="md-lock" slot="prepend"></Icon>
             </Input>
           </FormItem>
           <FormItem class="bottom">
