@@ -1,3 +1,6 @@
+<style lang="scss" rel="stylesheet/scss">
+  @import 'main.scss';
+</style>
 <template>
   <div class="main">
 
