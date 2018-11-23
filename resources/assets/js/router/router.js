@@ -59,7 +59,7 @@ export const mainRouter = [
     children: [
       {
         path: 'example',
-        component: require('views/home/index'),
+        component: require('views/management/index'),
         name: 'example',
         meta: {
           title: '实例',

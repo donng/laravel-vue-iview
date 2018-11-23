@@ -109,6 +109,7 @@
       // 关闭标签
       closeTag(event, name) {
         this.$store.dispatch('closeTag', name);
+        this.$router.push({name: 'home'})
       },
       clearTags (type) {
         if (type === 'clearAll') {
