@@ -52,6 +52,7 @@ php artisan jwt:secret
 配置数据库名称、用户名和密码
 
 # 数据库迁移
+php artisan migrate
 php artisan db:seed
 ```
 
