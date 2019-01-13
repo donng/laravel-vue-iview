@@ -12,7 +12,6 @@ const app = {
       state.collapse = !state.collapse;
     },
     appendTag: (state, tag) => {
-      console.log(state.tags)
       if (state.tags.some(v => v.path === tag.path)) {
         return false;
       }

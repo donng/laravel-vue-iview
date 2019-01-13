@@ -11,6 +11,7 @@ Vue.use(VueRouter);
 
 // 创建并导出 router 实例，然后传 `routes` 配置
 export const router = new VueRouter({
+  mode: 'history',
   routes: constantRouterMap
 });
 
