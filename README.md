@@ -4,7 +4,7 @@
 
 关于此项目的搭建的思路可以阅读这篇[博文](https://segmentfault.com/a/1190000013212484)。
 
-[在线预览此项目](http://demo.donnebox.com)，线上地址的用户名和密码都是 `admin@admin.com`
+[在线预览此项目](http://admin.donnebox.com)，线上地址的用户名和密码都是 `admin@admin.com`
 
 ## 简介
 
