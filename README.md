@@ -1,6 +1,8 @@
-# laravel-vue-iview
-
+## laravel-vue-iview
+![](https://img.shields.io/badge/php-%3E%3D7.2.5-blue) ![](https://img.shields.io/github/last-commit/donng/laravel-vue-iview?style=flat) ![](https://img.shields.io/github/license/donng/laravel-vue-iview)
 ## 更新说明
+
+### 2020-06-19
 
 框架升级到 Laravel7，由于 iview 已经停止维护，使用 view-design 代替。其他组件的具体版本可查看 `composer.json` 和 `package.json`。
 
@@ -75,14 +77,6 @@ php artisan serve
 访问 http://127.0.0.1:8000
 
 用户名和密码都是 `admin@admin.com`
-
-## 项目截图
-
-<p align="center">
-  <img src='http://image.donnebox.com/github/laravel-vue-iview-login.jpg'/>
-  <img src='http://image.donnebox.com/github/laravel-vue-iview-dashboard.jpg'/>
-</p>
-
 
 ## 文件结构
 
