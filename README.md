@@ -1,5 +1,5 @@
 ## laravel-vue-iview
-![](https://img.shields.io/badge/php-%3E%3D7.2.5-blue) ![](https://img.shields.io/github/last-commit/donng/laravel-vue-iview?style=flat) ![](https://img.shields.io/github/license/donng/laravel-vue-iview)
+![](https://img.shields.io/badge/php-%3E%3D7.2.5-blue) ![](https://img.shields.io/github/last-commit/donng/laravel-vue-iview?style=flat)
 ## 更新说明
 
 ### 2020-06-19
