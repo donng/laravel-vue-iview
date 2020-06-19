@@ -1,0 +1,35 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "npm run development -- --watch",
+    "watch-poll": "npm run watch -- --watch-poll",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "axios": "^0.19",
+    "babel-plugin-import": "^1.13.0",
+    "cross-env": "^7.0",
+    "fibers": "^5.0.0",
+    "laravel-mix": "^5.0.1",
+    "lodash": "^4.17.13",
+    "node-sass": "^4.14.1",
+    "resolve-url-loader": "^3.1.0",
+    "sass": "^1.15.2",
+    "sass-loader": "^8.0.0",
+    "view-design": "^4.2.0",
+    "vue": "^2.6.11",
+    "vue-i18n": "^8.18.2",
+    "vue-router": "^3.3.4",
+    "vue-template-compiler": "^2.6.11",
+    "vuex": "^3.4.0"
+  },
+  "dependencies": {
+    "js-cookie": "^2.2.1",
+    "particles.js": "^2.0.0"
+  }
+}
