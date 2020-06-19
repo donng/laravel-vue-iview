@@ -2,19 +2,15 @@
 ![](https://img.shields.io/badge/php-%3E%3D7.2.5-blue) ![](https://img.shields.io/github/last-commit/donng/laravel-vue-iview?style=flat)
 ## 更新说明
 
-### 2020-06-19
-
-框架升级到 Laravel7，由于 iview 已经停止维护，使用 view-design 代替。其他组件的具体版本可查看 `composer.json` 和 `package.json`。
-
-关于此项目的搭建的思路可以阅读这篇[博文](https://segmentfault.com/a/1190000013212484)。
-
-[在线预览此项目](http://admin.donnebox.com)，线上地址的用户名和密码都是 `admin@admin.com`
+2020-06-19：框架升级到 Laravel7，由于 iview 已经停止维护，使用 view-design 代替。
 
 ## 简介
 
-本项目由后台框架 laravel 7、前端框架 vue 以及 ui 框架 [view-design](https://www.iviewui.com/) 搭建而成，主要用于学习 laravel 和 vue 的整合思路。
+本项目由后台框架 laravel 7、前端框架 vue 以及 ui 框架 [view-design](https://www.iviewui.com/) 搭建而成。
 
-前端常用模块的开发不是本项目的重点，这方面已经有完成度较高的项目，没有必要再造轮子了，这方面需求请参照 iview 官方的前端项目：[iview-admin](https://github.com/iview/iview-admin)，注意： iview 官方已经停止更新。
+关于此项目 laravel 5 版本的搭建的思路可以阅读这篇[文章](https://segmentfault.com/a/1190000013212484) 。
+
+[在线预览此项目](http://admin.donnebox.com)，线上地址的用户名和密码都是 `admin@admin.com`.
 
 项目主要内容：
 
