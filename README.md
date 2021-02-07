@@ -2,8 +2,8 @@
 ![](https://img.shields.io/badge/php-%3E%3D7.2.5-blue) ![](https://img.shields.io/github/last-commit/donng/laravel-vue-iview?style=flat)
 ## 更新说明
 
-2021-02-08：技术栈已转移，本项目停止更新维护。
-2020-06-19：框架升级到 Laravel7，由于 iview 已经停止维护，使用 view-design 代替。
+- 2021-02-08：技术栈已转移，本项目停止更新维护。
+- 2020-06-19：框架升级到 Laravel7，由于 iview 已经停止维护，使用 view-design 代替。
 
 ## 简介
 
